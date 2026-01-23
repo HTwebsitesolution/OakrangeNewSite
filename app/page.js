@@ -260,30 +260,47 @@ const HeroSection = ({ onQuoteClick }) => {
 // ==================== CREDIBILITY STRIP ====================
 const CredibilityStrip = () => {
   const credentials = [
-    { name: 'UKAS', description: 'Accredited Laboratory' },
-    { name: 'ISO 17025', description: 'Certified' },
-    { name: 'ISO 9001', description: 'Quality Management' },
-    { name: 'SafeContractor', description: 'Approved' },
-    { name: 'CHAS', description: 'Accredited' },
+    { 
+      icon: Award,
+      stat: '40+', 
+      label: 'Years Experience',
+      description: 'Trusted since 1984'
+    },
+    { 
+      icon: MapPin,
+      stat: 'UK-Wide', 
+      label: 'Onsite Coverage',
+      description: 'We come to you'
+    },
+    { 
+      icon: Monitor,
+      stat: '24/7', 
+      label: 'Portal Access',
+      description: 'Certificates online'
+    },
+    { 
+      icon: Zap,
+      stat: '48hr', 
+      label: 'Fast Turnaround',
+      description: 'Rapid certification'
+    },
   ]
 
   return (
-    <section className="bg-slate-50 py-8 border-y border-slate-200">
+    <section className="bg-slate-900 py-12">
       <div className="container-main">
-        <p className="text-center text-sm text-slate-500 uppercase tracking-wider mb-6 font-medium">
-          Trusted by leading UK organisations
-        </p>
-        <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {credentials.map((cred, index) => (
             <div 
               key={index}
-              className="flex flex-col items-center gap-1 text-center group"
+              className="text-center group"
             >
-              <div className="w-16 h-16 bg-white rounded-xl border border-slate-200 flex items-center justify-center group-hover:border-oakblue-300 group-hover:shadow-card transition-all">
-                <Shield className="w-8 h-8 text-slate-400 group-hover:text-oakblue-600 transition-colors" />
+              <div className="inline-flex items-center justify-center w-14 h-14 bg-oakblue-600/20 rounded-xl mb-4 group-hover:bg-oakblue-600/30 transition-colors">
+                <cred.icon className="w-7 h-7 text-oakblue-400" />
               </div>
-              <span className="font-semibold text-slate-800 text-sm">{cred.name}</span>
-              <span className="text-xs text-slate-500">{cred.description}</span>
+              <div className="text-3xl md:text-4xl font-bold text-white mb-1">{cred.stat}</div>
+              <div className="font-semibold text-white text-sm mb-1">{cred.label}</div>
+              <div className="text-xs text-slate-400">{cred.description}</div>
             </div>
           ))}
         </div>
