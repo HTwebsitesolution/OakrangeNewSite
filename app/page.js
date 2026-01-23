@@ -6,7 +6,9 @@ import {
   Shield, Award, Clock, CheckCircle2, ArrowRight, Star, 
   Gauge, Thermometer, Ruler, Scale, Zap, Building2, Factory,
   Pill, Plane, FlaskConical, Cog, Quote, Plus, Minus,
-  FileCheck, Users, Target, Calculator, Send, ExternalLink
+  FileCheck, Users, Target, Calculator, Send, ExternalLink,
+  Wrench, Tractor, HardHat, PlaneTakeoff, Upload, Monitor,
+  ClipboardList, Truck, ListChecks, FileText, Sparkles
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
