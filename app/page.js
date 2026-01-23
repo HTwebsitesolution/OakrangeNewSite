@@ -674,24 +674,24 @@ const AIQuoteBuilderPreview = ({ onQuoteClick }) => {
 const TestimonialsSection = () => {
   const testimonials = [
     {
-      quote: "Oakrange has been our calibration partner for over 10 years. Their onsite service minimises our equipment downtime and their certificates are always impeccable.",
-      author: "Sarah Mitchell",
-      role: "Quality Manager",
-      company: "PharmaCorp UK",
+      quote: "Oakrange has been calibrating our workshop's torque wrenches for over 5 years. The onsite service means zero downtime — the lads can keep working while calibration happens in the background.",
+      author: "Mike Patterson",
+      role: "Workshop Manager",
+      company: "Patterson's Garage, Birmingham",
       rating: 5,
     },
     {
-      quote: "The team's technical expertise is outstanding. They understand our AS9100 requirements and consistently deliver to the highest standards.",
-      author: "James Crawford",
-      role: "Engineering Director",
-      company: "AeroTech Solutions",
+      quote: "As an airfield, we need absolute precision. Their aviation-standard calibration and the online portal where we can pull certificates for audits has been a game-changer.",
+      author: "Rachel Edwards",
+      role: "Maintenance Director",
+      company: "Gloucestershire Airfield",
       rating: 5,
     },
     {
-      quote: "Responsive, professional, and thorough. Oakrange handles all our dimensional calibration needs with precision and care.",
-      author: "Emma Thompson",
-      role: "Laboratory Supervisor",
-      company: "TestLab International",
+      quote: "We run three tractor dealerships and they handle all our calibration in scheduled visits. Professional, reliable, and the portal makes audit prep simple.",
+      author: "David Thornton",
+      role: "Service Manager",
+      company: "Thornton Agricultural Ltd",
       rating: 5,
     },
   ]
