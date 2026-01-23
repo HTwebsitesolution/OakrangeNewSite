@@ -751,7 +751,7 @@ const servicesData = [
     icon: Settings,
     iconColor: 'bg-amber-500',
     title: 'In-house Repairs & Calibration Support',
-    tagline: 'When onsite isn't suitable — send your equipment to our laboratory for repair, adjustment, and calibration.',
+    tagline: "When onsite isn't suitable - send your equipment to our laboratory for repair, adjustment, and calibration.",
     whoItsFor: [
       'Businesses with equipment requiring specialist repair',
       'Instruments that need bench calibration for best accuracy',
