@@ -8,7 +8,7 @@ import {
   Pill, Plane, FlaskConical, Cog, Quote, Plus, Minus,
   FileCheck, Users, Target, Calculator, Send, ExternalLink,
   Wrench, Tractor, HardHat, PlaneTakeoff, Upload,
-  ClipboardList, Truck, ListChecks, FileText, Sparkles
+  ClipboardList, Truck, ListChecks, FileText, Sparkles, Calendar
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
