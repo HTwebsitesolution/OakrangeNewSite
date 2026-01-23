@@ -842,9 +842,9 @@ const servicesData = [
       'Combined visits with Oakrange calibration where possible',
     ],
     workflow: [
-      'Contact us and we'll connect you with EcoTec',
+      'Contact us and we will connect you with EcoTec',
       'EcoTec provides a quotation based on appliance count',
-      'Testing scheduled — can be combined with calibration visits',
+      'Testing scheduled - can be combined with calibration visits',
       'All appliances tested and labelled onsite',
       'Certificate and equipment register provided',
       'Results shared with Oakrange for your records',
