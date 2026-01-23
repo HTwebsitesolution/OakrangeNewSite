@@ -495,27 +495,21 @@ const ProcessSection = () => {
   const steps = [
     {
       step: '01',
-      title: 'Request Quote',
-      description: 'Submit your instrument list online or speak with our team for a detailed quotation.',
-      icon: Calculator,
+      title: 'Send Equipment List',
+      description: 'Email or upload your instrument list. Include makes, models, and quantities — we\'ll handle the rest.',
+      icon: ClipboardList,
     },
     {
       step: '02',
-      title: 'Schedule Service',
-      description: 'Choose a convenient date for onsite calibration or arrange laboratory collection.',
-      icon: Clock,
+      title: 'We Visit Onsite',
+      description: 'Our engineers arrive at your workshop or airfield with all necessary reference standards and equipment.',
+      icon: Truck,
     },
     {
       step: '03',
-      title: 'Calibration',
-      description: 'Our engineers calibrate your instruments using traceable reference standards.',
-      icon: Target,
-    },
-    {
-      step: '04',
-      title: 'Certification',
-      description: 'Receive comprehensive certificates with detailed measurement uncertainty.',
-      icon: FileCheck,
+      title: 'Certificates to Portal',
+      description: 'UKAS certificates uploaded directly to your secure portal within 48 hours. Download anytime, audit-ready.',
+      icon: Upload,
     },
   ]
 
@@ -525,46 +519,56 @@ const ProcessSection = () => {
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <div className="accent-line mx-auto mb-4" />
-          <h2 className="mb-4">Our Process</h2>
+          <h2 className="mb-4">How It Works</h2>
           <p className="text-lg text-slate-600">
-            A streamlined approach to calibration services, designed for minimal disruption to your operations.
+            Simple, efficient, and designed to minimise your downtime. Here's how we deliver audit-ready calibration.
           </p>
         </div>
 
-        {/* Timeline */}
-        <div className="relative">
+        {/* Timeline - Horizontal on desktop */}
+        <div className="relative max-w-4xl mx-auto">
           {/* Connection Line - Desktop */}
-          <div className="hidden lg:block absolute top-20 left-0 right-0 h-0.5 bg-slate-200" />
+          <div className="hidden md:block absolute top-16 left-[15%] right-[15%] h-1 bg-gradient-to-r from-oakblue-200 via-oakblue-400 to-oakblue-600 rounded-full" />
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 md:gap-12">
             {steps.map((step, index) => (
-              <div key={index} className="relative">
-                {/* Step Card */}
-                <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-card hover:shadow-elevated transition-shadow">
-                  {/* Step Number Circle */}
-                  <div className="w-14 h-14 bg-oakblue-600 rounded-full flex items-center justify-center text-white font-bold text-lg mb-6 mx-auto lg:mx-0 relative z-10">
-                    {step.step}
-                  </div>
-                  
-                  <div className="text-center lg:text-left">
-                    <div className="flex items-center justify-center lg:justify-start gap-2 mb-3">
-                      <step.icon className="w-5 h-5 text-oakblue-600" />
-                      <h3 className="text-lg font-semibold text-slate-900">{step.title}</h3>
-                    </div>
-                    <p className="text-slate-600 text-sm leading-relaxed">
-                      {step.description}
-                    </p>
+              <div key={index} className="relative text-center">
+                {/* Step Number Circle */}
+                <div className="relative z-10 mx-auto mb-6">
+                  <div className="w-32 h-32 bg-gradient-to-br from-oakblue-500 to-oakblue-700 rounded-2xl flex flex-col items-center justify-center text-white shadow-elevated mx-auto transform hover:scale-105 transition-transform">
+                    <step.icon className="w-10 h-10 mb-2" />
+                    <span className="text-2xl font-bold">{step.step}</span>
                   </div>
                 </div>
+                
+                <h3 className="text-xl font-semibold text-slate-900 mb-3">{step.title}</h3>
+                <p className="text-slate-600 text-sm leading-relaxed max-w-xs mx-auto">
+                  {step.description}
+                </p>
 
                 {/* Arrow - Desktop */}
                 {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-20 -right-4 z-20">
-                    <ChevronRight className="w-8 h-8 text-slate-300" />
+                  <div className="hidden md:block absolute top-16 -right-6 z-20">
+                    <ChevronRight className="w-8 h-8 text-oakblue-400" />
                   </div>
                 )}
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* Portal CTA */}
+        <div className="mt-16 text-center">
+          <div className="inline-flex items-center gap-3 bg-oakblue-50 border border-oakblue-200 rounded-xl px-6 py-4">
+            <FileCheck className="w-6 h-6 text-oakblue-600" />
+            <div className="text-left">
+              <p className="font-semibold text-slate-900">Already a customer?</p>
+              <p className="text-sm text-slate-600">Access your certificates in the Customer Portal</p>
+            </div>
+            <Button variant="outline" size="sm" className="ml-4 border-oakblue-300 text-oakblue-700 hover:bg-oakblue-100">
+              <ExternalLink className="w-4 h-4 mr-2" />
+              Open Portal
+            </Button>
           </div>
         </div>
       </div>
