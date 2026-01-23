@@ -576,6 +576,100 @@ const ProcessSection = () => {
   )
 }
 
+// ==================== AI QUOTE BUILDER PREVIEW ====================
+const AIQuoteBuilderPreview = ({ onQuoteClick }) => {
+  const collectItems = [
+    { icon: ClipboardList, label: 'Equipment types & quantities' },
+    { icon: MapPin, label: 'Your location (postcode)' },
+    { icon: Clock, label: 'Preferred schedule' },
+    { icon: Users, label: 'Contact details' },
+  ]
+
+  const receiveItems = [
+    { icon: FileText, label: 'Itemised quote within 24 hours' },
+    { icon: Calendar, label: 'Available visit dates' },
+    { icon: CheckCircle2, label: 'Scope of calibration work' },
+    { icon: Calculator, label: 'Clear, transparent pricing' },
+  ]
+
+  return (
+    <section className="section-padding bg-gradient-to-br from-slate-50 to-oakblue-50">
+      <div className="container-main">
+        <div className="max-w-5xl mx-auto">
+          {/* Section Header */}
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 badge-primary mb-4">
+              <Sparkles className="w-4 h-4" />
+              <span>Smart Quote System</span>
+            </div>
+            <h2 className="mb-4">Get Your Quote in Minutes</h2>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+              Our AI-powered quote builder collects the right information and delivers a detailed quote to your inbox — no phone calls required.
+            </p>
+          </div>
+
+          {/* Two Column Layout */}
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* What We Collect */}
+            <div className="bg-white rounded-2xl p-8 shadow-card border border-slate-200">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 bg-oakblue-100 rounded-xl flex items-center justify-center">
+                  <ListChecks className="w-5 h-5 text-oakblue-600" />
+                </div>
+                <h3 className="text-xl font-semibold text-slate-900">What We Ask</h3>
+              </div>
+              <ul className="space-y-4">
+                {collectItems.map((item, index) => (
+                  <li key={index} className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-slate-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <item.icon className="w-4 h-4 text-slate-600" />
+                    </div>
+                    <span className="text-slate-700">{item.label}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* What You Receive */}
+            <div className="bg-oakblue-600 rounded-2xl p-8 shadow-elevated text-white">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                  <FileCheck className="w-5 h-5 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold">What You Receive</h3>
+              </div>
+              <ul className="space-y-4">
+                {receiveItems.map((item, index) => (
+                  <li key={index} className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <item.icon className="w-4 h-4 text-white" />
+                    </div>
+                    <span className="text-oakblue-100">{item.label}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* CTA */}
+          <div className="text-center mt-10">
+            <Button 
+              onClick={onQuoteClick}
+              size="lg"
+              className="btn-primary text-lg px-10 py-5 h-auto shadow-elevated"
+            >
+              <Calculator className="w-5 h-5 mr-2" />
+              Start Your Quote
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
+            <p className="text-sm text-slate-500 mt-4">No obligation • Response within 24 hours</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 // ==================== TESTIMONIALS ====================
 const TestimonialsSection = () => {
   const testimonials = [
