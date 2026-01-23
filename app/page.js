@@ -197,14 +197,16 @@ const HeroSection = ({ onQuoteClick }) => {
 
           {/* Headline */}
           <h1 className="mb-6 animate-fade-in animation-delay-100 text-balance">
-            Precision Calibration,{' '}
-            <span className="text-oakblue-600">Delivered Onsite</span>
+            Onsite Calibration Across the UK —{' '}
+            <span className="text-oakblue-600">audit-ready results, minimal downtime.</span>
           </h1>
 
           {/* Subheadline */}
-          <p className="text-xl md:text-2xl text-slate-600 mb-8 max-w-2xl mx-auto animate-fade-in animation-delay-200 text-balance">
-            Expert engineering services with UKAS-traceable accuracy. 
-            Minimise downtime with calibration at your facility.
+          <p className="text-xl md:text-2xl text-slate-600 mb-8 max-w-3xl mx-auto animate-fade-in animation-delay-200 text-balance">
+            From <strong className="text-slate-800">automotive workshops</strong> and <strong className="text-slate-800">tractor dealerships</strong> to{' '}
+            <strong className="text-slate-800">construction yards</strong> and <strong className="text-slate-800">airfields</strong> — we calibrate your 
+            torque wrenches, pressure gauges, and test equipment on your premises. 
+            Certificates uploaded directly to your <span className="text-oakblue-600 font-semibold">online portal</span>.
           </p>
 
           {/* CTA Buttons */}
@@ -215,7 +217,7 @@ const HeroSection = ({ onQuoteClick }) => {
               className="btn-primary text-lg px-8 py-4 h-auto"
             >
               <Calculator className="w-5 h-5 mr-2" />
-              Get Instant Quote
+              Request a Quote
             </Button>
             <Button 
               variant="outline" 
@@ -223,26 +225,30 @@ const HeroSection = ({ onQuoteClick }) => {
               className="btn-secondary text-lg px-8 py-4 h-auto"
               asChild
             >
-              <a href="#services">
-                Explore Services
-                <ChevronRight className="w-5 h-5 ml-1" />
+              <a href="#verify">
+                <FileCheck className="w-5 h-5 mr-2" />
+                Verify Certificate
               </a>
             </Button>
           </div>
 
           {/* Trust Indicators */}
-          <div className="flex flex-wrap items-center justify-center gap-8 mt-12 pt-8 border-t border-slate-200 animate-fade-in animation-delay-400">
-            <div className="flex items-center gap-2 text-slate-600">
-              <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-              <span className="font-medium">ISO 17025 Compliant</span>
-            </div>
-            <div className="flex items-center gap-2 text-slate-600">
-              <Clock className="w-5 h-5 text-oakblue-600" />
-              <span className="font-medium">24-48hr Turnaround</span>
-            </div>
+          <div className="flex flex-wrap items-center justify-center gap-6 lg:gap-10 mt-12 pt-8 border-t border-slate-200 animate-fade-in animation-delay-400">
             <div className="flex items-center gap-2 text-slate-600">
               <Award className="w-5 h-5 text-amber-600" />
-              <span className="font-medium">25+ Years Experience</span>
+              <span className="font-medium">40+ Years Experience</span>
+            </div>
+            <div className="flex items-center gap-2 text-slate-600">
+              <MapPin className="w-5 h-5 text-oakblue-600" />
+              <span className="font-medium">Nationwide Coverage</span>
+            </div>
+            <div className="flex items-center gap-2 text-slate-600">
+              <Clock className="w-5 h-5 text-emerald-600" />
+              <span className="font-medium">Fast Turnaround</span>
+            </div>
+            <div className="flex items-center gap-2 text-slate-600">
+              <ExternalLink className="w-5 h-5 text-purple-600" />
+              <span className="font-medium">Portal Access</span>
             </div>
           </div>
         </div>
