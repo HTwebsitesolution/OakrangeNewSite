@@ -1203,6 +1203,7 @@ export default function App() {
         <ServicesSection />
         <IndustriesSection />
         <ProcessSection />
+        <AIQuoteBuilderPreview onQuoteClick={() => setQuoteBuilderOpen(true)} />
         <TestimonialsSection />
         <FAQSection />
         <CTABand onQuoteClick={() => setQuoteBuilderOpen(true)} />
