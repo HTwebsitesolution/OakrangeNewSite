@@ -1,45 +1,1093 @@
 'use client'
 
-import { useEffect } from "react";
+import { useState, useEffect } from 'react'
+import { 
+  Menu, X, ChevronDown, ChevronRight, Phone, Mail, MapPin, 
+  Shield, Award, Clock, CheckCircle2, ArrowRight, Star, 
+  Gauge, Thermometer, Ruler, Scale, Zap, Building2, Factory,
+  Pill, Plane, FlaskConical, Cog, Quote, Plus, Minus,
+  FileCheck, Users, Target, Calculator, Send, ExternalLink
+} from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+  SheetClose,
+} from '@/components/ui/sheet'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Label } from '@/components/ui/label'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 
-const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await fetch('/api/');
-      const data = await response.json();
-      console.log(data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
-    }
-  };
-
-  useEffect(() => {
-    helloWorldApi();
-  }, []);
-
+// ==================== UTILITY BAR ====================
+const UtilityBar = () => {
   return (
-    <div>
-      <header className="App-header">
-        <a
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" alt="Emergent" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
-      </header>
+    <div className="bg-slate-900 text-slate-300 text-sm">
+      <div className="container-main flex items-center justify-between py-2">
+        <div className="flex items-center gap-6">
+          <a href="tel:+441onal234567890" className="flex items-center gap-2 hover:text-white transition-colors">
+            <Phone className="w-4 h-4" />
+            <span className="hidden sm:inline">+44 1onal 234 567890</span>
+          </a>
+          <a href="mailto:info@oakrange.co.uk" className="flex items-center gap-2 hover:text-white transition-colors">
+            <Mail className="w-4 h-4" />
+            <span className="hidden md:inline">info@oakrange.co.uk</span>
+          </a>
+        </div>
+        <div className="flex items-center gap-4">
+          <button className="flex items-center gap-2 hover:text-white transition-colors px-3 py-1 rounded hover:bg-slate-800">
+            <FileCheck className="w-4 h-4" />
+            <span>Verify Certificate</span>
+          </button>
+          <button className="flex items-center gap-2 hover:text-white transition-colors px-3 py-1 rounded hover:bg-slate-800">
+            <ExternalLink className="w-4 h-4" />
+            <span className="hidden sm:inline">Customer Portal</span>
+          </button>
+        </div>
+      </div>
     </div>
-  );
-};
-
-function App() {
-  return (
-    <div className="App">
-      <Home />
-    </div>
-  );
+  )
 }
 
-export default App;
+// ==================== NAVIGATION ====================
+const Navigation = ({ onQuoteClick }) => {
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const navLinks = [
+    { label: 'Services', href: '#services' },
+    { label: 'Industries', href: '#industries' },
+    { label: 'Process', href: '#process' },
+    { label: 'About', href: '#about' },
+    { label: 'FAQ', href: '#faq' },
+    { label: 'Contact', href: '#contact' },
+  ]
+
+  return (
+    <nav className={`sticky top-0 z-50 transition-all duration-300 ${
+      isScrolled 
+        ? 'bg-white/95 backdrop-blur-md shadow-card' 
+        : 'bg-white'
+    }`}>
+      <div className="container-main">
+        <div className="flex items-center justify-between h-16 md:h-20">
+          {/* Logo */}
+          <a href="#" className="flex items-center gap-3 group">
+            <div className="w-10 h-10 bg-oakblue-600 rounded-lg flex items-center justify-center group-hover:bg-oakblue-700 transition-colors">
+              <Gauge className="w-6 h-6 text-white" />
+            </div>
+            <div className="flex flex-col">
+              <span className="font-bold text-lg text-slate-900 leading-tight">Oakrange</span>
+              <span className="text-xs text-slate-500 leading-tight">Engineering</span>
+            </div>
+          </a>
+
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="text-slate-600 hover:text-oakblue-600 font-medium transition-colors relative group"
+              >
+                {link.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-oakblue-600 group-hover:w-full transition-all duration-300" />
+              </a>
+            ))}
+          </div>
+
+          {/* CTA Button */}
+          <div className="hidden md:flex items-center gap-4">
+            <Button 
+              onClick={onQuoteClick}
+              className="btn-primary flex items-center gap-2"
+            >
+              <Calculator className="w-4 h-4" />
+              Request a Quote
+            </Button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="lg:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden border-t border-slate-100 py-4 animate-fade-in">
+            <div className="flex flex-col gap-2">
+              {navLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="px-4 py-3 text-slate-600 hover:text-oakblue-600 hover:bg-slate-50 rounded-lg font-medium transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </a>
+              ))}
+              <div className="px-4 pt-4 border-t border-slate-100 mt-2">
+                <Button 
+                  onClick={() => {
+                    setMobileMenuOpen(false)
+                    onQuoteClick()
+                  }}
+                  className="btn-primary w-full flex items-center justify-center gap-2"
+                >
+                  <Calculator className="w-4 h-4" />
+                  Request a Quote
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </nav>
+  )
+}
+
+// ==================== HERO SECTION ====================
+const HeroSection = ({ onQuoteClick }) => {
+  return (
+    <section className="gradient-hero section-padding relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.03]">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231E40AF' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+        }} />
+      </div>
+
+      <div className="container-main relative">
+        <div className="max-w-4xl mx-auto text-center">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 badge-primary mb-6 animate-fade-in">
+            <Shield className="w-4 h-4" />
+            <span>UKAS Accredited Calibration Laboratory</span>
+          </div>
+
+          {/* Headline */}
+          <h1 className="mb-6 animate-fade-in animation-delay-100 text-balance">
+            Precision Calibration,{' '}
+            <span className="text-oakblue-600">Delivered Onsite</span>
+          </h1>
+
+          {/* Subheadline */}
+          <p className="text-xl md:text-2xl text-slate-600 mb-8 max-w-2xl mx-auto animate-fade-in animation-delay-200 text-balance">
+            Expert engineering services with UKAS-traceable accuracy. 
+            Minimise downtime with calibration at your facility.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in animation-delay-300">
+            <Button 
+              onClick={onQuoteClick}
+              size="lg"
+              className="btn-primary text-lg px-8 py-4 h-auto"
+            >
+              <Calculator className="w-5 h-5 mr-2" />
+              Get Instant Quote
+            </Button>
+            <Button 
+              variant="outline" 
+              size="lg"
+              className="btn-secondary text-lg px-8 py-4 h-auto"
+              asChild
+            >
+              <a href="#services">
+                Explore Services
+                <ChevronRight className="w-5 h-5 ml-1" />
+              </a>
+            </Button>
+          </div>
+
+          {/* Trust Indicators */}
+          <div className="flex flex-wrap items-center justify-center gap-8 mt-12 pt-8 border-t border-slate-200 animate-fade-in animation-delay-400">
+            <div className="flex items-center gap-2 text-slate-600">
+              <CheckCircle2 className="w-5 h-5 text-emerald-600" />
+              <span className="font-medium">ISO 17025 Compliant</span>
+            </div>
+            <div className="flex items-center gap-2 text-slate-600">
+              <Clock className="w-5 h-5 text-oakblue-600" />
+              <span className="font-medium">24-48hr Turnaround</span>
+            </div>
+            <div className="flex items-center gap-2 text-slate-600">
+              <Award className="w-5 h-5 text-amber-600" />
+              <span className="font-medium">25+ Years Experience</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ==================== CREDIBILITY STRIP ====================
+const CredibilityStrip = () => {
+  const credentials = [
+    { name: 'UKAS', description: 'Accredited Laboratory' },
+    { name: 'ISO 17025', description: 'Certified' },
+    { name: 'ISO 9001', description: 'Quality Management' },
+    { name: 'SafeContractor', description: 'Approved' },
+    { name: 'CHAS', description: 'Accredited' },
+  ]
+
+  return (
+    <section className="bg-slate-50 py-8 border-y border-slate-200">
+      <div className="container-main">
+        <p className="text-center text-sm text-slate-500 uppercase tracking-wider mb-6 font-medium">
+          Trusted by leading UK organisations
+        </p>
+        <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+          {credentials.map((cred, index) => (
+            <div 
+              key={index}
+              className="flex flex-col items-center gap-1 text-center group"
+            >
+              <div className="w-16 h-16 bg-white rounded-xl border border-slate-200 flex items-center justify-center group-hover:border-oakblue-300 group-hover:shadow-card transition-all">
+                <Shield className="w-8 h-8 text-slate-400 group-hover:text-oakblue-600 transition-colors" />
+              </div>
+              <span className="font-semibold text-slate-800 text-sm">{cred.name}</span>
+              <span className="text-xs text-slate-500">{cred.description}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ==================== SERVICE CARDS ====================
+const ServicesSection = () => {
+  const services = [
+    {
+      icon: Thermometer,
+      title: 'Temperature Calibration',
+      description: 'Thermometers, thermocouples, RTDs, data loggers, and temperature chambers calibrated to traceable standards.',
+      features: ['Traceable to NPL', '-200°C to +1600°C range', 'Onsite or laboratory'],
+    },
+    {
+      icon: Gauge,
+      title: 'Pressure Calibration',
+      description: 'Pressure gauges, transmitters, and test equipment calibrated across the full pressure range.',
+      features: ['Vacuum to 10,000 bar', 'Dead-weight testers', 'Digital pressure standards'],
+    },
+    {
+      icon: Ruler,
+      title: 'Dimensional Calibration',
+      description: 'Micrometers, calipers, gauge blocks, CMMs, and other dimensional instruments.',
+      features: ['Sub-micron accuracy', 'CMM verification', 'Gauge block calibration'],
+    },
+    {
+      icon: Scale,
+      title: 'Mass Calibration',
+      description: 'Balances, scales, and mass standards from milligrams to tonnes.',
+      features: ['OIML weights', 'Analytical balances', 'Industrial scales'],
+    },
+    {
+      icon: Zap,
+      title: 'Electrical Calibration',
+      description: 'Multimeters, clamp meters, insulation testers, PAT testers, and electrical standards.',
+      features: ['DC to 100 kHz', 'High voltage', 'Resistance standards'],
+    },
+    {
+      icon: Cog,
+      title: 'Torque Calibration',
+      description: 'Torque wrenches, transducers, and screwdrivers calibrated to international standards.',
+      features: ['0.1 Nm to 20,000 Nm', 'Both directions', 'BS EN ISO 6789'],
+    },
+  ]
+
+  return (
+    <section id="services" className="section-padding bg-white">
+      <div className="container-main">
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <div className="accent-line mx-auto mb-4" />
+          <h2 className="mb-4">Calibration Services</h2>
+          <p className="text-lg text-slate-600">
+            Comprehensive calibration capabilities covering all major measurement disciplines, 
+            delivered by expert engineers at your location.
+          </p>
+        </div>
+
+        {/* Service Cards Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.map((service, index) => (
+            <Card 
+              key={index} 
+              className="card-hover border-slate-200 group cursor-pointer"
+            >
+              <CardHeader>
+                <div className="w-12 h-12 bg-oakblue-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-oakblue-100 transition-colors">
+                  <service.icon className="w-6 h-6 text-oakblue-600" />
+                </div>
+                <CardTitle className="text-xl group-hover:text-oakblue-600 transition-colors">
+                  {service.title}
+                </CardTitle>
+                <CardDescription className="text-slate-600">
+                  {service.description}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2">
+                  {service.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-center gap-2 text-sm text-slate-600">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-6 pt-4 border-t border-slate-100">
+                  <a 
+                    href="#" 
+                    className="inline-flex items-center text-oakblue-600 font-medium text-sm hover:text-oakblue-700 group/link"
+                  >
+                    Learn more
+                    <ArrowRight className="w-4 h-4 ml-1 group-hover/link:translate-x-1 transition-transform" />
+                  </a>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ==================== INDUSTRY CARDS ====================
+const IndustriesSection = () => {
+  const industries = [
+    {
+      icon: Pill,
+      title: 'Pharmaceutical',
+      description: 'GMP-compliant calibration for critical pharmaceutical manufacturing equipment.',
+    },
+    {
+      icon: Plane,
+      title: 'Aerospace',
+      description: 'AS9100 aligned services for precision aerospace instrumentation.',
+    },
+    {
+      icon: FlaskConical,
+      title: 'Laboratory',
+      description: 'Supporting research and testing laboratories with accurate measurement.',
+    },
+    {
+      icon: Factory,
+      title: 'Manufacturing',
+      description: 'Quality assurance calibration for production line instrumentation.',
+    },
+    {
+      icon: Building2,
+      title: 'Energy & Utilities',
+      description: 'Calibration services for power generation and distribution facilities.',
+    },
+    {
+      icon: Cog,
+      title: 'Automotive',
+      description: 'IATF 16949 compliant services for automotive industry requirements.',
+    },
+  ]
+
+  return (
+    <section id="industries" className="section-padding bg-slate-50">
+      <div className="container-main">
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <div className="accent-line mx-auto mb-4" />
+          <h2 className="mb-4">Industries We Serve</h2>
+          <p className="text-lg text-slate-600">
+            Sector-specific expertise ensuring compliance with industry standards and regulations.
+          </p>
+        </div>
+
+        {/* Industry Cards Grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {industries.map((industry, index) => (
+            <div 
+              key={index}
+              className="bg-white p-6 rounded-xl border border-slate-200 card-hover group"
+            >
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-oakblue-50 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-oakblue-100 transition-colors">
+                  <industry.icon className="w-6 h-6 text-oakblue-600" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-slate-900 mb-2 group-hover:text-oakblue-600 transition-colors">
+                    {industry.title}
+                  </h3>
+                  <p className="text-slate-600 text-sm leading-relaxed">
+                    {industry.description}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ==================== PROCESS TIMELINE ====================
+const ProcessSection = () => {
+  const steps = [
+    {
+      step: '01',
+      title: 'Request Quote',
+      description: 'Submit your instrument list online or speak with our team for a detailed quotation.',
+      icon: Calculator,
+    },
+    {
+      step: '02',
+      title: 'Schedule Service',
+      description: 'Choose a convenient date for onsite calibration or arrange laboratory collection.',
+      icon: Clock,
+    },
+    {
+      step: '03',
+      title: 'Calibration',
+      description: 'Our engineers calibrate your instruments using traceable reference standards.',
+      icon: Target,
+    },
+    {
+      step: '04',
+      title: 'Certification',
+      description: 'Receive comprehensive certificates with detailed measurement uncertainty.',
+      icon: FileCheck,
+    },
+  ]
+
+  return (
+    <section id="process" className="section-padding bg-white">
+      <div className="container-main">
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <div className="accent-line mx-auto mb-4" />
+          <h2 className="mb-4">Our Process</h2>
+          <p className="text-lg text-slate-600">
+            A streamlined approach to calibration services, designed for minimal disruption to your operations.
+          </p>
+        </div>
+
+        {/* Timeline */}
+        <div className="relative">
+          {/* Connection Line - Desktop */}
+          <div className="hidden lg:block absolute top-20 left-0 right-0 h-0.5 bg-slate-200" />
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {steps.map((step, index) => (
+              <div key={index} className="relative">
+                {/* Step Card */}
+                <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-card hover:shadow-elevated transition-shadow">
+                  {/* Step Number Circle */}
+                  <div className="w-14 h-14 bg-oakblue-600 rounded-full flex items-center justify-center text-white font-bold text-lg mb-6 mx-auto lg:mx-0 relative z-10">
+                    {step.step}
+                  </div>
+                  
+                  <div className="text-center lg:text-left">
+                    <div className="flex items-center justify-center lg:justify-start gap-2 mb-3">
+                      <step.icon className="w-5 h-5 text-oakblue-600" />
+                      <h3 className="text-lg font-semibold text-slate-900">{step.title}</h3>
+                    </div>
+                    <p className="text-slate-600 text-sm leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Arrow - Desktop */}
+                {index < steps.length - 1 && (
+                  <div className="hidden lg:block absolute top-20 -right-4 z-20">
+                    <ChevronRight className="w-8 h-8 text-slate-300" />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ==================== TESTIMONIALS ====================
+const TestimonialsSection = () => {
+  const testimonials = [
+    {
+      quote: "Oakrange has been our calibration partner for over 10 years. Their onsite service minimises our equipment downtime and their certificates are always impeccable.",
+      author: "Sarah Mitchell",
+      role: "Quality Manager",
+      company: "PharmaCorp UK",
+      rating: 5,
+    },
+    {
+      quote: "The team's technical expertise is outstanding. They understand our AS9100 requirements and consistently deliver to the highest standards.",
+      author: "James Crawford",
+      role: "Engineering Director",
+      company: "AeroTech Solutions",
+      rating: 5,
+    },
+    {
+      quote: "Responsive, professional, and thorough. Oakrange handles all our dimensional calibration needs with precision and care.",
+      author: "Emma Thompson",
+      role: "Laboratory Supervisor",
+      company: "TestLab International",
+      rating: 5,
+    },
+  ]
+
+  return (
+    <section id="about" className="section-padding bg-slate-900">
+      <div className="container-main">
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <div className="accent-line mx-auto mb-4" />
+          <h2 className="mb-4 text-white">Trusted by Industry Leaders</h2>
+          <p className="text-lg text-slate-400">
+            See what our clients say about our calibration services.
+          </p>
+        </div>
+
+        {/* Testimonial Cards */}
+        <div className="grid md:grid-cols-3 gap-6">
+          {testimonials.map((testimonial, index) => (
+            <Card 
+              key={index}
+              className="bg-slate-800/50 border-slate-700 hover:bg-slate-800 transition-colors"
+            >
+              <CardContent className="pt-6">
+                {/* Stars */}
+                <div className="flex gap-1 mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
+                  ))}
+                </div>
+
+                {/* Quote */}
+                <div className="relative mb-6">
+                  <Quote className="absolute -top-2 -left-2 w-8 h-8 text-oakblue-500/30" />
+                  <p className="text-slate-300 leading-relaxed pl-4">
+                    "{testimonial.quote}"
+                  </p>
+                </div>
+
+                {/* Author */}
+                <div className="flex items-center gap-3 pt-4 border-t border-slate-700">
+                  <div className="w-10 h-10 bg-oakblue-600 rounded-full flex items-center justify-center text-white font-semibold">
+                    {testimonial.author.split(' ').map(n => n[0]).join('')}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-white">{testimonial.author}</p>
+                    <p className="text-sm text-slate-400">
+                      {testimonial.role}, {testimonial.company}
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ==================== FAQ ACCORDION ====================
+const FAQSection = () => {
+  const faqs = [
+    {
+      question: 'What is UKAS accreditation and why does it matter?',
+      answer: 'UKAS (United Kingdom Accreditation Service) is the national accreditation body recognised by the UK government. UKAS accreditation ensures that our calibration services meet ISO/IEC 17025 requirements, providing internationally recognised traceability and measurement competence. This is often a regulatory requirement for quality management systems.',
+    },
+    {
+      question: 'How long does onsite calibration typically take?',
+      answer: 'The duration depends on the quantity and type of instruments. Typically, a small batch (10-20 instruments) can be completed in a single day. We work with you to schedule visits that minimise disruption to your operations, and can arrange out-of-hours service if required.',
+    },
+    {
+      question: 'What areas of the UK do you cover?',
+      answer: 'We provide nationwide coverage across the UK, with engineering teams based strategically to minimise travel time and costs. Our main hubs are in the Midlands, South East, and North West, allowing us to reach most locations within 24-48 hours.',
+    },
+    {
+      question: 'How do I verify the authenticity of my calibration certificate?',
+      answer: 'Every certificate we issue includes a unique reference number that can be verified through our online portal or by contacting our quality department directly. We maintain records for a minimum of 10 years in accordance with our accreditation requirements.',
+    },
+    {
+      question: 'Can you calibrate equipment from any manufacturer?',
+      answer: 'Yes, we calibrate instruments from all major manufacturers regardless of make or model. If you have specialist or unusual equipment, please contact us to confirm our capabilities and discuss any specific requirements.',
+    },
+    {
+      question: 'What happens if my instrument fails calibration?',
+      answer: 'If an instrument falls outside its specified tolerance, we will document the "as found" condition and can often perform adjustment to bring it back within specification. We\'ll always discuss options with you before proceeding, and provide clear documentation of any adjustments made.',
+    },
+  ]
+
+  return (
+    <section id="faq" className="section-padding bg-white">
+      <div className="container-main">
+        <div className="grid lg:grid-cols-5 gap-12">
+          {/* Left Column - Header */}
+          <div className="lg:col-span-2">
+            <div className="lg:sticky lg:top-32">
+              <div className="accent-line mb-4" />
+              <h2 className="mb-4">Frequently Asked Questions</h2>
+              <p className="text-slate-600 mb-6">
+                Find answers to common questions about our calibration services. 
+                Can't find what you're looking for?
+              </p>
+              <Button variant="outline" className="btn-secondary" asChild>
+                <a href="#contact">
+                  <Mail className="w-4 h-4 mr-2" />
+                  Contact Us
+                </a>
+              </Button>
+            </div>
+          </div>
+
+          {/* Right Column - Accordion */}
+          <div className="lg:col-span-3">
+            <Accordion type="single" collapsible className="space-y-4">
+              {faqs.map((faq, index) => (
+                <AccordionItem 
+                  key={index} 
+                  value={`item-${index}`}
+                  className="bg-slate-50 rounded-xl border border-slate-200 px-6 data-[state=open]:bg-white data-[state=open]:shadow-card transition-all"
+                >
+                  <AccordionTrigger className="text-left font-semibold text-slate-900 hover:text-oakblue-600 py-5 [&[data-state=open]>svg]:rotate-180">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-slate-600 pb-5 leading-relaxed">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ==================== CTA BAND ====================
+const CTABand = ({ onQuoteClick }) => {
+  return (
+    <section className="gradient-cta py-16">
+      <div className="container-main">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="text-center md:text-left">
+            <h2 className="text-white mb-2 text-3xl md:text-4xl">Ready to Get Started?</h2>
+            <p className="text-oakblue-100 text-lg">
+              Get an instant quote for your calibration requirements.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Button 
+              onClick={onQuoteClick}
+              size="lg"
+              className="bg-white text-oakblue-700 hover:bg-oakblue-50 font-semibold px-8 py-4 h-auto shadow-elevated"
+            >
+              <Calculator className="w-5 h-5 mr-2" />
+              Request a Quote
+            </Button>
+            <Button 
+              variant="outline" 
+              size="lg"
+              className="border-white/30 text-white hover:bg-white/10 px-8 py-4 h-auto"
+              asChild
+            >
+              <a href="tel:+441234567890">
+                <Phone className="w-5 h-5 mr-2" />
+                Call Us Now
+              </a>
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ==================== QUOTE BUILDER SLIDE-OVER ====================
+const QuoteBuilder = ({ isOpen, onClose }) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    phone: '',
+    serviceType: '',
+    instrumentCount: '',
+    location: '',
+    message: '',
+  })
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    // Handle form submission
+    console.log('Quote request:', formData)
+    alert('Thank you! We will contact you shortly with your quote.')
+    onClose()
+  }
+
+  const handleChange = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }))
+  }
+
+  return (
+    <Sheet open={isOpen} onOpenChange={onClose}>
+      <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
+        <SheetHeader className="mb-6">
+          <SheetTitle className="text-2xl flex items-center gap-2">
+            <Calculator className="w-6 h-6 text-oakblue-600" />
+            Request a Quote
+          </SheetTitle>
+          <SheetDescription>
+            Fill in your details and we'll provide a tailored quote within 24 hours.
+          </SheetDescription>
+        </SheetHeader>
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Contact Information */}
+          <div className="space-y-4">
+            <h4 className="font-semibold text-slate-900 flex items-center gap-2">
+              <Users className="w-4 h-4 text-oakblue-600" />
+              Contact Information
+            </h4>
+            
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="name">Full Name *</Label>
+                <Input
+                  id="name"
+                  placeholder="John Smith"
+                  value={formData.name}
+                  onChange={(e) => handleChange('name', e.target.value)}
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="phone">Phone</Label>
+                <Input
+                  id="phone"
+                  type="tel"
+                  placeholder="+44 ..."
+                  value={formData.phone}
+                  onChange={(e) => handleChange('phone', e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="email">Email Address *</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="john@company.co.uk"
+                value={formData.email}
+                onChange={(e) => handleChange('email', e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="company">Company Name</Label>
+              <Input
+                id="company"
+                placeholder="Your Company Ltd"
+                value={formData.company}
+                onChange={(e) => handleChange('company', e.target.value)}
+              />
+            </div>
+          </div>
+
+          {/* Service Requirements */}
+          <div className="space-y-4 pt-4 border-t border-slate-200">
+            <h4 className="font-semibold text-slate-900 flex items-center gap-2">
+              <Gauge className="w-4 h-4 text-oakblue-600" />
+              Service Requirements
+            </h4>
+
+            <div className="space-y-2">
+              <Label htmlFor="serviceType">Service Type *</Label>
+              <Select 
+                value={formData.serviceType} 
+                onValueChange={(value) => handleChange('serviceType', value)}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a service" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="temperature">Temperature Calibration</SelectItem>
+                  <SelectItem value="pressure">Pressure Calibration</SelectItem>
+                  <SelectItem value="dimensional">Dimensional Calibration</SelectItem>
+                  <SelectItem value="mass">Mass Calibration</SelectItem>
+                  <SelectItem value="electrical">Electrical Calibration</SelectItem>
+                  <SelectItem value="torque">Torque Calibration</SelectItem>
+                  <SelectItem value="multiple">Multiple Services</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="instrumentCount">No. of Instruments</Label>
+                <Select 
+                  value={formData.instrumentCount} 
+                  onValueChange={(value) => handleChange('instrumentCount', value)}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="1-10">1-10</SelectItem>
+                    <SelectItem value="11-25">11-25</SelectItem>
+                    <SelectItem value="26-50">26-50</SelectItem>
+                    <SelectItem value="51-100">51-100</SelectItem>
+                    <SelectItem value="100+">100+</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="location">Location</Label>
+                <Select 
+                  value={formData.location} 
+                  onValueChange={(value) => handleChange('location', value)}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="onsite">Onsite Service</SelectItem>
+                    <SelectItem value="laboratory">Laboratory</SelectItem>
+                    <SelectItem value="either">Either</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="message">Additional Details</Label>
+              <Textarea
+                id="message"
+                placeholder="Tell us about your instruments, any specific requirements, or questions..."
+                rows={4}
+                value={formData.message}
+                onChange={(e) => handleChange('message', e.target.value)}
+              />
+            </div>
+          </div>
+
+          {/* Submit */}
+          <div className="pt-4 border-t border-slate-200">
+            <Button type="submit" className="btn-primary w-full text-lg py-6">
+              <Send className="w-5 h-5 mr-2" />
+              Submit Quote Request
+            </Button>
+            <p className="text-xs text-slate-500 text-center mt-4">
+              We typically respond within 24 hours. For urgent enquiries, please call us.
+            </p>
+          </div>
+        </form>
+      </SheetContent>
+    </Sheet>
+  )
+}
+
+// ==================== FOOTER ====================
+const Footer = () => {
+  const currentYear = new Date().getFullYear()
+
+  const footerLinks = {
+    services: [
+      { label: 'Temperature Calibration', href: '#' },
+      { label: 'Pressure Calibration', href: '#' },
+      { label: 'Dimensional Calibration', href: '#' },
+      { label: 'Mass Calibration', href: '#' },
+      { label: 'Electrical Calibration', href: '#' },
+      { label: 'Torque Calibration', href: '#' },
+    ],
+    company: [
+      { label: 'About Us', href: '#about' },
+      { label: 'Our Process', href: '#process' },
+      { label: 'Industries', href: '#industries' },
+      { label: 'Careers', href: '#' },
+      { label: 'News & Updates', href: '#' },
+    ],
+    support: [
+      { label: 'Contact Us', href: '#contact' },
+      { label: 'FAQ', href: '#faq' },
+      { label: 'Verify Certificate', href: '#' },
+      { label: 'Customer Portal', href: '#' },
+      { label: 'Request Callback', href: '#' },
+    ],
+  }
+
+  return (
+    <footer id="contact" className="bg-slate-900 text-slate-300">
+      {/* Main Footer */}
+      <div className="container-main section-padding">
+        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12">
+          {/* Company Info */}
+          <div className="lg:col-span-2">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 bg-oakblue-600 rounded-lg flex items-center justify-center">
+                <Gauge className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <span className="font-bold text-lg text-white block leading-tight">Oakrange</span>
+                <span className="text-xs text-slate-500 leading-tight">Engineering</span>
+              </div>
+            </div>
+            <p className="text-slate-400 mb-6 max-w-sm">
+              UKAS accredited calibration laboratory providing precision measurement services across the UK since 1998.
+            </p>
+            <div className="space-y-3">
+              <a href="tel:+441234567890" className="flex items-center gap-3 hover:text-white transition-colors">
+                <Phone className="w-5 h-5 text-oakblue-500" />
+                <span>+44 (0) 1234 567890</span>
+              </a>
+              <a href="mailto:info@oakrange.co.uk" className="flex items-center gap-3 hover:text-white transition-colors">
+                <Mail className="w-5 h-5 text-oakblue-500" />
+                <span>info@oakrange.co.uk</span>
+              </a>
+              <div className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-oakblue-500 flex-shrink-0 mt-0.5" />
+                <span>
+                  Oakrange Engineering Ltd<br />
+                  Unit 7, Innovation Park<br />
+                  Birmingham, B1 1AA
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Services Links */}
+          <div>
+            <h4 className="font-semibold text-white mb-4">Services</h4>
+            <ul className="space-y-3">
+              {footerLinks.services.map((link, index) => (
+                <li key={index}>
+                  <a href={link.href} className="hover:text-white transition-colors text-sm">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Company Links */}
+          <div>
+            <h4 className="font-semibold text-white mb-4">Company</h4>
+            <ul className="space-y-3">
+              {footerLinks.company.map((link, index) => (
+                <li key={index}>
+                  <a href={link.href} className="hover:text-white transition-colors text-sm">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Support Links */}
+          <div>
+            <h4 className="font-semibold text-white mb-4">Support</h4>
+            <ul className="space-y-3">
+              {footerLinks.support.map((link, index) => (
+                <li key={index}>
+                  <a href={link.href} className="hover:text-white transition-colors text-sm">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="border-t border-slate-800">
+        <div className="container-main py-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-slate-500">
+              © {currentYear} Oakrange Engineering Ltd. All rights reserved.
+            </p>
+            <div className="flex items-center gap-6 text-sm">
+              <a href="#" className="text-slate-500 hover:text-white transition-colors">Privacy Policy</a>
+              <a href="#" className="text-slate-500 hover:text-white transition-colors">Terms of Service</a>
+              <a href="#" className="text-slate-500 hover:text-white transition-colors">Cookie Policy</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
+}
+
+// ==================== MAIN APP ====================
+export default function App() {
+  const [quoteBuilderOpen, setQuoteBuilderOpen] = useState(false)
+
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Utility Bar */}
+      <UtilityBar />
+
+      {/* Navigation */}
+      <Navigation onQuoteClick={() => setQuoteBuilderOpen(true)} />
+
+      {/* Main Content */}
+      <main>
+        <HeroSection onQuoteClick={() => setQuoteBuilderOpen(true)} />
+        <CredibilityStrip />
+        <ServicesSection />
+        <IndustriesSection />
+        <ProcessSection />
+        <TestimonialsSection />
+        <FAQSection />
+        <CTABand onQuoteClick={() => setQuoteBuilderOpen(true)} />
+      </main>
+
+      {/* Footer */}
+      <Footer />
+
+      {/* Quote Builder Slide-Over */}
+      <QuoteBuilder 
+        isOpen={quoteBuilderOpen} 
+        onClose={() => setQuoteBuilderOpen(false)} 
+      />
+    </div>
+  )
+}

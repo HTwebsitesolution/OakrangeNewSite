@@ -1,104 +1,164 @@
+import { NextResponse } from 'next/server'
 import { MongoClient } from 'mongodb'
 import { v4 as uuidv4 } from 'uuid'
-import { NextResponse } from 'next/server'
 
-// MongoDB connection
-let client
-let db
+const mongoUrl = process.env.MONGO_URL
+let client = null
+let db = null
 
-async function connectToMongo() {
-  if (!client) {
-    client = new MongoClient(process.env.MONGO_URL)
-    await client.connect()
-    db = client.db(process.env.DB_NAME)
-  }
-  return db
-}
-
-// Helper function to handle CORS
-function handleCORS(response) {
-  response.headers.set('Access-Control-Allow-Origin', process.env.CORS_ORIGINS || '*')
-  response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-  response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-  response.headers.set('Access-Control-Allow-Credentials', 'true')
-  return response
-}
-
-// OPTIONS handler for CORS
-export async function OPTIONS() {
-  return handleCORS(new NextResponse(null, { status: 200 }))
-}
-
-// Route handler function
-async function handleRoute(request, { params }) {
-  const { path = [] } = params
-  const route = `/${path.join('/')}`
-  const method = request.method
-
+async function connectDB() {
+  if (db) return db
   try {
-    const db = await connectToMongo()
-
-    // Root endpoint - GET /api/root (since /api/ is not accessible with catch-all)
-    if (route === '/root' && method === 'GET') {
-      return handleCORS(NextResponse.json({ message: "Hello World" }))
-    }
-    // Root endpoint - GET /api/root (since /api/ is not accessible with catch-all)
-    if (route === '/' && method === 'GET') {
-      return handleCORS(NextResponse.json({ message: "Hello World" }))
-    }
-
-    // Status endpoints - POST /api/status
-    if (route === '/status' && method === 'POST') {
-      const body = await request.json()
-      
-      if (!body.client_name) {
-        return handleCORS(NextResponse.json(
-          { error: "client_name is required" }, 
-          { status: 400 }
-        ))
-      }
-
-      const statusObj = {
-        id: uuidv4(),
-        client_name: body.client_name,
-        timestamp: new Date()
-      }
-
-      await db.collection('status_checks').insertOne(statusObj)
-      return handleCORS(NextResponse.json(statusObj))
-    }
-
-    // Status endpoints - GET /api/status
-    if (route === '/status' && method === 'GET') {
-      const statusChecks = await db.collection('status_checks')
-        .find({})
-        .limit(1000)
-        .toArray()
-
-      // Remove MongoDB's _id field from response
-      const cleanedStatusChecks = statusChecks.map(({ _id, ...rest }) => rest)
-      
-      return handleCORS(NextResponse.json(cleanedStatusChecks))
-    }
-
-    // Route not found
-    return handleCORS(NextResponse.json(
-      { error: `Route ${route} not found` }, 
-      { status: 404 }
-    ))
-
+    client = new MongoClient(mongoUrl)
+    await client.connect()
+    db = client.db('oakrange_engineering')
+    console.log('Connected to MongoDB')
+    return db
   } catch (error) {
-    console.error('API Error:', error)
-    return handleCORS(NextResponse.json(
-      { error: "Internal server error" }, 
-      { status: 500 }
-    ))
+    console.error('MongoDB connection error:', error)
+    throw error
   }
 }
 
-// Export all HTTP methods
-export const GET = handleRoute
-export const POST = handleRoute
-export const PUT = handleRoute
-export const DELETE = handleRoute
-export const PATCH = handleRoute
+// Health check endpoint
+async function handleHealthCheck() {
+  try {
+    const database = await connectDB()
+    return NextResponse.json({ 
+      status: 'healthy', 
+      timestamp: new Date().toISOString(),
+      database: 'connected'
+    })
+  } catch (error) {
+    return NextResponse.json({ 
+      status: 'unhealthy', 
+      error: error.message 
+    }, { status: 500 })
+  }
+}
+
+// Quote request endpoints
+async function handleQuoteRequest(request) {
+  try {
+    const database = await connectDB()
+    const body = await request.json()
+    
+    const quoteRequest = {
+      id: uuidv4(),
+      ...body,
+      status: 'pending',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    }
+    
+    await database.collection('quote_requests').insertOne(quoteRequest)
+    
+    return NextResponse.json({ 
+      success: true, 
+      message: 'Quote request submitted successfully',
+      quoteId: quoteRequest.id
+    }, { status: 201 })
+  } catch (error) {
+    console.error('Error creating quote request:', error)
+    return NextResponse.json({ 
+      success: false, 
+      error: 'Failed to submit quote request' 
+    }, { status: 500 })
+  }
+}
+
+async function getQuoteRequests() {
+  try {
+    const database = await connectDB()
+    const quotes = await database.collection('quote_requests')
+      .find({})
+      .sort({ createdAt: -1 })
+      .toArray()
+    
+    return NextResponse.json({ success: true, data: quotes })
+  } catch (error) {
+    console.error('Error fetching quote requests:', error)
+    return NextResponse.json({ 
+      success: false, 
+      error: 'Failed to fetch quote requests' 
+    }, { status: 500 })
+  }
+}
+
+// Certificate verification endpoint
+async function verifyCertificate(certificateId) {
+  try {
+    const database = await connectDB()
+    const certificate = await database.collection('certificates').findOne({ 
+      certificateId: certificateId 
+    })
+    
+    if (!certificate) {
+      return NextResponse.json({ 
+        valid: false, 
+        message: 'Certificate not found' 
+      }, { status: 404 })
+    }
+    
+    return NextResponse.json({ 
+      valid: true, 
+      certificate: {
+        id: certificate.certificateId,
+        issuedTo: certificate.issuedTo,
+        instrument: certificate.instrument,
+        calibrationDate: certificate.calibrationDate,
+        validUntil: certificate.validUntil,
+        status: certificate.status
+      }
+    })
+  } catch (error) {
+    console.error('Error verifying certificate:', error)
+    return NextResponse.json({ 
+      success: false, 
+      error: 'Failed to verify certificate' 
+    }, { status: 500 })
+  }
+}
+
+// Route handler
+export async function GET(request, { params }) {
+  const path = params?.path || []
+  const pathString = path.join('/')
+  
+  // API routes
+  if (pathString === 'health') {
+    return handleHealthCheck()
+  }
+  
+  if (pathString === 'quotes') {
+    return getQuoteRequests()
+  }
+  
+  if (pathString.startsWith('certificates/verify/')) {
+    const certificateId = pathString.split('/').pop()
+    return verifyCertificate(certificateId)
+  }
+  
+  return NextResponse.json({ 
+    message: 'Oakrange Engineering API',
+    version: '1.0.0',
+    endpoints: {
+      health: '/api/health',
+      quotes: '/api/quotes',
+      verifyCertificate: '/api/certificates/verify/:id'
+    }
+  })
+}
+
+export async function POST(request, { params }) {
+  const path = params?.path || []
+  const pathString = path.join('/')
+  
+  if (pathString === 'quotes') {
+    return handleQuoteRequest(request)
+  }
+  
+  return NextResponse.json({ 
+    error: 'Not found' 
+  }, { status: 404 })
+}
