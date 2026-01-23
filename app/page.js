@@ -275,7 +275,7 @@ const CredibilityStrip = () => {
       description: 'We come to you'
     },
     { 
-      icon: Monitor,
+      icon: FileCheck,
       stat: '24/7', 
       label: 'Portal Access',
       description: 'Certificates online'
