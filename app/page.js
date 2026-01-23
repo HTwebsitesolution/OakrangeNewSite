@@ -833,11 +833,11 @@ const CTABand = ({ onQuoteClick }) => {
   return (
     <section className="gradient-cta py-16">
       <div className="container-main">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="text-center md:text-left">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+          <div className="text-center lg:text-left">
             <h2 className="text-white mb-2 text-3xl md:text-4xl">Ready to Get Started?</h2>
             <p className="text-oakblue-100 text-lg">
-              Get an instant quote for your calibration requirements.
+              Get a quote for your workshop or airfield calibration needs — or access your certificates now.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4">
@@ -855,9 +855,9 @@ const CTABand = ({ onQuoteClick }) => {
               className="border-white/30 text-white hover:bg-white/10 px-8 py-4 h-auto"
               asChild
             >
-              <a href="tel:+441234567890">
-                <Phone className="w-5 h-5 mr-2" />
-                Call Us Now
+              <a href="#portal">
+                <ExternalLink className="w-5 h-5 mr-2" />
+                Customer Portal
               </a>
             </Button>
           </div>
