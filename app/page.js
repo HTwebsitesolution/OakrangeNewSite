@@ -414,34 +414,28 @@ const ServicesSection = () => {
 const IndustriesSection = () => {
   const industries = [
     {
-      icon: Pill,
-      title: 'Pharmaceutical',
-      description: 'GMP-compliant calibration for critical pharmaceutical manufacturing equipment.',
+      icon: Wrench,
+      title: 'Automotive Workshops',
+      description: 'MOT stations, garages, and dealerships. Torque wrenches, tyre gauges, and diagnostic equipment calibrated onsite.',
+      items: ['Torque wrenches', 'Tyre pressure gauges', 'Diagnostic tools'],
     },
     {
-      icon: Plane,
-      title: 'Aerospace',
-      description: 'AS9100 aligned services for precision aerospace instrumentation.',
+      icon: Tractor,
+      title: 'Tractor & Agriculture',
+      description: 'Agricultural dealers and farm workshops. Keep your service equipment compliant and accurate.',
+      items: ['Hydraulic gauges', 'Torque equipment', 'Pressure testers'],
     },
     {
-      icon: FlaskConical,
-      title: 'Laboratory',
-      description: 'Supporting research and testing laboratories with accurate measurement.',
+      icon: HardHat,
+      title: 'Construction Workshops',
+      description: 'Plant hire, construction depots, and heavy equipment service centres across the UK.',
+      items: ['Lifting equipment', 'Pressure systems', 'Torque tools'],
     },
     {
-      icon: Factory,
-      title: 'Manufacturing',
-      description: 'Quality assurance calibration for production line instrumentation.',
-    },
-    {
-      icon: Building2,
-      title: 'Energy & Utilities',
-      description: 'Calibration services for power generation and distribution facilities.',
-    },
-    {
-      icon: Cog,
-      title: 'Automotive',
-      description: 'IATF 16949 compliant services for automotive industry requirements.',
+      icon: PlaneTakeoff,
+      title: 'Airfields & Aviation',
+      description: 'GA airfields, maintenance hangars, and aviation facilities. Precision calibration to aviation standards.',
+      items: ['Pressure instruments', 'Torque wrenches', 'Test equipment'],
     },
   ]
 
@@ -453,28 +447,39 @@ const IndustriesSection = () => {
           <div className="accent-line mx-auto mb-4" />
           <h2 className="mb-4">Industries We Serve</h2>
           <p className="text-lg text-slate-600">
-            Sector-specific expertise ensuring compliance with industry standards and regulations.
+            Specialist calibration for workshops, dealerships, and airfields. 
+            We understand your equipment and compliance requirements.
           </p>
         </div>
 
         {/* Industry Cards Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 gap-6">
           {industries.map((industry, index) => (
             <div 
               key={index}
-              className="bg-white p-6 rounded-xl border border-slate-200 card-hover group"
+              className="bg-white p-8 rounded-xl border border-slate-200 card-hover group"
             >
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-oakblue-50 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-oakblue-100 transition-colors">
-                  <industry.icon className="w-6 h-6 text-oakblue-600" />
+              <div className="flex items-start gap-5">
+                <div className="w-16 h-16 bg-oakblue-50 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-oakblue-100 transition-colors">
+                  <industry.icon className="w-8 h-8 text-oakblue-600" />
                 </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-slate-900 mb-2 group-hover:text-oakblue-600 transition-colors">
+                <div className="flex-1">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-2 group-hover:text-oakblue-600 transition-colors">
                     {industry.title}
                   </h3>
-                  <p className="text-slate-600 text-sm leading-relaxed">
+                  <p className="text-slate-600 text-sm leading-relaxed mb-4">
                     {industry.description}
                   </p>
+                  <div className="flex flex-wrap gap-2">
+                    {industry.items.map((item, idx) => (
+                      <span 
+                        key={idx} 
+                        className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-700"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
