@@ -7,7 +7,7 @@ import {
   Gauge, Thermometer, Ruler, Scale, Zap, Building2, Factory,
   Pill, Plane, FlaskConical, Cog, Quote, Plus, Minus,
   FileCheck, Users, Target, Calculator, Send, ExternalLink,
-  Wrench, Tractor, HardHat, PlaneTakeoff, Upload, Monitor,
+  Wrench, Tractor, HardHat, PlaneTakeoff, Upload,
   ClipboardList, Truck, ListChecks, FileText, Sparkles
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
