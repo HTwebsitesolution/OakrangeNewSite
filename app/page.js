@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
 import { 
   Menu, X, ChevronDown, ChevronRight, Phone, Mail, MapPin, 
   Shield, Award, Clock, CheckCircle2, ArrowRight, Star, 
@@ -37,6 +39,22 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+
+// ==================== BRAND LOGO ====================
+const BrandLogo = () => {
+  return (
+    <Link href="/" className="flex items-center gap-3">
+      <Image
+        src="/brand/oakrange-logo.png"
+        alt="Oakrange Engineering Ltd"
+        width={220}
+        height={60}
+        priority
+        className="h-10 w-auto"
+      />
+    </Link>
+  )
+}
 
 // ==================== UTILITY BAR ====================
 const UtilityBar = () => {
@@ -99,15 +117,7 @@ const Navigation = ({ onQuoteClick }) => {
       <div className="container-main">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 bg-oakblue-600 rounded-lg flex items-center justify-center group-hover:bg-oakblue-700 transition-colors">
-              <Gauge className="w-6 h-6 text-white" />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-bold text-lg text-slate-900 leading-tight">Oakrange</span>
-              <span className="text-xs text-slate-500 leading-tight">Engineering</span>
-            </div>
-          </a>
+          <BrandLogo />
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
@@ -115,10 +125,10 @@ const Navigation = ({ onQuoteClick }) => {
               <a
                 key={link.label}
                 href={link.href}
-                className="text-slate-600 hover:text-oakblue-600 font-medium transition-colors relative group"
+                className="text-slate-600 hover:text-primary font-medium transition-colors relative group"
               >
                 {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-oakblue-600 group-hover:w-full transition-all duration-300" />
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
               </a>
             ))}
           </div>
@@ -152,7 +162,7 @@ const Navigation = ({ onQuoteClick }) => {
                 <a
                   key={link.label}
                   href={link.href}
-                  className="px-4 py-3 text-slate-600 hover:text-oakblue-600 hover:bg-slate-50 rounded-lg font-medium transition-colors"
+                  className="px-4 py-3 text-slate-600 hover:text-primary hover:bg-slate-50 rounded-lg font-medium transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.label}
@@ -200,7 +210,7 @@ const HeroSection = ({ onQuoteClick }) => {
           {/* Headline */}
           <h1 className="mb-6 animate-fade-in animation-delay-100 text-balance">
             Onsite Calibration Across the UK —{' '}
-            <span className="text-oakblue-600">audit-ready results, minimal downtime.</span>
+            <span className="text-primary">audit-ready results, minimal downtime.</span>
           </h1>
 
           {/* Subheadline */}
@@ -208,7 +218,7 @@ const HeroSection = ({ onQuoteClick }) => {
             From <strong className="text-slate-800">automotive workshops</strong> and <strong className="text-slate-800">tractor dealerships</strong> to{' '}
             <strong className="text-slate-800">construction yards</strong> and <strong className="text-slate-800">airfields</strong> — we calibrate your 
             torque wrenches, pressure gauges, and test equipment on your premises. 
-            Certificates uploaded directly to your <span className="text-oakblue-600 font-semibold">online portal</span>.
+            Certificates uploaded directly to your <span className="text-primary font-semibold">online portal</span>.
           </p>
 
           {/* CTA Buttons */}
@@ -241,7 +251,7 @@ const HeroSection = ({ onQuoteClick }) => {
               <span className="font-medium">40+ Years Experience</span>
             </div>
             <div className="flex items-center gap-2 text-slate-600">
-              <MapPin className="w-5 h-5 text-oakblue-600" />
+              <MapPin className="w-5 h-5 text-primary" />
               <span className="font-medium">Nationwide Coverage</span>
             </div>
             <div className="flex items-center gap-2 text-slate-600">
@@ -297,8 +307,8 @@ const CredibilityStrip = () => {
               key={index}
               className="text-center group"
             >
-              <div className="inline-flex items-center justify-center w-14 h-14 bg-oakblue-600/20 rounded-xl mb-4 group-hover:bg-oakblue-600/30 transition-colors">
-                <cred.icon className="w-7 h-7 text-oakblue-400" />
+              <div className="inline-flex items-center justify-center w-14 h-14 bg-primary/20 rounded-xl mb-4 group-hover:bg-primary/30 transition-colors">
+                <cred.icon className="w-7 h-7 text-primary/70" />
               </div>
               <div className="text-3xl md:text-4xl font-bold text-white mb-1">{cred.stat}</div>
               <div className="font-semibold text-white text-sm mb-1">{cred.label}</div>
@@ -373,10 +383,10 @@ const ServicesSection = () => {
               className="card-hover border-slate-200 group cursor-pointer"
             >
               <CardHeader>
-                <div className="w-12 h-12 bg-oakblue-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-oakblue-100 transition-colors">
-                  <service.icon className="w-6 h-6 text-oakblue-600" />
+                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                  <service.icon className="w-6 h-6 text-primary" />
                 </div>
-                <CardTitle className="text-xl group-hover:text-oakblue-600 transition-colors">
+                <CardTitle className="text-xl group-hover:text-primary transition-colors">
                   {service.title}
                 </CardTitle>
                 <CardDescription className="text-slate-600">
@@ -395,7 +405,7 @@ const ServicesSection = () => {
                 <div className="mt-6 pt-4 border-t border-slate-100">
                   <a 
                     href="#" 
-                    className="inline-flex items-center text-oakblue-600 font-medium text-sm hover:text-oakblue-700 group/link"
+                    className="inline-flex items-center text-primary font-medium text-sm hover:text-primary group/link"
                   >
                     Learn more
                     <ArrowRight className="w-4 h-4 ml-1 group-hover/link:translate-x-1 transition-transform" />
@@ -460,11 +470,11 @@ const IndustriesSection = () => {
               className="bg-white p-8 rounded-xl border border-slate-200 card-hover group"
             >
               <div className="flex items-start gap-5">
-                <div className="w-16 h-16 bg-oakblue-50 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-oakblue-100 transition-colors">
-                  <industry.icon className="w-8 h-8 text-oakblue-600" />
+                <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                  <industry.icon className="w-8 h-8 text-primary" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-2 group-hover:text-oakblue-600 transition-colors">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-2 group-hover:text-primary transition-colors">
                     {industry.title}
                   </h3>
                   <p className="text-slate-600 text-sm leading-relaxed mb-4">
@@ -528,14 +538,14 @@ const ProcessSection = () => {
         {/* Timeline - Horizontal on desktop */}
         <div className="relative max-w-4xl mx-auto">
           {/* Connection Line - Desktop */}
-          <div className="hidden md:block absolute top-16 left-[15%] right-[15%] h-1 bg-gradient-to-r from-oakblue-200 via-oakblue-400 to-oakblue-600 rounded-full" />
+          <div className="hidden md:block absolute top-16 left-[15%] right-[15%] h-1 bg-gradient-to-r from-primary/30 via-primary/60 to-primary rounded-full" />
           
           <div className="grid md:grid-cols-3 gap-8 md:gap-12">
             {steps.map((step, index) => (
               <div key={index} className="relative text-center">
                 {/* Step Number Circle */}
                 <div className="relative z-10 mx-auto mb-6">
-                  <div className="w-32 h-32 bg-gradient-to-br from-oakblue-500 to-oakblue-700 rounded-2xl flex flex-col items-center justify-center text-white shadow-elevated mx-auto transform hover:scale-105 transition-transform">
+                  <div className="w-32 h-32 bg-gradient-to-br from-primary to-primary/90 rounded-2xl flex flex-col items-center justify-center text-white shadow-elevated mx-auto transform hover:scale-105 transition-transform">
                     <step.icon className="w-10 h-10 mb-2" />
                     <span className="text-2xl font-bold">{step.step}</span>
                   </div>
@@ -549,7 +559,7 @@ const ProcessSection = () => {
                 {/* Arrow - Desktop */}
                 {index < steps.length - 1 && (
                   <div className="hidden md:block absolute top-16 -right-6 z-20">
-                    <ChevronRight className="w-8 h-8 text-oakblue-400" />
+                    <ChevronRight className="w-8 h-8 text-primary/70" />
                   </div>
                 )}
               </div>
@@ -559,13 +569,13 @@ const ProcessSection = () => {
 
         {/* Portal CTA */}
         <div className="mt-16 text-center">
-          <div className="inline-flex items-center gap-3 bg-oakblue-50 border border-oakblue-200 rounded-xl px-6 py-4">
-            <FileCheck className="w-6 h-6 text-oakblue-600" />
+          <div className="inline-flex items-center gap-3 bg-primary/10 border border-primary/30 rounded-xl px-6 py-4">
+            <FileCheck className="w-6 h-6 text-primary" />
             <div className="text-left">
               <p className="font-semibold text-slate-900">Already a customer?</p>
               <p className="text-sm text-slate-600">Access your certificates in the Customer Portal</p>
             </div>
-            <Button variant="outline" size="sm" className="ml-4 border-oakblue-300 text-oakblue-700 hover:bg-oakblue-100">
+            <Button variant="outline" size="sm" className="ml-4 border-primary/40 text-primary hover:bg-primary/20">
               <ExternalLink className="w-4 h-4 mr-2" />
               Open Portal
             </Button>
@@ -593,7 +603,7 @@ const AIQuoteBuilderPreview = ({ onQuoteClick }) => {
   ]
 
   return (
-    <section className="section-padding bg-gradient-to-br from-slate-50 to-oakblue-50">
+    <section className="section-padding bg-gradient-to-br from-slate-50 to-slate-50">
       <div className="container-main">
         <div className="max-w-5xl mx-auto">
           {/* Section Header */}
@@ -613,8 +623,8 @@ const AIQuoteBuilderPreview = ({ onQuoteClick }) => {
             {/* What We Collect */}
             <div className="bg-white rounded-2xl p-8 shadow-card border border-slate-200">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-oakblue-100 rounded-xl flex items-center justify-center">
-                  <ListChecks className="w-5 h-5 text-oakblue-600" />
+                <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center">
+                  <ListChecks className="w-5 h-5 text-primary" />
                 </div>
                 <h3 className="text-xl font-semibold text-slate-900">What We Ask</h3>
               </div>
@@ -631,7 +641,7 @@ const AIQuoteBuilderPreview = ({ onQuoteClick }) => {
             </div>
 
             {/* What You Receive */}
-            <div className="bg-oakblue-600 rounded-2xl p-8 shadow-elevated text-white">
+            <div className="bg-primary rounded-2xl p-8 shadow-elevated text-white">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
                   <FileCheck className="w-5 h-5 text-white" />
@@ -644,7 +654,7 @@ const AIQuoteBuilderPreview = ({ onQuoteClick }) => {
                     <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
                       <item.icon className="w-4 h-4 text-white" />
                     </div>
-                    <span className="text-oakblue-100">{item.label}</span>
+                    <span className="text-primary/20">{item.label}</span>
                   </li>
                 ))}
               </ul>
@@ -725,7 +735,7 @@ const TestimonialsSection = () => {
 
                 {/* Quote */}
                 <div className="relative mb-6">
-                  <Quote className="absolute -top-2 -left-2 w-8 h-8 text-oakblue-500/30" />
+                  <Quote className="absolute -top-2 -left-2 w-8 h-8 text-primary/80/30" />
                   <p className="text-slate-300 leading-relaxed pl-4">
                     "{testimonial.quote}"
                   </p>
@@ -733,7 +743,7 @@ const TestimonialsSection = () => {
 
                 {/* Author */}
                 <div className="flex items-center gap-3 pt-4 border-t border-slate-700">
-                  <div className="w-10 h-10 bg-oakblue-600 rounded-full flex items-center justify-center text-white font-semibold">
+                  <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-semibold">
                     {testimonial.author.split(' ').map(n => n[0]).join('')}
                   </div>
                   <div>
@@ -812,7 +822,7 @@ const FAQSection = () => {
                   value={`item-${index}`}
                   className="bg-slate-50 rounded-xl border border-slate-200 px-6 data-[state=open]:bg-white data-[state=open]:shadow-card transition-all"
                 >
-                  <AccordionTrigger className="text-left font-semibold text-slate-900 hover:text-oakblue-600 py-5 [&[data-state=open]>svg]:rotate-180">
+                  <AccordionTrigger className="text-left font-semibold text-slate-900 hover:text-primary py-5 [&[data-state=open]>svg]:rotate-180">
                     {faq.question}
                   </AccordionTrigger>
                   <AccordionContent className="text-slate-600 pb-5 leading-relaxed">
@@ -836,7 +846,7 @@ const CTABand = ({ onQuoteClick }) => {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
           <div className="text-center lg:text-left">
             <h2 className="text-white mb-2 text-3xl md:text-4xl">Ready to Get Started?</h2>
-            <p className="text-oakblue-100 text-lg">
+            <p className="text-primary/20 text-lg">
               Get a quote for your workshop or airfield calibration needs — or access your certificates now.
             </p>
           </div>
@@ -844,7 +854,7 @@ const CTABand = ({ onQuoteClick }) => {
             <Button 
               onClick={onQuoteClick}
               size="lg"
-              className="bg-white text-oakblue-700 hover:bg-oakblue-50 font-semibold px-8 py-4 h-auto shadow-elevated"
+              className="bg-white text-primary hover:bg-primary/10 font-semibold px-8 py-4 h-auto shadow-elevated"
             >
               <Calculator className="w-5 h-5 mr-2" />
               Request a Quote
@@ -897,7 +907,7 @@ const QuoteBuilder = ({ isOpen, onClose }) => {
       <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
         <SheetHeader className="mb-6">
           <SheetTitle className="text-2xl flex items-center gap-2">
-            <Calculator className="w-6 h-6 text-oakblue-600" />
+            <Calculator className="w-6 h-6 text-primary" />
             Request a Quote
           </SheetTitle>
           <SheetDescription>
@@ -909,7 +919,7 @@ const QuoteBuilder = ({ isOpen, onClose }) => {
           {/* Contact Information */}
           <div className="space-y-4">
             <h4 className="font-semibold text-slate-900 flex items-center gap-2">
-              <Users className="w-4 h-4 text-oakblue-600" />
+              <Users className="w-4 h-4 text-primary" />
               Contact Information
             </h4>
             
@@ -962,7 +972,7 @@ const QuoteBuilder = ({ isOpen, onClose }) => {
           {/* Service Requirements */}
           <div className="space-y-4 pt-4 border-t border-slate-200">
             <h4 className="font-semibold text-slate-900 flex items-center gap-2">
-              <Gauge className="w-4 h-4 text-oakblue-600" />
+              <Gauge className="w-4 h-4 text-primary" />
               Service Requirements
             </h4>
 
@@ -1090,7 +1100,7 @@ const Footer = () => {
           {/* Company Info */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 bg-oakblue-600 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
                 <Gauge className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -1103,15 +1113,15 @@ const Footer = () => {
             </p>
             <div className="space-y-3">
               <a href="tel:+441234567890" className="flex items-center gap-3 hover:text-white transition-colors">
-                <Phone className="w-5 h-5 text-oakblue-500" />
+                <Phone className="w-5 h-5 text-primary/80" />
                 <span>+44 (0) 1234 567890</span>
               </a>
               <a href="mailto:info@oakrange.co.uk" className="flex items-center gap-3 hover:text-white transition-colors">
-                <Mail className="w-5 h-5 text-oakblue-500" />
+                <Mail className="w-5 h-5 text-primary/80" />
                 <span>info@oakrange.co.uk</span>
               </a>
               <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-oakblue-500 flex-shrink-0 mt-0.5" />
+                <MapPin className="w-5 h-5 text-primary/80 flex-shrink-0 mt-0.5" />
                 <span>
                   Oakrange Engineering Ltd<br />
                   Unit 7, Innovation Park<br />
