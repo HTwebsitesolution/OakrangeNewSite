@@ -646,7 +646,7 @@ const AIQuoteBuilderPreview = ({ onQuoteClick }) => {
                 <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
                   <FileCheck className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold">What You Receive</h3>
+                <h3 className="text-xl font-semibold text-white">What You Receive</h3>
               </div>
               <ul className="space-y-4">
                 {receiveItems.map((item, index) => (
@@ -654,7 +654,7 @@ const AIQuoteBuilderPreview = ({ onQuoteClick }) => {
                     <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
                       <item.icon className="w-4 h-4 text-white" />
                     </div>
-                    <span className="text-primary/20">{item.label}</span>
+                    <span className="text-white">{item.label}</span>
                   </li>
                 ))}
               </ul>
