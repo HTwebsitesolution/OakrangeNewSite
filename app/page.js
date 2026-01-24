@@ -83,7 +83,7 @@ const Navigation = ({ onQuoteClick }) => {
 
   const navLinks = [
     { label: 'Services', href: '/services' },
-    { label: 'Industries', href: '#industries' },
+    { label: 'Industries', href: '/industries' },
     { label: 'Process', href: '#process' },
     { label: 'About', href: '#about' },
     { label: 'FAQ', href: '#faq' },
