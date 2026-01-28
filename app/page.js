@@ -846,30 +846,25 @@ const CTABand = ({ onQuoteClick }) => {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
           <div className="text-center lg:text-left">
             <h2 className="text-white mb-2 text-3xl md:text-4xl">Ready to Get Started?</h2>
-            <p className="text-primary/20 text-lg">
+            <p className="text-white/90 text-lg">
               Get a quote for your workshop or airfield calibration needs — or access your certificates now.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button 
+            <button
               onClick={onQuoteClick}
-              size="lg"
-              className="bg-white text-primary hover:bg-primary/10 font-semibold px-8 py-4 h-auto shadow-elevated"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-lg font-semibold transition-colors bg-white text-primary hover:bg-primary/10 hover:text-primary px-8 py-4 h-auto shadow-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
             >
-              <Calculator className="w-5 h-5 mr-2" />
+              <Calculator className="w-5 h-5" />
               Request a Quote
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="border-white/30 text-white hover:bg-white/10 px-8 py-4 h-auto"
-              asChild
+            </button>
+            <a
+              href="#portal"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-lg font-semibold transition-colors border border-white/30 text-white bg-transparent hover:bg-white/10 hover:text-white px-8 py-4 h-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 disabled:pointer-events-none disabled:opacity-50"
             >
-              <a href="#portal">
-                <ExternalLink className="w-5 h-5 mr-2" />
-                Customer Portal
-              </a>
-            </Button>
+              <ExternalLink className="w-5 h-5" />
+              Customer Portal
+            </a>
           </div>
         </div>
       </div>

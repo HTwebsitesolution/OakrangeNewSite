@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { 
   Wrench, Gauge, PlaneTakeoff, HardHat, Tractor,
   ChevronRight, ArrowRight, CheckCircle2, AlertTriangle,
@@ -38,6 +39,22 @@ import {
   TableRow,
 } from '@/components/ui/table'
 
+// ==================== BRAND LOGO ====================
+const BrandLogo = () => {
+  return (
+    <Link href="/" className="flex items-center gap-3">
+      <Image
+        src="/brand/oakrange-logo.png"
+        alt="Oakrange Engineering Ltd"
+        width={220}
+        height={60}
+        priority
+        className="h-10 w-auto"
+      />
+    </Link>
+  )
+}
+
 // ==================== NAVIGATION ====================
 const Navigation = ({ onQuoteClick }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -55,25 +72,17 @@ const Navigation = ({ onQuoteClick }) => {
     <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200">
       <div className="container-main">
         <div className="flex items-center justify-between h-16 md:h-20">
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 bg-oakblue-600 rounded-lg flex items-center justify-center group-hover:bg-oakblue-700 transition-colors">
-              <Gauge className="w-6 h-6 text-white" />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-bold text-lg text-slate-900 leading-tight">Oakrange</span>
-              <span className="text-xs text-slate-500 leading-tight">Engineering</span>
-            </div>
-          </Link>
+          <BrandLogo />
 
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                className="text-slate-600 hover:text-oakblue-600 font-medium transition-colors relative group"
+                className="text-slate-600 hover:text-primary font-medium transition-colors relative group"
               >
                 {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-oakblue-600 group-hover:w-full transition-all duration-300" />
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
               </Link>
             ))}
           </div>
@@ -81,7 +90,7 @@ const Navigation = ({ onQuoteClick }) => {
           <div className="hidden md:flex items-center gap-4">
             <Button 
               onClick={onQuoteClick}
-              className="bg-oakblue-600 hover:bg-oakblue-700 text-white font-medium px-6 py-2.5 rounded-lg transition-all"
+              className="bg-primary hover:bg-primary/90 text-white font-medium px-6 py-2.5 rounded-lg transition-all"
             >
               <Calculator className="w-4 h-4 mr-2" />
               Get an Estimate
@@ -104,7 +113,7 @@ const Navigation = ({ onQuoteClick }) => {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="px-4 py-3 text-slate-600 hover:text-oakblue-600 hover:bg-slate-50 rounded-lg font-medium transition-colors"
+                  className="px-4 py-3 text-slate-600 hover:text-primary hover:bg-slate-50 rounded-lg font-medium transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.label}
@@ -116,7 +125,7 @@ const Navigation = ({ onQuoteClick }) => {
                     setMobileMenuOpen(false)
                     onQuoteClick()
                   }}
-                  className="bg-oakblue-600 hover:bg-oakblue-700 text-white w-full"
+                  className="bg-primary hover:bg-primary/90 text-white w-full"
                 >
                   <Calculator className="w-4 h-4 mr-2" />
                   Get an Estimate
@@ -133,7 +142,7 @@ const Navigation = ({ onQuoteClick }) => {
 // ==================== PAGE HEADER ====================
 const PageHeader = () => {
   return (
-    <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-oakblue-900 py-20 md:py-24 relative overflow-hidden">
+    <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-20 md:py-24 relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
@@ -143,13 +152,13 @@ const PageHeader = () => {
       
       <div className="container-main relative">
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 bg-oakblue-500/20 text-oakblue-300 px-4 py-1.5 rounded-full text-sm font-medium mb-6 border border-oakblue-500/30">
+          <div className="inline-flex items-center gap-2 bg-primary/100/20 text-primary/60 px-4 py-1.5 rounded-full text-sm font-medium mb-6 border border-primary/30">
             <Building2 className="w-4 h-4" />
             <span>Industry-Specific Calibration</span>
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
             Your Industry.{' '}
-            <span className="text-oakblue-400">Your Equipment.</span>{' '}
+            <span className="text-primary/70">Your Equipment.</span>{' '}
             Our Expertise.
           </h1>
           <p className="text-xl text-slate-300 leading-relaxed">
@@ -189,7 +198,7 @@ const IndustryNav = () => {
             <button
               key={industry.id}
               onClick={() => scrollToSection(industry.id)}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-200 hover:border-oakblue-300 hover:bg-oakblue-50 text-slate-700 hover:text-oakblue-700 font-medium transition-all group"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-200 hover:border-primary/40 hover:bg-primary/10 text-slate-700 hover:text-primary font-medium transition-all group"
             >
               <industry.icon className="w-5 h-5 group-hover:scale-110 transition-transform" />
               <span className="hidden sm:inline">{industry.label}</span>
@@ -275,7 +284,7 @@ const IndustrySection = ({
           </div>
 
           {/* Approach Column */}
-          <div className="bg-oakblue-600 rounded-2xl p-8 text-white">
+          <div className="bg-primary rounded-2xl p-8 text-white">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
                 <ThumbsUp className="w-5 h-5 text-white" />
@@ -285,20 +294,20 @@ const IndustrySection = ({
             <div className="space-y-4">
               <div className="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3">
                 <div className={`w-3 h-3 rounded-full ${approach.primary === 'onsite' ? 'bg-emerald-400' : 'bg-amber-400'}`} />
-                <span className="font-medium">
+                <span className="font-medium text-white">
                   {approach.primary === 'onsite' ? 'Onsite Calibration' : 'Send-in Service'}
                 </span>
-                <span className="text-xs bg-white/20 px-2 py-0.5 rounded-full ml-auto">Recommended</span>
+                <span className="text-xs bg-white/20 text-white px-2 py-0.5 rounded-full ml-auto">Recommended</span>
               </div>
-              <p className="text-oakblue-100 text-sm leading-relaxed">
+              <p className="text-white/90 text-sm leading-relaxed">
                 {approach.description}
               </p>
               <div className="pt-4 border-t border-white/20">
-                <p className="text-sm font-medium text-oakblue-200 mb-2">Why this approach:</p>
+                <p className="text-sm font-medium text-white/80 mb-2">Why this approach:</p>
                 <ul className="space-y-2">
                   {approach.reasons.map((reason, index) => (
-                    <li key={index} className="flex items-start gap-2 text-sm text-oakblue-100">
-                      <CheckCircle2 className="w-4 h-4 text-oakblue-300 flex-shrink-0 mt-0.5" />
+                    <li key={index} className="flex items-start gap-2 text-sm text-white/90">
+                      <CheckCircle2 className="w-4 h-4 text-white/80 flex-shrink-0 mt-0.5" />
                       {reason}
                     </li>
                   ))}
@@ -317,7 +326,7 @@ const IndustrySection = ({
           <Button 
             onClick={onQuoteClick}
             size="lg"
-            className="bg-oakblue-600 hover:bg-oakblue-700 text-white px-8 flex-shrink-0"
+            className="bg-primary hover:bg-primary/90 text-white px-8 flex-shrink-0"
           >
             <Calculator className="w-5 h-5 mr-2" />
             Get an Estimate
@@ -370,7 +379,7 @@ const ComparisonTable = ({ onQuoteClick }) => {
       <div className="container-main">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="w-12 h-1 bg-oakblue-600 rounded-full mx-auto mb-4" />
+          <div className="w-12 h-1 bg-primary rounded-full mx-auto mb-4" />
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
             Industry Comparison
           </h2>
@@ -394,7 +403,7 @@ const ComparisonTable = ({ onQuoteClick }) => {
               </TableHeader>
               <TableBody>
                 {comparisonData.map((row, index) => (
-                  <TableRow key={index} className={row.highlight ? 'bg-oakblue-50/50' : ''}>
+                  <TableRow key={index} className={row.highlight ? 'bg-primary/10/50' : ''}>
                     <TableCell className="py-4">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -407,7 +416,7 @@ const ComparisonTable = ({ onQuoteClick }) => {
                       <span className="text-slate-600 text-sm">{row.commonNeeds}</span>
                     </TableCell>
                     <TableCell className="py-4">
-                      <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-oakblue-100 text-oakblue-800">
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary/20 text-primary">
                         {row.servicePath}
                       </span>
                     </TableCell>
@@ -419,7 +428,7 @@ const ComparisonTable = ({ onQuoteClick }) => {
                         onClick={onQuoteClick}
                         variant="outline"
                         size="sm"
-                        className="border-oakblue-200 text-oakblue-700 hover:bg-oakblue-50"
+                        className="border-primary/30 text-primary hover:bg-primary/10"
                       >
                         Get Estimate
                       </Button>
@@ -469,7 +478,7 @@ const QuoteBuilder = ({ isOpen, onClose }) => {
       <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
         <SheetHeader className="mb-6">
           <SheetTitle className="text-2xl flex items-center gap-2">
-            <Calculator className="w-6 h-6 text-oakblue-600" />
+            <Calculator className="w-6 h-6 text-primary" />
             Get an Estimate
           </SheetTitle>
           <SheetDescription>
@@ -480,7 +489,7 @@ const QuoteBuilder = ({ isOpen, onClose }) => {
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-4">
             <h4 className="font-semibold text-slate-900 flex items-center gap-2">
-              <Users className="w-4 h-4 text-oakblue-600" />
+              <Users className="w-4 h-4 text-primary" />
               Contact Information
             </h4>
             
@@ -532,7 +541,7 @@ const QuoteBuilder = ({ isOpen, onClose }) => {
 
           <div className="space-y-4 pt-4 border-t border-slate-200">
             <h4 className="font-semibold text-slate-900 flex items-center gap-2">
-              <Building2 className="w-4 h-4 text-oakblue-600" />
+              <Building2 className="w-4 h-4 text-primary" />
               Industry & Equipment
             </h4>
 
@@ -599,7 +608,7 @@ const QuoteBuilder = ({ isOpen, onClose }) => {
           </div>
 
           <div className="pt-4 border-t border-slate-200">
-            <Button type="submit" className="bg-oakblue-600 hover:bg-oakblue-700 w-full text-lg py-6">
+            <Button type="submit" className="bg-primary hover:bg-primary/90 w-full text-lg py-6">
               <Calculator className="w-5 h-5 mr-2" />
               Get My Estimate
             </Button>
@@ -620,7 +629,7 @@ const Footer = () => {
       <div className="container-main">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-oakblue-600 rounded-lg flex items-center justify-center">
+            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
               <Gauge className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -853,22 +862,30 @@ export default function IndustriesPage() {
         <ComparisonTable onQuoteClick={() => setQuoteBuilderOpen(true)} />
 
         {/* Final CTA */}
-        <section className="py-20 bg-gradient-to-r from-oakblue-600 to-oakblue-700">
+        <section className="py-20 bg-gradient-to-r from-primary to-primary/90">
           <div className="container-main text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Not Sure Which Service You Need?
             </h2>
-            <p className="text-xl text-oakblue-100 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
               Our AI Quote Builder will help identify the right calibration services for your specific industry and equipment.
             </p>
-            <Button 
-              onClick={() => setQuoteBuilderOpen(true)}
-              size="lg"
-              className="bg-white text-oakblue-700 hover:bg-oakblue-50 font-semibold px-10 py-5 h-auto shadow-lg"
-            >
-              <Sparkles className="w-5 h-5 mr-2" />
-              Open Quote Builder
-            </Button>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button
+                onClick={() => setQuoteBuilderOpen(true)}
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-lg font-semibold transition-colors bg-white text-primary hover:bg-primary/10 hover:text-primary px-10 py-5 h-auto shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+              >
+                <Sparkles className="w-5 h-5" />
+                Open Quote Builder
+              </button>
+              <a
+                href="#portal"
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-lg font-semibold transition-colors border border-white/30 text-white bg-transparent hover:bg-white/10 hover:text-white px-10 py-5 h-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 disabled:pointer-events-none disabled:opacity-50"
+              >
+                <ExternalLink className="w-5 h-5" />
+                Customer Portal
+              </a>
+            </div>
           </div>
         </section>
       </main>

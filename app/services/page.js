@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { 
   Wrench, Gauge, PlaneTakeoff, Settings, FileCheck, Zap,
   ChevronRight, ArrowRight, CheckCircle2, Users, Package,
@@ -29,6 +30,22 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
+// ==================== BRAND LOGO ====================
+const BrandLogo = () => {
+  return (
+    <Link href="/" className="flex items-center gap-3">
+      <Image
+        src="/brand/oakrange-logo.png"
+        alt="Oakrange Engineering Ltd"
+        width={220}
+        height={60}
+        priority
+        className="h-10 w-auto"
+      />
+    </Link>
+  )
+}
+
 // ==================== NAVIGATION ====================
 const Navigation = ({ onQuoteClick }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -47,15 +64,7 @@ const Navigation = ({ onQuoteClick }) => {
       <div className="container-main">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 bg-oakblue-600 rounded-lg flex items-center justify-center group-hover:bg-oakblue-700 transition-colors">
-              <Gauge className="w-6 h-6 text-white" />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-bold text-lg text-slate-900 leading-tight">Oakrange</span>
-              <span className="text-xs text-slate-500 leading-tight">Engineering</span>
-            </div>
-          </Link>
+          <BrandLogo />
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
@@ -63,10 +72,10 @@ const Navigation = ({ onQuoteClick }) => {
               <Link
                 key={link.label}
                 href={link.href}
-                className="text-slate-600 hover:text-oakblue-600 font-medium transition-colors relative group"
+                className="text-slate-600 hover:text-primary font-medium transition-colors relative group"
               >
                 {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-oakblue-600 group-hover:w-full transition-all duration-300" />
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
               </Link>
             ))}
           </div>
@@ -75,7 +84,7 @@ const Navigation = ({ onQuoteClick }) => {
           <div className="hidden md:flex items-center gap-4">
             <Button 
               onClick={onQuoteClick}
-              className="bg-oakblue-600 hover:bg-oakblue-700 text-white font-medium px-6 py-2.5 rounded-lg transition-all"
+              className="bg-primary hover:bg-primary/90 text-white font-medium px-6 py-2.5 rounded-lg transition-all"
             >
               <Calculator className="w-4 h-4 mr-2" />
               Request a Quote
@@ -100,7 +109,7 @@ const Navigation = ({ onQuoteClick }) => {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="px-4 py-3 text-slate-600 hover:text-oakblue-600 hover:bg-slate-50 rounded-lg font-medium transition-colors"
+                  className="px-4 py-3 text-slate-600 hover:text-primary hover:bg-slate-50 rounded-lg font-medium transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.label}
@@ -112,7 +121,7 @@ const Navigation = ({ onQuoteClick }) => {
                     setMobileMenuOpen(false)
                     onQuoteClick()
                   }}
-                  className="bg-oakblue-600 hover:bg-oakblue-700 text-white w-full"
+                  className="bg-primary hover:bg-primary/90 text-white w-full"
                 >
                   <Calculator className="w-4 h-4 mr-2" />
                   Request a Quote
@@ -129,10 +138,10 @@ const Navigation = ({ onQuoteClick }) => {
 // ==================== PAGE HEADER ====================
 const PageHeader = () => {
   return (
-    <section className="bg-gradient-to-br from-slate-50 via-white to-oakblue-50 py-16 md:py-20">
+    <section className="bg-gradient-to-br from-slate-50 via-white to-slate-50 py-16 md:py-20">
       <div className="container-main">
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 bg-oakblue-100 text-oakblue-800 px-4 py-1.5 rounded-full text-sm font-medium mb-6">
+          <div className="inline-flex items-center gap-2 bg-primary/20 text-primary px-4 py-1.5 rounded-full text-sm font-medium mb-6">
             <Shield className="w-4 h-4" />
             <span>UKAS Accredited Services</span>
           </div>
@@ -217,12 +226,12 @@ const ServiceHubCards = () => {
               onClick={() => scrollToSection(service.id)}
               className="text-left group"
             >
-              <Card className="h-full border-slate-200 hover:border-oakblue-300 hover:shadow-lg transition-all duration-300 group-hover:-translate-y-1">
+              <Card className="h-full border-slate-200 hover:border-primary/40 hover:shadow-lg transition-all duration-300 group-hover:-translate-y-1">
                 <CardHeader>
                   <div className={`w-14 h-14 ${service.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
                     <service.icon className="w-7 h-7 text-white" />
                   </div>
-                  <CardTitle className="text-xl group-hover:text-oakblue-600 transition-colors flex items-center gap-2">
+                  <CardTitle className="text-xl group-hover:text-primary transition-colors flex items-center gap-2">
                     {service.title}
                     {service.isExternal && (
                       <ExternalLink className="w-4 h-4 text-slate-400" />
@@ -233,7 +242,7 @@ const ServiceHubCards = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <span className="inline-flex items-center text-oakblue-600 font-medium text-sm group-hover:gap-2 transition-all">
+                  <span className="inline-flex items-center text-primary font-medium text-sm group-hover:gap-2 transition-all">
                     Learn more
                     <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                   </span>
@@ -254,8 +263,8 @@ const NotSureBlock = ({ onQuoteClick }) => {
       <div className="container-main">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 bg-white rounded-2xl p-8 shadow-sm border border-slate-200">
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 bg-oakblue-100 rounded-xl flex items-center justify-center flex-shrink-0">
-              <HelpCircle className="w-7 h-7 text-oakblue-600" />
+            <div className="w-14 h-14 bg-primary/20 rounded-xl flex items-center justify-center flex-shrink-0">
+              <HelpCircle className="w-7 h-7 text-primary" />
             </div>
             <div>
               <h3 className="text-xl font-semibold text-slate-900 mb-1">Not sure what you need?</h3>
@@ -267,7 +276,7 @@ const NotSureBlock = ({ onQuoteClick }) => {
           <Button 
             onClick={onQuoteClick}
             size="lg"
-            className="bg-oakblue-600 hover:bg-oakblue-700 text-white px-8 flex-shrink-0"
+            className="bg-primary hover:bg-primary/90 text-white px-8 flex-shrink-0"
           >
             <Sparkles className="w-5 h-5 mr-2" />
             Open Quote Builder
@@ -315,7 +324,7 @@ const ServiceDetailSection = ({
             {/* Who It's For */}
             <div className="bg-slate-50 rounded-xl p-6 border border-slate-200">
               <div className="flex items-center gap-3 mb-4">
-                <Users className="w-5 h-5 text-oakblue-600" />
+                <Users className="w-5 h-5 text-primary" />
                 <h3 className="text-lg font-semibold text-slate-900">Who It's For</h3>
               </div>
               <ul className="space-y-3">
@@ -331,13 +340,13 @@ const ServiceDetailSection = ({
             {/* What's Included */}
             <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
               <div className="flex items-center gap-3 mb-4">
-                <Package className="w-5 h-5 text-oakblue-600" />
+                <Package className="w-5 h-5 text-primary" />
                 <h3 className="text-lg font-semibold text-slate-900">What's Included</h3>
               </div>
               <ul className="space-y-3">
                 {whatsIncluded.map((item, index) => (
                   <li key={index} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-oakblue-600 flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                     <span className="text-slate-700">{item}</span>
                   </li>
                 ))}
@@ -350,13 +359,13 @@ const ServiceDetailSection = ({
             {/* Typical Workflow */}
             <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
               <div className="flex items-center gap-3 mb-4">
-                <ClipboardList className="w-5 h-5 text-oakblue-600" />
+                <ClipboardList className="w-5 h-5 text-primary" />
                 <h3 className="text-lg font-semibold text-slate-900">Typical Workflow</h3>
               </div>
               <ol className="space-y-4">
                 {workflow.map((step, index) => (
                   <li key={index} className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-oakblue-600 rounded-full flex items-center justify-center text-white font-semibold text-sm flex-shrink-0">
+                    <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-semibold text-sm flex-shrink-0">
                       {index + 1}
                     </div>
                     <div className="pt-1">
@@ -368,16 +377,16 @@ const ServiceDetailSection = ({
             </div>
 
             {/* What You Receive */}
-            <div className="bg-oakblue-600 rounded-xl p-6 text-white">
+            <div className="bg-primary rounded-xl p-6 text-white">
               <div className="flex items-center gap-3 mb-4">
-                <Award className="w-5 h-5 text-oakblue-200" />
+                <Award className="w-5 h-5 text-white/80" />
                 <h3 className="text-lg font-semibold">What You Receive</h3>
               </div>
               <ul className="space-y-3">
                 {whatYouReceive.map((item, index) => (
                   <li key={index} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-oakblue-200 flex-shrink-0 mt-0.5" />
-                    <span className="text-oakblue-50">{item}</span>
+                    <CheckCircle2 className="w-5 h-5 text-white/80 flex-shrink-0 mt-0.5" />
+                    <span className="text-white/80">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -391,7 +400,7 @@ const ServiceDetailSection = ({
             <>
               <Button 
                 size="lg"
-                className="bg-oakblue-600 hover:bg-oakblue-700 text-white px-8"
+                className="bg-primary hover:bg-primary/90 text-white px-8"
                 asChild
               >
                 <a href={externalLink} target="_blank" rel="noopener noreferrer">
@@ -408,7 +417,7 @@ const ServiceDetailSection = ({
               <Button 
                 onClick={onQuoteClick}
                 size="lg"
-                className="bg-oakblue-600 hover:bg-oakblue-700 text-white px-8"
+                className="bg-primary hover:bg-primary/90 text-white px-8"
               >
                 <Calculator className="w-5 h-5 mr-2" />
                 Request a Quote for {title}
@@ -451,7 +460,7 @@ const QuoteBuilder = ({ isOpen, onClose }) => {
       <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
         <SheetHeader className="mb-6">
           <SheetTitle className="text-2xl flex items-center gap-2">
-            <Calculator className="w-6 h-6 text-oakblue-600" />
+            <Calculator className="w-6 h-6 text-primary" />
             Request a Quote
           </SheetTitle>
           <SheetDescription>
@@ -463,7 +472,7 @@ const QuoteBuilder = ({ isOpen, onClose }) => {
           {/* Contact Information */}
           <div className="space-y-4">
             <h4 className="font-semibold text-slate-900 flex items-center gap-2">
-              <Users className="w-4 h-4 text-oakblue-600" />
+              <Users className="w-4 h-4 text-primary" />
               Contact Information
             </h4>
             
@@ -516,7 +525,7 @@ const QuoteBuilder = ({ isOpen, onClose }) => {
           {/* Service Requirements */}
           <div className="space-y-4 pt-4 border-t border-slate-200">
             <h4 className="font-semibold text-slate-900 flex items-center gap-2">
-              <Gauge className="w-4 h-4 text-oakblue-600" />
+              <Gauge className="w-4 h-4 text-primary" />
               Service Requirements
             </h4>
 
@@ -585,7 +594,7 @@ const QuoteBuilder = ({ isOpen, onClose }) => {
 
           {/* Submit */}
           <div className="pt-4 border-t border-slate-200">
-            <Button type="submit" className="bg-oakblue-600 hover:bg-oakblue-700 w-full text-lg py-6">
+            <Button type="submit" className="bg-primary hover:bg-primary/90 w-full text-lg py-6">
               <Calculator className="w-5 h-5 mr-2" />
               Submit Quote Request
             </Button>
@@ -606,7 +615,7 @@ const Footer = () => {
       <div className="container-main">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-oakblue-600 rounded-lg flex items-center justify-center">
+            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
               <Gauge className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -887,34 +896,29 @@ export default function ServicesPage() {
         ))}
 
         {/* Final CTA */}
-        <section className="py-20 bg-gradient-to-r from-oakblue-600 to-oakblue-700">
+        <section className="py-20 bg-gradient-to-r from-primary to-primary/90">
           <div className="container-main text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Ready to Get Your Equipment Calibrated?
             </h2>
-            <p className="text-xl text-oakblue-100 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
               Request a quote today or access your existing certificates through the Customer Portal.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button 
+              <button
                 onClick={() => setQuoteBuilderOpen(true)}
-                size="lg"
-                className="bg-white text-oakblue-700 hover:bg-oakblue-50 font-semibold px-8 py-4 h-auto shadow-lg"
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-lg font-semibold transition-colors bg-white text-primary hover:bg-primary/10 hover:text-primary px-8 py-4 h-auto shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
               >
-                <Calculator className="w-5 h-5 mr-2" />
+                <Calculator className="w-5 h-5" />
                 Request a Quote
-              </Button>
-              <Button 
-                variant="outline" 
-                size="lg"
-                className="border-white/30 text-white hover:bg-white/10 px-8 py-4 h-auto"
-                asChild
+              </button>
+              <a
+                href="#portal"
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-lg font-semibold transition-colors border border-white/30 text-white bg-transparent hover:bg-white/10 hover:text-white px-8 py-4 h-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 disabled:pointer-events-none disabled:opacity-50"
               >
-                <a href="#portal">
-                  <ExternalLink className="w-5 h-5 mr-2" />
-                  Customer Portal
-                </a>
-              </Button>
+                <ExternalLink className="w-5 h-5" />
+                Customer Portal
+              </a>
             </div>
           </div>
         </section>
