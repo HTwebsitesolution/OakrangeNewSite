@@ -10,7 +10,8 @@ import {
   Pill, Plane, FlaskConical, Cog, Quote, Plus, Minus,
   FileCheck, Users, Target, Calculator, Send, ExternalLink,
   Wrench, Tractor, HardHat, PlaneTakeoff, Upload,
-  ClipboardList, Truck, ListChecks, FileText, Sparkles, Calendar
+  ClipboardList, Truck, ListChecks, FileText, Sparkles, Calendar,
+  ArrowUp
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -62,9 +63,9 @@ const UtilityBar = () => {
     <div className="bg-slate-900 text-slate-300 text-sm">
       <div className="container-main flex items-center justify-between py-2">
         <div className="flex items-center gap-6">
-          <a href="tel:+441onal234567890" className="flex items-center gap-2 hover:text-white transition-colors">
+          <a href="tel:01709542334" className="flex items-center gap-2 hover:text-white transition-colors">
             <Phone className="w-4 h-4" />
-            <span className="hidden sm:inline">+44 1onal 234 567890</span>
+            <span className="hidden sm:inline">01709 542334</span>
           </a>
           <a href="mailto:info@oakrange.co.uk" className="flex items-center gap-2 hover:text-white transition-colors">
             <Mail className="w-4 h-4" />
@@ -246,7 +247,7 @@ const HeroSection = ({ onQuoteClick }) => {
               <Button 
                 variant="outline" 
                 size="lg"
-                className="border-2 border-slate-300 text-slate-700 hover:bg-slate-50 font-semibold text-lg px-8 py-4 h-auto"
+                className="border-2 border-slate-300 text-slate-700 hover:bg-slate-50 hover:text-slate-900 hover:border-slate-400 font-semibold text-lg px-8 py-4 h-auto transition-all duration-200"
                 asChild
               >
                 <a href="#verify">
@@ -902,7 +903,7 @@ const ProcessSection = () => {
               <p className="font-semibold text-slate-900">Already a customer?</p>
               <p className="text-sm text-slate-600">Access your certificates in the Customer Portal</p>
             </div>
-            <Button variant="outline" size="sm" className="ml-4 border-2 border-slate-300 text-slate-700 hover:bg-slate-50">
+            <Button variant="outline" size="sm" className="ml-4 border-2 border-slate-300 text-slate-700 hover:bg-slate-50 hover:text-slate-900 hover:border-slate-400 transition-all duration-200">
               <ExternalLink className="w-4 h-4 mr-2" />
               Open Portal
             </Button>
@@ -1131,7 +1132,7 @@ const FAQSection = () => {
                 Find answers to common questions about our calibration services. 
                 Can't find what you're looking for?
               </p>
-              <Button variant="outline" className="border-2 border-slate-300 text-slate-700 hover:bg-slate-50 font-semibold px-6 py-3" asChild>
+              <Button variant="outline" className="border-2 border-slate-300 text-slate-700 hover:bg-slate-50 hover:text-slate-900 hover:border-slate-400 font-semibold px-6 py-3 transition-all duration-200" asChild>
                 <a href="#contact">
                   <Mail className="w-4 h-4 mr-2" />
                   Contact Us
@@ -1434,9 +1435,9 @@ const Footer = () => {
               UKAS accredited calibration laboratory providing precision measurement services across the UK since 1998.
             </p>
             <div className="space-y-3">
-              <a href="tel:+441234567890" className="flex items-center gap-3 hover:text-white transition-colors">
+              <a href="tel:01709542334" className="flex items-center gap-3 hover:text-white transition-colors">
                 <Phone className="w-5 h-5 text-primary/80" />
-                <span>+44 (0) 1234 567890</span>
+                <span>01709 542334</span>
               </a>
               <a href="mailto:info@oakrange.co.uk" className="flex items-center gap-3 hover:text-white transition-colors">
                 <Mail className="w-5 h-5 text-primary/80" />
@@ -1446,8 +1447,8 @@ const Footer = () => {
                 <MapPin className="w-5 h-5 text-primary/80 flex-shrink-0 mt-0.5" />
                 <span>
                   Oakrange Engineering Ltd<br />
-                  Unit 7, Innovation Park<br />
-                  Birmingham, B1 1AA
+                  Manor Farm. Styrrup Rd<br />
+                  Oldcotes, Worksop S81 8JB
                 </span>
               </div>
             </div>
@@ -1516,6 +1517,43 @@ const Footer = () => {
   )
 }
 
+// ==================== BACK TO TOP BUTTON ====================
+const BackToTop = () => {
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.pageYOffset > 300) {
+        setIsVisible(true)
+      } else {
+        setIsVisible(false)
+      }
+    }
+
+    window.addEventListener('scroll', toggleVisibility)
+    return () => window.removeEventListener('scroll', toggleVisibility)
+  }, [])
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
+
+  return (
+    <button
+      onClick={scrollToTop}
+      className={`fixed bottom-8 right-8 z-50 p-4 bg-primary hover:bg-primary/90 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+      }`}
+      aria-label="Back to top"
+    >
+      <ArrowUp className="w-5 h-5" />
+    </button>
+  )
+}
+
 // ==================== MAIN APP ====================
 export default function App() {
   const [quoteBuilderOpen, setQuoteBuilderOpen] = useState(false)
@@ -1546,6 +1584,9 @@ export default function App() {
 
       {/* Footer */}
       <Footer />
+
+      {/* Back to Top Button */}
+      <BackToTop />
 
       {/* Quote Builder Slide-Over */}
       <QuoteBuilder 
