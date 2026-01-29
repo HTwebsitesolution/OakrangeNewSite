@@ -15,6 +15,7 @@ import {
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import FloatingLines from '@/components/FloatingLines'
 import {
   Accordion,
   AccordionContent,
@@ -190,7 +191,19 @@ const Navigation = ({ onQuoteClick }) => {
 const HeroSection = ({ onQuoteClick }) => {
   return (
     <section className="bg-white py-20 md:py-28 lg:py-32 relative overflow-hidden">
-      <div className="container-main relative animate-fade-in-up">
+      {/* Floating Lines Background */}
+      <div className="absolute inset-0 w-full h-full opacity-30 pointer-events-none z-0" style={{ minHeight: '600px' }}>
+        <FloatingLines 
+          enabledWaves={["top","middle","bottom"]}
+          lineCount={5}
+          lineDistance={5}
+          bendRadius={5}
+          bendStrength={-0.5}
+          interactive={true}
+          parallax={true}
+        />
+      </div>
+      <div className="container-main relative animate-fade-in-up z-10">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 xl:gap-12 items-center">
           {/* Left Content */}
           <div className="space-y-8 max-w-3xl">
