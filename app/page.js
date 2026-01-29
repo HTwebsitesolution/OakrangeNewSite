@@ -188,76 +188,125 @@ const Navigation = ({ onQuoteClick }) => {
 // ==================== HERO SECTION ====================
 const HeroSection = ({ onQuoteClick }) => {
   return (
-    <section className="gradient-hero section-padding relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-[0.03]">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231E40AF' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
-        }} />
-      </div>
-
+    <section className="bg-white py-20 md:py-28 lg:py-32 relative overflow-hidden">
       <div className="container-main relative">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 badge-primary mb-6 animate-fade-in">
-            <Shield className="w-4 h-4" />
-            <span>UKAS Accredited Calibration Laboratory</span>
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left Content */}
+          <div className="space-y-8">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-50 border border-slate-200 rounded-full text-sm font-medium text-slate-700">
+              <Shield className="w-4 h-4 text-slate-600" />
+              <span>UKAS Accredited Calibration Laboratory</span>
+            </div>
+
+            {/* Headline - Reduced red usage */}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight tracking-tight">
+              Onsite Calibration Across the UK —{' '}
+              <span className="text-slate-900">audit-ready results, minimal downtime.</span>
+            </h1>
+
+            {/* Subheadline */}
+            <p className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-xl">
+              From <strong className="text-slate-900">automotive workshops</strong> and <strong className="text-slate-900">tractor dealerships</strong> to{' '}
+              <strong className="text-slate-900">construction yards</strong> and <strong className="text-slate-900">airfields</strong> — we calibrate your 
+              torque wrenches, pressure gauges, and test equipment on your premises. 
+              Certificates uploaded directly to your <strong className="text-slate-900">online portal</strong>.
+            </p>
+
+            {/* Proof Bullets */}
+            <div className="space-y-3 pt-4">
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
+                <span className="text-slate-700">UKAS-accredited certificates with full traceability</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
+                <span className="text-slate-700">Onsite service minimises downtime — we come to you</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
+                <span className="text-slate-700">24/7 portal access for audit-ready certificate retrieval</span>
+              </div>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row items-start gap-4 pt-4">
+              <Button 
+                onClick={onQuoteClick}
+                size="lg"
+                className="bg-primary hover:bg-primary/90 text-white font-semibold text-lg px-8 py-4 h-auto shadow-lg hover:shadow-xl transition-all"
+              >
+                <Calculator className="w-5 h-5 mr-2" />
+                Request a Quote
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="border-2 border-slate-300 text-slate-700 hover:bg-slate-50 font-semibold text-lg px-8 py-4 h-auto"
+                asChild
+              >
+                <a href="#verify">
+                  <FileCheck className="w-5 h-5 mr-2" />
+                  Verify Certificate
+                </a>
+              </Button>
+            </div>
           </div>
 
-          {/* Headline */}
-          <h1 className="mb-6 animate-fade-in animation-delay-100 text-balance">
-            Onsite Calibration Across the UK —{' '}
-            <span className="text-primary">audit-ready results, minimal downtime.</span>
-          </h1>
-
-          {/* Subheadline */}
-          <p className="text-xl md:text-2xl text-slate-600 mb-8 max-w-3xl mx-auto animate-fade-in animation-delay-200 text-balance">
-            From <strong className="text-slate-800">automotive workshops</strong> and <strong className="text-slate-800">tractor dealerships</strong> to{' '}
-            <strong className="text-slate-800">construction yards</strong> and <strong className="text-slate-800">airfields</strong> — we calibrate your 
-            torque wrenches, pressure gauges, and test equipment on your premises. 
-            Certificates uploaded directly to your <span className="text-primary font-semibold">online portal</span>.
-          </p>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in animation-delay-300">
-            <Button 
-              onClick={onQuoteClick}
-              size="lg"
-              className="btn-primary text-lg px-8 py-4 h-auto"
-            >
-              <Calculator className="w-5 h-5 mr-2" />
-              Request a Quote
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="btn-secondary text-lg px-8 py-4 h-auto"
-              asChild
-            >
-              <a href="#verify">
-                <FileCheck className="w-5 h-5 mr-2" />
-                Verify Certificate
-              </a>
-            </Button>
+          {/* Right Visual */}
+          <div className="relative lg:pl-8">
+            <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-[0_20px_60px_rgba(2,6,23,0.12)] bg-slate-100 aspect-[4/3]">
+              <img
+                src="/images/hero-tech-calibration.png"
+                alt="Technician calibrating equipment"
+                className="h-full w-full object-cover"
+              />
+              {/* subtle overlay for premium look */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-slate-900/25 via-transparent to-white/10" />
+              {/* optional texture/noise */}
+              <div className="absolute inset-0 opacity-[0.06] mix-blend-overlay bg-[url('/images/noise.png')]" />
+            </div>
           </div>
+        </div>
 
-          {/* Trust Indicators */}
-          <div className="flex flex-wrap items-center justify-center gap-6 lg:gap-10 mt-12 pt-8 border-t border-slate-200 animate-fade-in animation-delay-400">
-            <div className="flex items-center gap-2 text-slate-600">
-              <Award className="w-5 h-5 text-amber-600" />
-              <span className="font-medium">40+ Years Experience</span>
+        {/* Trust Bar */}
+        <div className="mt-16 pt-8 border-t border-slate-200">
+          <div className="flex flex-wrap items-center justify-center gap-8 lg:gap-12">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center">
+                <Shield className="w-6 h-6 text-slate-600" />
+              </div>
+              <div>
+                <div className="font-semibold text-slate-900 text-sm">UKAS Accredited</div>
+                <div className="text-xs text-slate-500">ISO/IEC 17025</div>
+              </div>
             </div>
-            <div className="flex items-center gap-2 text-slate-600">
-              <MapPin className="w-5 h-5 text-primary" />
-              <span className="font-medium">Nationwide Coverage</span>
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center">
+                <MapPin className="w-6 h-6 text-slate-600" />
+              </div>
+              <div>
+                <div className="font-semibold text-slate-900 text-sm">UK-Wide Onsite</div>
+                <div className="text-xs text-slate-500">Nationwide coverage</div>
+              </div>
             </div>
-            <div className="flex items-center gap-2 text-slate-600">
-              <Clock className="w-5 h-5 text-emerald-600" />
-              <span className="font-medium">Fast Turnaround</span>
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center">
+                <Clock className="w-6 h-6 text-slate-600" />
+              </div>
+              <div>
+                <div className="font-semibold text-slate-900 text-sm">Certificates in 48h</div>
+                <div className="text-xs text-slate-500">Fast turnaround</div>
+              </div>
             </div>
-            <div className="flex items-center gap-2 text-slate-600">
-              <ExternalLink className="w-5 h-5 text-purple-600" />
-              <span className="font-medium">Portal Access</span>
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center">
+                <FileCheck className="w-6 h-6 text-slate-600" />
+              </div>
+              <div>
+                <div className="font-semibold text-slate-900 text-sm">24/7 Portal Access</div>
+                <div className="text-xs text-slate-500">Audit-ready records</div>
+              </div>
             </div>
           </div>
         </div>
@@ -296,20 +345,20 @@ const CredibilityStrip = () => {
   ]
 
   return (
-    <section className="bg-slate-900 py-12">
+    <section className="bg-slate-900 py-16">
       <div className="container-main">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {credentials.map((cred, index) => (
             <div 
               key={index}
               className="text-center group"
             >
-              <div className="inline-flex items-center justify-center w-14 h-14 bg-primary/20 rounded-xl mb-4 group-hover:bg-primary/30 transition-colors">
-                <cred.icon className="w-7 h-7 text-primary/70" />
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-white/10 rounded-xl mb-5 group-hover:bg-white/15 transition-colors">
+                <cred.icon className="w-8 h-8 text-white" />
               </div>
-              <div className="text-3xl md:text-4xl font-bold text-white mb-1">{cred.stat}</div>
-              <div className="font-semibold text-white text-sm mb-1">{cred.label}</div>
-              <div className="text-xs text-slate-400">{cred.description}</div>
+              <div className="text-4xl md:text-5xl font-bold text-white mb-2">{cred.stat}</div>
+              <div className="font-semibold text-white text-base mb-1">{cred.label}</div>
+              <div className="text-sm text-slate-400">{cred.description}</div>
             </div>
           ))}
         </div>
@@ -320,97 +369,220 @@ const CredibilityStrip = () => {
 
 // ==================== SERVICE CARDS ====================
 const ServicesSection = () => {
-  const services = [
+  const flagshipServices = [
     {
-      icon: Thermometer,
-      title: 'Temperature Calibration',
-      description: 'Thermometers, thermocouples, RTDs, data loggers, and temperature chambers calibrated to traceable standards.',
-      features: ['Traceable to NPL', '-200°C to +1600°C range', 'Onsite or laboratory'],
+      icon: Cog,
+      title: 'Torque Calibration',
+      description: 'Torque wrenches, transducers, and screwdrivers calibrated to international standards.',
+      outcome: 'Reduce downtime',
+      features: ['0.1 Nm to 20,000 Nm range', 'BS EN ISO 6789 compliant', 'Both clockwise and counter-clockwise'],
     },
     {
       icon: Gauge,
       title: 'Pressure Calibration',
       description: 'Pressure gauges, transmitters, and test equipment calibrated across the full pressure range.',
+      outcome: 'Pass audits',
       features: ['Vacuum to 10,000 bar', 'Dead-weight testers', 'Digital pressure standards'],
+    },
+  ]
+
+  const supportingServices = [
+    {
+      icon: Thermometer,
+      title: 'Temperature Calibration',
+      description: 'Thermometers, thermocouples, RTDs, data loggers, and temperature chambers.',
+      outcome: 'Traceable results',
+      features: ['Traceable to NPL', '-200°C to +1600°C range', 'Onsite or laboratory'],
     },
     {
       icon: Ruler,
       title: 'Dimensional Calibration',
       description: 'Micrometers, calipers, gauge blocks, CMMs, and other dimensional instruments.',
+      outcome: 'Sub-micron accuracy',
       features: ['Sub-micron accuracy', 'CMM verification', 'Gauge block calibration'],
     },
     {
       icon: Scale,
       title: 'Mass Calibration',
       description: 'Balances, scales, and mass standards from milligrams to tonnes.',
+      outcome: 'OIML compliant',
       features: ['OIML weights', 'Analytical balances', 'Industrial scales'],
     },
     {
       icon: Zap,
       title: 'Electrical Calibration',
       description: 'Multimeters, clamp meters, insulation testers, PAT testers, and electrical standards.',
+      outcome: 'Full traceability',
       features: ['DC to 100 kHz', 'High voltage', 'Resistance standards'],
-    },
-    {
-      icon: Cog,
-      title: 'Torque Calibration',
-      description: 'Torque wrenches, transducers, and screwdrivers calibrated to international standards.',
-      features: ['0.1 Nm to 20,000 Nm', 'Both directions', 'BS EN ISO 6789'],
     },
   ]
 
   return (
-    <section id="services" className="section-padding bg-white">
+    <section id="services" className="py-24 md:py-32 bg-white">
       <div className="container-main">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="accent-line mx-auto mb-4" />
-          <h2 className="mb-4">Calibration Services</h2>
-          <p className="text-lg text-slate-600">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="w-16 h-1 bg-slate-300 mx-auto mb-6" />
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">Calibration Services</h2>
+          <p className="text-xl text-slate-600 leading-relaxed">
             Comprehensive calibration capabilities covering all major measurement disciplines, 
             delivered by expert engineers at your location.
           </p>
         </div>
 
-        {/* Service Cards Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, index) => (
+        {/* Flagship Services - 2 Large Cards */}
+        <div className="grid lg:grid-cols-2 gap-8 mb-12">
+          {flagshipServices.map((service, index) => (
             <Card 
               key={index} 
-              className="card-hover border-slate-200 group cursor-pointer"
+              className="border-2 border-slate-200 hover:border-slate-300 group transition-all duration-300 shadow-sm hover:shadow-lg"
             >
-              <CardHeader>
-                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                  <service.icon className="w-6 h-6 text-primary" />
+              <CardHeader className="pb-4">
+                <div className="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-slate-200 transition-colors">
+                  <service.icon className="w-8 h-8 text-slate-700" />
                 </div>
-                <CardTitle className="text-xl group-hover:text-primary transition-colors">
-                  {service.title}
-                </CardTitle>
-                <CardDescription className="text-slate-600">
+                <div className="flex items-center justify-between mb-2">
+                  <CardTitle className="text-2xl font-bold text-slate-900">
+                    {service.title}
+                  </CardTitle>
+                  <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full">
+                    {service.outcome}
+                  </span>
+                </div>
+                <CardDescription className="text-base text-slate-600 leading-relaxed">
                   {service.description}
                 </CardDescription>
               </CardHeader>
-              <CardContent>
-                <ul className="space-y-2">
+              <CardContent className="space-y-4">
+                <ul className="space-y-3">
                   {service.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-sm text-slate-600">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                      {feature}
+                    <li key={idx} className="flex items-start gap-3 text-slate-700">
+                      <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
+                      <span>{feature}</span>
                     </li>
                   ))}
                 </ul>
-                <div className="mt-6 pt-4 border-t border-slate-100">
+                <div className="pt-6 border-t border-slate-100">
                   <a 
                     href="#" 
-                    className="inline-flex items-center text-primary font-medium text-sm hover:text-primary group/link"
+                    className="inline-flex items-center text-slate-900 font-semibold text-sm hover:gap-3 transition-all group/link"
                   >
-                    Learn more
-                    <ArrowRight className="w-4 h-4 ml-1 group-hover/link:translate-x-1 transition-transform" />
+                    View scope
+                    <ArrowRight className="w-4 h-4 ml-2 group-hover/link:translate-x-1 transition-transform" />
                   </a>
                 </div>
               </CardContent>
             </Card>
           ))}
+        </div>
+
+        {/* Supporting Services - 4 Smaller Cards */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {supportingServices.map((service, index) => (
+            <Card 
+              key={index} 
+              className="border border-slate-200 hover:border-slate-300 group transition-all duration-300 shadow-sm hover:shadow-md"
+            >
+              <CardHeader className="pb-3">
+                <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-slate-200 transition-colors">
+                  <service.icon className="w-6 h-6 text-slate-700" />
+                </div>
+                <div className="mb-2">
+                  <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
+                    {service.outcome}
+                  </span>
+                </div>
+                <CardTitle className="text-lg font-bold text-slate-900 mb-2">
+                  {service.title}
+                </CardTitle>
+                <CardDescription className="text-sm text-slate-600">
+                  {service.description}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2 mb-4">
+                  {service.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-2 text-xs text-slate-600">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0 mt-0.5" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <a 
+                  href="#" 
+                  className="inline-flex items-center text-slate-900 font-medium text-xs hover:gap-2 transition-all group/link"
+                >
+                  View scope
+                  <ArrowRight className="w-3 h-3 ml-1 group-hover/link:translate-x-1 transition-transform" />
+                </a>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ==================== ONSITE COVERAGE PROOF ====================
+const OnsiteCoverageSection = () => {
+  const bullets = [
+    'Onsite service across the UK to minimise downtime',
+    'Engineers arrive with certified reference standards',
+    'Clear pass/fail results and adjustments logged',
+    'Certificates uploaded to your online portal',
+  ]
+
+  return (
+    <section className="py-24 md:py-32 bg-white">
+      <div className="container-main">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          {/* Image left */}
+          <div className="relative">
+            <div className="absolute -inset-4 bg-slate-200/40 blur-3xl rounded-[2rem] -z-10" aria-hidden="true" />
+            <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-[0_20px_60px_rgba(2,6,23,0.12)] bg-slate-100 aspect-[4/3]">
+              <img
+                src="/images/onsite-calibration.png"
+                alt="Engineer performing onsite calibration in an industrial facility"
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-tr from-slate-900/25 via-transparent to-white/10" />
+              <div className="absolute inset-0 opacity-[0.06] mix-blend-overlay bg-[url('/images/noise.png')]" />
+            </div>
+          </div>
+
+          {/* Copy right */}
+          <div className="space-y-6">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight">
+              UK-Wide Onsite Calibration
+            </h2>
+            <p className="text-xl text-slate-600 leading-relaxed">
+              From single workshops to multi-site fleets, our engineers visit your locations across the UK to calibrate
+              equipment with minimal disruption to your operation.
+            </p>
+            <ul className="space-y-3">
+              {bullets.map((item, idx) => (
+                <li key={idx} className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
+                  <span className="text-slate-700">{item}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="pt-4">
+              <Button
+                onClick={() => {
+                  if (typeof window !== 'undefined') {
+                    const el = document.getElementById('request-quote')
+                    if (el) el.scrollIntoView({ behavior: 'smooth' })
+                  }
+                }}
+                className="bg-primary hover:bg-primary/90 text-white font-semibold px-6 py-3 h-auto shadow-lg hover:shadow-xl transition-all"
+              >
+                <Calculator className="w-4 h-4 mr-2" />
+                Book onsite calibration
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -467,11 +639,11 @@ const IndustriesSection = () => {
               className="bg-white p-8 rounded-xl border border-slate-200 card-hover group"
             >
               <div className="flex items-start gap-5">
-                <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                  <industry.icon className="w-8 h-8 text-primary" />
+                <div className="w-16 h-16 bg-slate-100 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-slate-200 transition-colors">
+                  <industry.icon className="w-8 h-8 text-slate-700" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-2 group-hover:text-primary transition-colors">
+                  <h3 className="text-xl font-bold text-slate-900 mb-2">
                     {industry.title}
                   </h3>
                   <p className="text-slate-600 text-sm leading-relaxed mb-4">
@@ -497,66 +669,188 @@ const IndustriesSection = () => {
   )
 }
 
+// ==================== ACCREDITATION SECTION ====================
+const AccreditationSection = () => {
+  return (
+    <section className="py-24 md:py-32 bg-slate-900 text-white">
+      <div className="container-main">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div>
+            <div className="w-16 h-1 bg-white/20 mb-6" />
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Accreditation & Standards</h2>
+            <p className="text-xl text-slate-300 leading-relaxed mb-8">
+              Our UKAS accreditation demonstrates our commitment to precision, traceability, and quality assurance.
+            </p>
+            <div className="space-y-4">
+              <div className="flex items-start gap-4">
+                <CheckCircle2 className="w-6 h-6 text-emerald-400 flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="font-semibold text-lg mb-1">UKAS Accredited</h3>
+                  <p className="text-slate-300">United Kingdom Accreditation Service recognition for calibration competence</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <CheckCircle2 className="w-6 h-6 text-emerald-400 flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="font-semibold text-lg mb-1">ISO/IEC 17025 Compliant</h3>
+                  <p className="text-slate-300">International standard for testing and calibration laboratories</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <CheckCircle2 className="w-6 h-6 text-emerald-400 flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="font-semibold text-lg mb-1">Full Traceability</h3>
+                  <p className="text-slate-300">All measurements traceable to national standards (NPL) with documented uncertainty</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Image right */}
+          <div className="relative">
+            <div className="absolute -inset-4 bg-slate-700/60 blur-3xl rounded-[2rem] -z-10" aria-hidden="true" />
+            <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-[0_24px_80px_rgba(15,23,42,0.65)] bg-slate-800 aspect-[4/3]">
+              <img
+                src="/images/lab-calibration.png"
+                alt="Laboratory calibration environment with UKAS-aligned procedures"
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-tr from-slate-950/50 via-transparent to-slate-200/10" />
+              <div className="absolute inset-0 opacity-[0.08] mix-blend-overlay bg-[url('/images/noise.png')]" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ==================== CASE STUDIES SECTION ====================
+const CaseStudiesSection = () => {
+  const caseStudies = [
+    {
+      title: 'Automotive Workshop Chain',
+      challenge: '15 locations requiring quarterly torque wrench calibration',
+      solution: 'Scheduled onsite visits across all sites',
+      result: 'Zero downtime, audit-ready certificates, 48h portal access',
+      metric: '15 sites',
+      metricLabel: 'calibrated quarterly',
+    },
+    {
+      title: 'General Aviation Airfield',
+      challenge: 'CAA audit deadline approaching, certificates missing',
+      solution: 'Priority onsite calibration + portal setup',
+      result: 'Audit passed, all certificates accessible 24/7',
+      metric: '48 hours',
+      metricLabel: 'from request to certificates',
+    },
+  ]
+
+  return (
+    <section className="py-24 md:py-32 bg-white">
+      <div className="container-main">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="w-16 h-1 bg-slate-300 mx-auto mb-6" />
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">Case Studies</h2>
+          <p className="text-xl text-slate-600 leading-relaxed">
+            See how we've helped businesses maintain compliance and reduce downtime.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-8">
+          {caseStudies.map((study, index) => (
+            <div 
+              key={index}
+              className="bg-slate-50 rounded-2xl p-8 lg:p-10 border border-slate-200 hover:border-slate-300 transition-all"
+            >
+              <div className="flex items-start justify-between mb-6">
+                <h3 className="text-2xl font-bold text-slate-900">{study.title}</h3>
+                <div className="text-right">
+                  <div className="text-3xl font-bold text-slate-900">{study.metric}</div>
+                  <div className="text-sm text-slate-600">{study.metricLabel}</div>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <div className="text-sm font-semibold text-slate-700 mb-1">Challenge</div>
+                  <p className="text-slate-600">{study.challenge}</p>
+                </div>
+                <div>
+                  <div className="text-sm font-semibold text-slate-700 mb-1">Solution</div>
+                  <p className="text-slate-600">{study.solution}</p>
+                </div>
+                <div className="pt-4 border-t border-slate-200">
+                  <div className="text-sm font-semibold text-emerald-700 mb-1">Result</div>
+                  <p className="text-slate-700 font-medium">{study.result}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 // ==================== PROCESS TIMELINE ====================
 const ProcessSection = () => {
   const steps = [
     {
       step: '01',
-      title: 'Send Equipment List',
+      title: 'Book & Scope Equipment',
       description: 'Email or upload your instrument list. Include makes, models, and quantities — we\'ll handle the rest.',
       icon: ClipboardList,
     },
     {
       step: '02',
-      title: 'We Visit Onsite',
+      title: 'Onsite Calibration & Verification',
       description: 'Our engineers arrive at your workshop or airfield with all necessary reference standards and equipment.',
       icon: Truck,
     },
     {
       step: '03',
-      title: 'Certificates to Portal',
+      title: 'Certificate + Portal Access',
       description: 'UKAS certificates uploaded directly to your secure portal within 48 hours. Download anytime, audit-ready.',
       icon: Upload,
     },
   ]
 
   return (
-    <section id="process" className="section-padding bg-white">
+    <section id="process" className="py-24 md:py-32 bg-slate-50">
       <div className="container-main">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="accent-line mx-auto mb-4" />
-          <h2 className="mb-4">How It Works</h2>
-          <p className="text-lg text-slate-600">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="w-16 h-1 bg-slate-300 mx-auto mb-6" />
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">How It Works</h2>
+          <p className="text-xl text-slate-600 leading-relaxed">
             Simple, efficient, and designed to minimise your downtime. Here's how we deliver audit-ready calibration.
           </p>
         </div>
 
         {/* Timeline - Horizontal on desktop */}
-        <div className="relative max-w-4xl mx-auto">
+        <div className="relative max-w-5xl mx-auto">
           {/* Connection Line - Desktop */}
-          <div className="hidden md:block absolute top-16 left-[15%] right-[15%] h-1 bg-gradient-to-r from-primary/30 via-primary/60 to-primary rounded-full" />
+          <div className="hidden md:block absolute top-20 left-[12%] right-[12%] h-0.5 bg-slate-300" />
           
-          <div className="grid md:grid-cols-3 gap-8 md:gap-12">
+          <div className="grid md:grid-cols-3 gap-12 md:gap-16">
             {steps.map((step, index) => (
               <div key={index} className="relative text-center">
                 {/* Step Number Circle */}
-                <div className="relative z-10 mx-auto mb-6">
-                  <div className="w-32 h-32 bg-gradient-to-br from-primary to-primary/90 rounded-2xl flex flex-col items-center justify-center text-white shadow-elevated mx-auto transform hover:scale-105 transition-transform">
-                    <step.icon className="w-10 h-10 mb-2" />
-                    <span className="text-2xl font-bold">{step.step}</span>
+                <div className="relative z-10 mx-auto mb-8">
+                  <div className="w-40 h-40 bg-white rounded-2xl flex flex-col items-center justify-center border-2 border-slate-200 shadow-lg mx-auto">
+                    <step.icon className="w-12 h-12 text-slate-700 mb-3" />
+                    <span className="text-3xl font-bold text-slate-900">{step.step}</span>
                   </div>
                 </div>
                 
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">{step.title}</h3>
-                <p className="text-slate-600 text-sm leading-relaxed max-w-xs mx-auto">
+                <h3 className="text-2xl font-bold text-slate-900 mb-4">{step.title}</h3>
+                <p className="text-slate-600 leading-relaxed max-w-sm mx-auto">
                   {step.description}
                 </p>
 
                 {/* Arrow - Desktop */}
                 {index < steps.length - 1 && (
-                  <div className="hidden md:block absolute top-16 -right-6 z-20">
-                    <ChevronRight className="w-8 h-8 text-primary/70" />
+                  <div className="hidden md:block absolute top-20 -right-8 z-20">
+                    <ChevronRight className="w-10 h-10 text-slate-400" />
                   </div>
                 )}
               </div>
@@ -564,15 +858,47 @@ const ProcessSection = () => {
           </div>
         </div>
 
+        {/* What You Receive Panel */}
+        <div className="mt-20 grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="bg-white rounded-2xl p-8 lg:p-10 border border-slate-200 shadow-sm">
+            <h3 className="text-2xl font-bold text-slate-900 mb-4">What You Receive</h3>
+            <ul className="space-y-3">
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
+                <span className="text-slate-700">UKAS-accredited calibration certificates</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
+                <span className="text-slate-700">Full traceability to national standards</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
+                <span className="text-slate-700">24/7 portal access for instant certificate retrieval</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
+                <span className="text-slate-700">Calibration labels applied to each instrument</span>
+              </li>
+            </ul>
+          </div>
+          <div className="bg-slate-100 rounded-2xl p-8 lg:p-10 border border-slate-200 flex items-center justify-center">
+            <div className="text-center">
+              <FileCheck className="w-16 h-16 text-slate-400 mx-auto mb-4" />
+              <p className="text-slate-500 font-medium">Certificate Sample</p>
+              <p className="text-sm text-slate-400 mt-2">Placeholder for certificate preview</p>
+            </div>
+          </div>
+        </div>
+
         {/* Portal CTA */}
         <div className="mt-16 text-center">
-          <div className="inline-flex items-center gap-3 bg-primary/10 border border-primary/30 rounded-xl px-6 py-4">
-            <FileCheck className="w-6 h-6 text-primary" />
+          <div className="inline-flex items-center gap-4 bg-white border-2 border-slate-200 rounded-xl px-8 py-5 shadow-sm">
+            <FileCheck className="w-6 h-6 text-slate-700" />
             <div className="text-left">
               <p className="font-semibold text-slate-900">Already a customer?</p>
               <p className="text-sm text-slate-600">Access your certificates in the Customer Portal</p>
             </div>
-            <Button variant="outline" size="sm" className="ml-4 border-primary/40 text-primary hover:bg-primary/20">
+            <Button variant="outline" size="sm" className="ml-4 border-2 border-slate-300 text-slate-700 hover:bg-slate-50">
               <ExternalLink className="w-4 h-4 mr-2" />
               Open Portal
             </Button>
@@ -605,8 +931,8 @@ const AIQuoteBuilderPreview = ({ onQuoteClick }) => {
         <div className="max-w-5xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 badge-primary mb-4">
-              <Sparkles className="w-4 h-4" />
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 border border-slate-200 rounded-full text-sm font-medium text-slate-700 mb-4">
+              <Sparkles className="w-4 h-4 text-slate-600" />
               <span>Smart Quote System</span>
             </div>
             <h2 className="mb-4">Get Your Quote in Minutes</h2>
@@ -620,8 +946,8 @@ const AIQuoteBuilderPreview = ({ onQuoteClick }) => {
             {/* What We Collect */}
             <div className="bg-white rounded-2xl p-8 shadow-card border border-slate-200">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center">
-                  <ListChecks className="w-5 h-5 text-primary" />
+                <div className="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center">
+                  <ListChecks className="w-5 h-5 text-slate-700" />
                 </div>
                 <h3 className="text-xl font-semibold text-slate-900">What We Ask</h3>
               </div>
@@ -638,9 +964,9 @@ const AIQuoteBuilderPreview = ({ onQuoteClick }) => {
             </div>
 
             {/* What You Receive */}
-            <div className="bg-primary rounded-2xl p-8 shadow-elevated text-white">
+            <div className="bg-slate-900 rounded-2xl p-8 shadow-elevated text-white">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center">
                   <FileCheck className="w-5 h-5 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold text-white">What You Receive</h3>
@@ -732,17 +1058,17 @@ const TestimonialsSection = () => {
 
                 {/* Quote */}
                 <div className="relative mb-6">
-                  <Quote className="absolute -top-2 -left-2 w-8 h-8 text-primary/80/30" />
+                  <Quote className="absolute -top-2 -left-2 w-8 h-8 text-white/20" />
                   <p className="text-slate-300 leading-relaxed pl-4">
                     "{testimonial.quote}"
                   </p>
                 </div>
 
                 {/* Author */}
-                <div className="flex items-center gap-3 pt-4 border-t border-slate-700">
-                  <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-semibold">
-                    {testimonial.author.split(' ').map(n => n[0]).join('')}
-                  </div>
+                  <div className="flex items-center gap-3 pt-4 border-t border-slate-700">
+                    <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-white font-semibold">
+                      {testimonial.author.split(' ').map(n => n[0]).join('')}
+                    </div>
                   <div>
                     <p className="font-semibold text-white">{testimonial.author}</p>
                     <p className="text-sm text-slate-400">
@@ -789,19 +1115,19 @@ const FAQSection = () => {
   ]
 
   return (
-    <section id="faq" className="section-padding bg-white">
+    <section id="faq" className="py-24 md:py-32 bg-white">
       <div className="container-main">
         <div className="grid lg:grid-cols-5 gap-12">
           {/* Left Column - Header */}
           <div className="lg:col-span-2">
             <div className="lg:sticky lg:top-32">
-              <div className="accent-line mb-4" />
-              <h2 className="mb-4">Frequently Asked Questions</h2>
-              <p className="text-slate-600 mb-6">
+              <div className="w-16 h-1 bg-slate-300 mb-6" />
+              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">Frequently Asked Questions</h2>
+              <p className="text-xl text-slate-600 mb-8 leading-relaxed">
                 Find answers to common questions about our calibration services. 
                 Can't find what you're looking for?
               </p>
-              <Button variant="outline" className="btn-secondary" asChild>
+              <Button variant="outline" className="border-2 border-slate-300 text-slate-700 hover:bg-slate-50 font-semibold px-6 py-3" asChild>
                 <a href="#contact">
                   <Mail className="w-4 h-4 mr-2" />
                   Contact Us
@@ -819,7 +1145,7 @@ const FAQSection = () => {
                   value={`item-${index}`}
                   className="bg-slate-50 rounded-xl border border-slate-200 px-6 data-[state=open]:bg-white data-[state=open]:shadow-card transition-all"
                 >
-                  <AccordionTrigger className="text-left font-semibold text-slate-900 hover:text-primary py-5 [&[data-state=open]>svg]:rotate-180">
+                  <AccordionTrigger className="text-left font-semibold text-slate-900 hover:text-slate-700 py-5 [&[data-state=open]>svg]:rotate-180">
                     {faq.question}
                   </AccordionTrigger>
                   <AccordionContent className="text-slate-600 pb-5 leading-relaxed">
@@ -838,26 +1164,26 @@ const FAQSection = () => {
 // ==================== CTA BAND ====================
 const CTABand = ({ onQuoteClick }) => {
   return (
-    <section className="gradient-cta py-16">
+    <section className="bg-slate-900 py-20 md:py-24">
       <div className="container-main">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
           <div className="text-center lg:text-left">
-            <h2 className="text-white mb-2 text-3xl md:text-4xl">Ready to Get Started?</h2>
-            <p className="text-white/90 text-lg">
+            <h2 className="text-white mb-4 text-4xl md:text-5xl font-bold tracking-tight">Ready to Get Started?</h2>
+            <p className="text-slate-300 text-xl leading-relaxed">
               Get a quote for your workshop or airfield calibration needs — or access your certificates now.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4">
             <button
               onClick={onQuoteClick}
-              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-lg font-semibold transition-colors bg-white text-primary hover:bg-primary/10 hover:text-primary px-8 py-4 h-auto shadow-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-lg font-semibold transition-all bg-primary hover:bg-primary/90 text-white px-8 py-4 h-auto shadow-xl hover:shadow-2xl hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 disabled:pointer-events-none disabled:opacity-50"
             >
               <Calculator className="w-5 h-5" />
               Request a Quote
             </button>
             <a
               href="#portal"
-              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-lg font-semibold transition-colors border border-white/30 text-white bg-transparent hover:bg-white/10 hover:text-white px-8 py-4 h-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 disabled:pointer-events-none disabled:opacity-50"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-lg font-semibold transition-colors border-2 border-white/30 text-white bg-transparent hover:bg-white/10 hover:text-white px-8 py-4 h-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 disabled:pointer-events-none disabled:opacity-50"
             >
               <ExternalLink className="w-5 h-5" />
               Customer Portal
@@ -1202,8 +1528,11 @@ export default function App() {
       <main>
         <HeroSection onQuoteClick={() => setQuoteBuilderOpen(true)} />
         <CredibilityStrip />
+        <OnsiteCoverageSection />
         <ServicesSection />
         <IndustriesSection />
+        <AccreditationSection />
+        <CaseStudiesSection />
         <ProcessSection />
         <AIQuoteBuilderPreview onQuoteClick={() => setQuoteBuilderOpen(true)} />
         <TestimonialsSection />
