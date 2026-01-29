@@ -190,9 +190,9 @@ const HeroSection = ({ onQuoteClick }) => {
   return (
     <section className="bg-white py-20 md:py-28 lg:py-32 relative overflow-hidden">
       <div className="container-main relative">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 xl:gap-12 items-center">
           {/* Left Content */}
-          <div className="space-y-8">
+          <div className="space-y-8 max-w-3xl">
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-50 border border-slate-200 rounded-full text-sm font-medium text-slate-700">
               <Shield className="w-4 h-4 text-slate-600" />
@@ -200,13 +200,17 @@ const HeroSection = ({ onQuoteClick }) => {
             </div>
 
             {/* Headline - Reduced red usage */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight tracking-tight">
-              Onsite Calibration Across the UK —{' '}
-              <span className="text-slate-900">audit-ready results, minimal downtime.</span>
+            <h1 className="max-w-3xl text-4xl md:text-[2.9rem] lg:text-[3.1rem] xl:text-[3.4rem] font-bold text-slate-900 leading-tight tracking-tight">
+              <span className="inline-block lg:whitespace-nowrap">
+                Onsite <span className="text-primary">Calibration</span> Across the UK —
+              </span>{' '}
+              <span className="block lg:inline text-slate-900">
+                audit-ready results, minimal downtime.
+              </span>
             </h1>
 
             {/* Subheadline */}
-            <p className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-xl">
+            <p className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-3xl">
               From <strong className="text-slate-900">automotive workshops</strong> and <strong className="text-slate-900">tractor dealerships</strong> to{' '}
               <strong className="text-slate-900">construction yards</strong> and <strong className="text-slate-900">airfields</strong> — we calibrate your 
               torque wrenches, pressure gauges, and test equipment on your premises. 
