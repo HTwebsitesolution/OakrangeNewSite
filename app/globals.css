@@ -103,33 +103,33 @@
     }
   }
 
-  /* Typography scale */
+  /* Typography scale - Premium */
   h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900;
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 leading-tight;
   }
 
   h2 {
-    @apply text-3xl md:text-4xl font-bold tracking-tight text-slate-900;
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 leading-tight;
   }
 
   h3 {
-    @apply text-2xl md:text-3xl font-semibold tracking-tight text-slate-900;
+    @apply text-2xl md:text-3xl font-bold tracking-tight text-slate-900 leading-tight;
   }
 
   h4 {
-    @apply text-xl md:text-2xl font-semibold text-slate-900;
+    @apply text-xl md:text-2xl font-bold text-slate-900 leading-tight;
   }
 
   h5 {
-    @apply text-lg md:text-xl font-semibold text-slate-800;
+    @apply text-lg md:text-xl font-semibold text-slate-900 leading-snug;
   }
 
   h6 {
-    @apply text-base md:text-lg font-medium text-slate-800;
+    @apply text-base md:text-lg font-semibold text-slate-900 leading-snug;
   }
 
   p {
-    @apply text-base text-slate-600 leading-relaxed;
+    @apply text-lg text-slate-600 leading-relaxed;
   }
 }
 
@@ -207,6 +207,30 @@
 }
 
 @layer utilities {
+  /* Animation keyframes */
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out both;
+  }
+
+  .animate-fade-in-up-delayed {
+    animation: fade-in-up 0.7s ease-out 0.15s both;
+  }
+
+  .animate-fade-in-up-slow {
+    animation: fade-in-up 0.8s ease-out 0.3s both;
+  }
+
   /* Animation delay utilities */
   .animation-delay-100 {
     animation-delay: 100ms;
@@ -222,6 +246,10 @@
   }
   .animation-delay-500 {
     animation-delay: 500ms;
+  }
+
+  .image-hover-subtle {
+    @apply transition-transform duration-500 ease-out hover:-translate-y-1;
   }
 
   /* Text balance */

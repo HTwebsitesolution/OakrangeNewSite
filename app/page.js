@@ -190,7 +190,7 @@ const Navigation = ({ onQuoteClick }) => {
 const HeroSection = ({ onQuoteClick }) => {
   return (
     <section className="bg-white py-20 md:py-28 lg:py-32 relative overflow-hidden">
-      <div className="container-main relative">
+      <div className="container-main relative animate-fade-in-up">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 xl:gap-12 items-center">
           {/* Left Content */}
           <div className="space-y-8 max-w-3xl">
@@ -260,7 +260,7 @@ const HeroSection = ({ onQuoteClick }) => {
 
           {/* Right Visual */}
           <div className="relative lg:pl-8">
-            <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-[0_20px_60px_rgba(2,6,23,0.12)] bg-slate-100 aspect-[4/3]">
+            <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-[0_20px_60px_rgba(2,6,23,0.12)] bg-slate-100 aspect-[4/3] image-hover-subtle">
               <img
                 src="/images/hero-tech-calibration.png"
                 alt="Technician calibrating equipment"
@@ -424,7 +424,7 @@ const ServicesSection = () => {
 
   return (
     <section id="services" className="py-24 md:py-32 bg-white">
-      <div className="container-main">
+      <div className="w-full px-4 sm:px-6 lg:px-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="w-16 h-1 bg-slate-300 mx-auto mb-6" />
@@ -540,10 +540,10 @@ const OnsiteCoverageSection = () => {
 
   return (
     <section className="py-24 md:py-32 bg-white">
-      <div className="container-main">
+      <div className="container-main animate-fade-in-up-slow">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Image left */}
-          <div className="relative">
+          <div className="relative image-hover-subtle">
             <div className="absolute -inset-4 bg-slate-200/40 blur-3xl rounded-[2rem] -z-10" aria-hidden="true" />
             <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-[0_20px_60px_rgba(2,6,23,0.12)] bg-slate-100 aspect-[4/3]">
               <img
@@ -641,7 +641,7 @@ const IndustriesSection = () => {
           {industries.map((industry, index) => (
             <div 
               key={index}
-              className="bg-white p-8 rounded-xl border border-slate-200 card-hover group"
+              className="bg-white p-8 rounded-xl border border-slate-200 card-hover group animate-fade-in-up"
             >
               <div className="flex items-start gap-5">
                 <div className="w-16 h-16 bg-slate-100 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-slate-200 transition-colors">
