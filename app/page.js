@@ -43,9 +43,9 @@ import {
 // ==================== BRAND LOGO ====================
 const BrandLogo = () => {
   return (
-    <Link href="/" className="flex items-center gap-3">
+    <Link href="/" className="flex items-center gap-3 pt-1">
       <Image
-        src="/brand/oakrange-logo.png"
+        src="/brand/oakrange-logo-tight.png"
         alt="Oakrange Engineering Ltd"
         width={220}
         height={60}
@@ -131,10 +131,7 @@ const Navigation = ({ onQuoteClick }) => {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
               </a>
             ))}
-          </div>
-
-          {/* CTA Button */}
-          <div className="hidden md:flex items-center gap-4">
+            {/* CTA Button */}
             <Button 
               onClick={onQuoteClick}
               className="btn-primary flex items-center gap-2"

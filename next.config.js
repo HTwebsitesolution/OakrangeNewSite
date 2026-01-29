@@ -7,7 +7,13 @@ const nextConfig = {
     // Remove if not using Server Components
     serverComponentsExternalPackages: ['mongodb'],
   },
-  webpack(config, { dev }) {
+  webpack(config, { dev, isServer }) {
+    // Configure path aliases for webpack
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': require('path').resolve(__dirname),
+    };
+    
     if (dev) {
       // Reduce CPU/memory from file watching
       config.watchOptions = {
