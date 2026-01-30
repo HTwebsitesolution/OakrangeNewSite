@@ -43,16 +43,17 @@ import {
 } from '@/components/ui/select'
 
 // ==================== BRAND LOGO ====================
-const BrandLogo = () => {
+const BrandLogo = ({ variant = 'default' }) => {
+  const isDark = variant === 'dark'
   return (
-    <Link href="/" className="flex items-center gap-3 pt-1">
+    <Link href="/" className={`flex items-center gap-3 ${isDark ? 'hover:opacity-90 transition-opacity' : 'pt-1'}`}>
       <Image
-        src="/brand/oakrange-logo-tight.png"
+        src={isDark ? "/Oakrange Engineering Logo1.png" : "/brand/oakrange-logo-tight.png"}
         alt="Oakrange Engineering Ltd"
         width={220}
         height={60}
         priority
-        className="h-10 w-auto"
+        className={isDark ? "h-8 w-auto" : "h-10 w-auto"}
       />
     </Link>
   )
@@ -61,9 +62,9 @@ const BrandLogo = () => {
 // ==================== UTILITY BAR ====================
 const UtilityBar = () => {
   return (
-    <div className="bg-slate-900 text-slate-300 text-sm">
-      <div className="container-main flex items-center justify-between py-2">
-        <div className="flex items-center gap-6">
+    <div className="bg-slate-900 text-slate-300 text-sm relative">
+      <div className="container-main flex items-center justify-between py-2 relative">
+        <div className="flex items-center gap-6 z-10">
           <a href="tel:01709542334" className="flex items-center gap-2 hover:text-white transition-colors">
             <Phone className="w-4 h-4" />
             <span className="hidden sm:inline">01709 542334</span>
@@ -73,7 +74,13 @@ const UtilityBar = () => {
             <span className="hidden md:inline">info@oakrange.co.uk</span>
           </a>
         </div>
-        <div className="flex items-center gap-4">
+        
+        {/* Logo in center with full-height white background */}
+        <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 bg-white flex items-center justify-center px-4 min-w-[180px] max-w-[220px] z-20">
+          <BrandLogo variant="dark" />
+        </div>
+        
+        <div className="flex items-center gap-4 z-10 ml-auto">
           <button className="flex items-center gap-2 hover:text-white transition-colors px-3 py-1 rounded hover:bg-slate-800">
             <FileCheck className="w-4 h-4" />
             <span>Verify Certificate</span>
@@ -138,9 +145,6 @@ const Navigation = ({ onQuoteClick }) => {
     }`}>
       <div className="container-main">
         <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
-          <BrandLogo />
-
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => (
