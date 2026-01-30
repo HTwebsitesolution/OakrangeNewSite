@@ -60,7 +60,7 @@ const BrandLogo = ({ variant = 'default' }) => {
         width={220}
         height={60}
         priority
-        className={`${isDark ? "h-10 w-auto" : "h-[50px] w-auto"} logo-animated logo-hover-effect logo-color-adjust`}
+        className={`${isDark ? "h-[90.225px] w-auto" : "h-[112.78125px] w-auto"} logo-animated logo-hover-effect logo-color-adjust`}
       />
     </Link>
   )
@@ -448,7 +448,7 @@ const HeroSection = ({ onQuoteClick }) => {
 
           {/* Right Slider */}
           <div 
-            className="relative lg:pl-8"
+            className="relative lg:pl-8 mt-8 lg:mt-12"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
@@ -466,12 +466,12 @@ const HeroSection = ({ onQuoteClick }) => {
                   const Icon = slide.icon
                   return (
                     <CarouselItem key={index}>
-                      <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-[0_20px_60px_rgba(2,6,23,0.12)] bg-slate-100 aspect-[4/3] image-hover-subtle group">
+                      <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-[0_20px_60px_rgba(2,6,23,0.12)] bg-slate-100 min-h-[500px] md:min-h-[600px] image-hover-subtle group">
                         {/* Image */}
                         <img
                           src={slide.image}
                           alt={slide.title}
-                          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          className="h-full w-full object-contain transition-transform duration-700 group-hover:scale-105"
                         />
                         
                         {/* Gradient overlay */}

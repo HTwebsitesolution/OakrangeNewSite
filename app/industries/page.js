@@ -49,7 +49,7 @@ const BrandLogo = () => {
         width={220}
         height={60}
         priority
-        className="h-[50px] w-auto logo-animated logo-hover-effect logo-color-adjust"
+        className="h-[112.78125px] w-auto logo-animated logo-hover-effect logo-color-adjust"
       />
     </Link>
   )
