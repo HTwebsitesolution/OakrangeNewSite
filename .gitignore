@@ -23,7 +23,6 @@ node_modules/
 /.next/
 /out/
 next-env.d.ts
-tsconfig.json
 *.tsbuildinfo
 
 # Production builds
