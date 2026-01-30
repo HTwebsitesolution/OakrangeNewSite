@@ -53,14 +53,14 @@ import {
 const BrandLogo = ({ variant = 'default' }) => {
   const isDark = variant === 'dark'
   return (
-    <Link href="/" className={`flex items-center gap-3 ${isDark ? 'hover:opacity-90 transition-opacity' : 'pt-1'}`}>
+    <Link href="/" className={`flex items-center gap-3 ${isDark ? '' : 'pt-1'}`}>
       <Image
-        src={isDark ? "/Oakrange Engineering Logo1.png" : "/brand/oakrange-logo-tight.png"}
+        src="/Oakrange Engineering 3D Logo.png"
         alt="Oakrange Engineering Ltd"
         width={220}
         height={60}
         priority
-        className={isDark ? "h-8 w-auto" : "h-10 w-auto"}
+        className={`${isDark ? "h-10 w-auto" : "h-[50px] w-auto"} logo-animated logo-hover-effect logo-color-adjust`}
       />
     </Link>
   )

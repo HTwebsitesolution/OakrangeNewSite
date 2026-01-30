@@ -252,6 +252,58 @@
     @apply transition-transform duration-500 ease-out hover:-translate-y-1;
   }
 
+  /* Logo animations */
+  @keyframes logo-fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(-8px) scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes logo-pulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.95;
+      transform: scale(1.02);
+    }
+  }
+
+  @keyframes logo-glow {
+    0%, 100% {
+      filter: drop-shadow(0 0 0px rgba(239, 68, 68, 0));
+    }
+    50% {
+      filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.3));
+    }
+  }
+
+  .logo-animated {
+    animation: logo-fade-in 0.8s ease-out both, logo-pulse 3s ease-in-out 1s infinite;
+  }
+
+  .logo-hover-effect {
+    @apply transition-all duration-500 ease-out;
+  }
+
+  .logo-color-adjust {
+    /* Adjust red tones to match site primary color (HSL 359 100% 52%) */
+    /* Using hue-rotate and saturation to shift reds toward the site's red */
+    filter: hue-rotate(-5deg) saturate(1.1) brightness(1.05);
+  }
+
+  .logo-hover-effect:hover {
+    transform: scale(1.05) translateY(-2px);
+    filter: hue-rotate(-5deg) saturate(1.1) brightness(1.05) drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15)) drop-shadow(0 0 12px rgba(230, 57, 70, 0.3));
+    animation: none; /* Pause pulsing on hover */
+  }
+
   /* Text balance */
   .text-balance {
     text-wrap: balance;

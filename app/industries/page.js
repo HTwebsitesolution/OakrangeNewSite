@@ -44,12 +44,12 @@ const BrandLogo = () => {
   return (
     <Link href="/" className="flex items-center gap-3">
       <Image
-        src="/brand/oakrange-logo-tight.png"
+        src="/Oakrange Engineering 3D Logo.png"
         alt="Oakrange Engineering Ltd"
         width={220}
         height={60}
         priority
-        className="h-10 w-auto"
+        className="h-[50px] w-auto logo-animated logo-hover-effect logo-color-adjust"
       />
     </Link>
   )
