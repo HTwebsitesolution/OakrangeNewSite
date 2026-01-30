@@ -41,6 +41,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel'
 
 // ==================== BRAND LOGO ====================
 const BrandLogo = ({ variant = 'default' }) => {
@@ -299,6 +306,64 @@ const Navigation = ({ onQuoteClick }) => {
 
 // ==================== HERO SECTION ====================
 const HeroSection = ({ onQuoteClick }) => {
+  const [api, setApi] = useState(null)
+  const [current, setCurrent] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
+
+  const heroSlides = [
+    {
+      title: "UKAS-Accredited Precision",
+      description: "Every calibration performed to UKAS-accredited standards with full traceability to national standards.",
+      icon: Shield,
+      gradient: "from-blue-600 to-blue-800",
+      image: "/images/hero-tech-calibration.png",
+    },
+    {
+      title: "Onsite Calibration Excellence",
+      description: "Our mobile calibration units come directly to your facility, minimising downtime and keeping operations running.",
+      icon: Clock,
+      gradient: "from-emerald-600 to-emerald-800",
+      image: "/images/onsite-calibration.png",
+    },
+    {
+      title: "Digital-First Certificates",
+      description: "Receive calibration certificates within 48 hours, uploaded directly to your secure online portal.",
+      icon: FileCheck,
+      gradient: "from-slate-700 to-slate-900",
+      image: "/images/lab-calibration.png",
+    },
+    {
+      title: "Expert Engineering Team",
+      description: "40+ years of experience across all measurement disciplines, ensuring your equipment meets the highest standards.",
+      icon: Award,
+      gradient: "from-primary to-primary/90",
+      image: "/images/hero-tech-calibration.png",
+    },
+  ]
+
+  useEffect(() => {
+    if (!api) return
+    setCurrent(api.selectedScrollSnap())
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap())
+    })
+  }, [api])
+
+  // Auto-advance slider
+  useEffect(() => {
+    if (!api || isPaused) return
+
+    const interval = setInterval(() => {
+      if (api.canScrollNext()) {
+        api.scrollNext()
+      } else {
+        api.scrollTo(0) // Loop back to start
+      }
+    }, 5000) // Change slide every 5 seconds
+
+    return () => clearInterval(interval)
+  }, [api, isPaused])
+
   return (
     <section className="bg-white pt-24 pb-20 md:pt-32 md:pb-28 lg:pt-36 lg:pb-32 relative overflow-hidden">
       {/* Floating Lines Background */}
@@ -381,19 +446,78 @@ const HeroSection = ({ onQuoteClick }) => {
             </div>
           </div>
 
-          {/* Right Visual */}
-          <div className="relative lg:pl-8">
-            <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-[0_20px_60px_rgba(2,6,23,0.12)] bg-slate-100 aspect-[4/3] image-hover-subtle">
-              <img
-                src="/images/hero-tech-calibration.png"
-                alt="Technician calibrating equipment"
-                className="h-full w-full object-cover"
-              />
-              {/* subtle overlay for premium look */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-slate-900/25 via-transparent to-white/10" />
-              {/* optional texture/noise */}
-              <div className="absolute inset-0 opacity-[0.06] mix-blend-overlay bg-[url('/images/noise.png')]" />
-            </div>
+          {/* Right Slider */}
+          <div 
+            className="relative lg:pl-8"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            <Carousel
+              setApi={setApi}
+              opts={{
+                align: "start",
+                loop: true,
+                duration: 30,
+              }}
+              className="w-full"
+            >
+              <CarouselContent>
+                {heroSlides.map((slide, index) => {
+                  const Icon = slide.icon
+                  return (
+                    <CarouselItem key={index}>
+                      <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-[0_20px_60px_rgba(2,6,23,0.12)] bg-slate-100 aspect-[4/3] image-hover-subtle group">
+                        {/* Image */}
+                        <img
+                          src={slide.image}
+                          alt={slide.title}
+                          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                        
+                        {/* Gradient overlay */}
+                        <div className={`absolute inset-0 bg-gradient-to-tr ${slide.gradient} opacity-60 group-hover:opacity-70 transition-opacity duration-500`} />
+                        
+                        {/* Content overlay */}
+                        <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-10 text-white">
+                          <div className="relative z-10">
+                            {/* Icon */}
+                            <div className={`w-14 h-14 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-500`}>
+                              <Icon className="w-7 h-7 text-white" />
+                            </div>
+                            
+                            {/* Title */}
+                            <h3 className="text-2xl md:text-3xl font-bold mb-3 leading-tight">
+                              {slide.title}
+                            </h3>
+                            
+                            {/* Description */}
+                            <p className="text-white/90 text-base md:text-lg leading-relaxed">
+                              {slide.description}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </CarouselItem>
+                  )
+                })}
+              </CarouselContent>
+
+              {/* Dots Indicator */}
+              <div className="flex items-center justify-center gap-2 mt-6">
+                {heroSlides.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => api?.scrollTo(index)}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      current === index
+                        ? 'w-8 bg-primary'
+                        : 'w-2 bg-slate-300 hover:bg-slate-400'
+                    }`}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
+              </div>
+            </Carousel>
           </div>
         </div>
 
@@ -489,6 +613,158 @@ const CredibilityStrip = () => {
               <div className="text-sm text-slate-400">{cred.description}</div>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ==================== PREMIUM SLIDER SECTION ====================
+const PremiumSliderSection = () => {
+  const [api, setApi] = useState(null)
+  const [current, setCurrent] = useState(0)
+
+  const slides = [
+    {
+      title: "UKAS-Accredited Precision",
+      subtitle: "Industry-Leading Standards",
+      description: "Every calibration is performed to UKAS-accredited standards with full traceability to national standards. Your equipment is calibrated by certified engineers using precision instruments.",
+      icon: Shield,
+      gradient: "from-blue-600 to-blue-800",
+      bgColor: "bg-gradient-to-br from-blue-50 to-blue-100",
+    },
+    {
+      title: "Minimal Downtime",
+      subtitle: "Onsite Calibration Excellence",
+      description: "Our mobile calibration units come directly to your facility. No need to ship equipment or wait for returns. We calibrate on your premises, keeping your operations running smoothly.",
+      icon: Clock,
+      gradient: "from-emerald-600 to-emerald-800",
+      bgColor: "bg-gradient-to-br from-emerald-50 to-emerald-100",
+    },
+    {
+      title: "Digital-First Certificates",
+      subtitle: "Instant Access & Compliance",
+      description: "Receive your calibration certificates within 48 hours, uploaded directly to your secure online portal. Access audit-ready documentation 24/7, anytime, anywhere.",
+      icon: FileCheck,
+      gradient: "from-slate-700 to-slate-900",
+      bgColor: "bg-gradient-to-br from-slate-50 to-slate-100",
+    },
+    {
+      title: "Expert Engineering Team",
+      subtitle: "40+ Years of Experience",
+      description: "Our certified calibration engineers bring decades of expertise across all measurement disciplines. From torque wrenches to pressure gauges, we ensure your equipment meets the highest standards.",
+      icon: Award,
+      gradient: "from-primary to-primary/90",
+      bgColor: "bg-gradient-to-br from-red-50 to-red-100",
+    },
+  ]
+
+  useEffect(() => {
+    if (!api) return
+
+    setCurrent(api.selectedScrollSnap())
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap())
+    })
+  }, [api])
+
+  return (
+    <section className="py-20 md:py-28 bg-white relative overflow-hidden">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 opacity-[0.02] bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')]"></div>
+      
+      <div className="container-main relative z-10">
+        {/* Section Header */}
+        <div className="text-center mb-12 md:mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 rounded-full text-sm font-semibold text-slate-700 mb-6">
+            <Sparkles className="w-4 h-4 text-primary" />
+            <span>Why Choose Oakrange</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
+            Premium Calibration Services
+          </h2>
+          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+            Delivering precision, reliability, and excellence across the UK
+          </p>
+        </div>
+
+        {/* Premium Carousel */}
+        <div className="relative">
+          <Carousel
+            setApi={setApi}
+            opts={{
+              align: "start",
+              loop: true,
+              duration: 30,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-2 md:-ml-4">
+              {slides.map((slide, index) => {
+                const Icon = slide.icon
+                return (
+                  <CarouselItem key={index} className="pl-2 md:pl-4 basis-full md:basis-1/2 lg:basis-1/3">
+                    <div className={`relative h-full p-8 md:p-10 rounded-3xl ${slide.bgColor} border border-white/50 shadow-lg hover:shadow-2xl transition-all duration-500 group`}>
+                      {/* Gradient overlay on hover */}
+                      <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${slide.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+                      
+                      {/* Content */}
+                      <div className="relative z-10">
+                        {/* Icon */}
+                        <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${slide.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg`}>
+                          <Icon className="w-8 h-8 text-white" />
+                        </div>
+
+                        {/* Badge */}
+                        <div className="inline-block px-3 py-1 bg-white/80 backdrop-blur-sm rounded-full text-xs font-semibold text-slate-700 mb-4">
+                          {slide.subtitle}
+                        </div>
+
+                        {/* Title */}
+                        <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4 leading-tight">
+                          {slide.title}
+                        </h3>
+
+                        {/* Description */}
+                        <p className="text-slate-700 leading-relaxed text-base md:text-lg">
+                          {slide.description}
+                        </p>
+
+                        {/* Decorative element */}
+                        <div className={`mt-6 w-12 h-1 bg-gradient-to-r ${slide.gradient} rounded-full`}></div>
+                      </div>
+
+                      {/* Corner accent */}
+                      <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${slide.gradient} opacity-5 rounded-bl-full`}></div>
+                    </div>
+                  </CarouselItem>
+                )
+              })}
+            </CarouselContent>
+
+            {/* Custom Navigation Buttons */}
+            <div className="flex items-center justify-center gap-4 mt-10">
+              <CarouselPrevious className="relative -left-0 top-0 translate-y-0 h-12 w-12 rounded-full bg-white border-2 border-slate-200 shadow-lg hover:bg-slate-50 hover:border-primary transition-all duration-300 hover:scale-110" />
+              
+              {/* Dots Indicator */}
+              <div className="flex items-center gap-2">
+                {slides.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => api?.scrollTo(index)}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      current === index
+                        ? 'w-8 bg-primary'
+                        : 'w-2 bg-slate-300 hover:bg-slate-400'
+                    }`}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
+              </div>
+
+              <CarouselNext className="relative -right-0 top-0 translate-y-0 h-12 w-12 rounded-full bg-white border-2 border-slate-200 shadow-lg hover:bg-slate-50 hover:border-primary transition-all duration-300 hover:scale-110" />
+            </div>
+          </Carousel>
         </div>
       </div>
     </section>
