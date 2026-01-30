@@ -44,7 +44,7 @@ const BrandLogo = () => {
   return (
     <Link href="/" className="flex items-center gap-3">
       <Image
-        src="/Oakrange Engineering 3D Logo.png"
+        src="/oakrange-3d-logo.png"
         alt="Oakrange Engineering Ltd"
         width={220}
         height={60}

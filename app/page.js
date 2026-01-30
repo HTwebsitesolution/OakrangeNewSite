@@ -55,7 +55,7 @@ const BrandLogo = ({ variant = 'default' }) => {
   return (
     <Link href="/" className={`flex items-center gap-3 ${isDark ? '' : 'pt-1'}`}>
       <Image
-        src="/Oakrange Engineering 3D Logo.png"
+        src="/oakrange-3d-logo.png"
         alt="Oakrange Engineering Ltd"
         width={220}
         height={60}
