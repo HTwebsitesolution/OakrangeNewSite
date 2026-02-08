@@ -2,8 +2,8 @@ import './globals.css'
 
 export const metadata = {
   title: 'Oakrange Engineering | Precision Calibration Services UK',
-  description: 'UKAS accredited onsite calibration services across the UK. Expert engineers, precision instruments, traceable results.',
-  keywords: 'calibration, UKAS, onsite calibration, engineering, UK, precision measurement',
+  description: 'UKAS-traceable onsite calibration services across the UK. Expert engineers, precision instruments, traceable results.',
+  keywords: 'calibration, UKAS-traceable, onsite calibration, engineering, UK, precision measurement',
 }
 
 export default function RootLayout({ children }) {

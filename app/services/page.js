@@ -143,7 +143,7 @@ const PageHeader = () => {
         <div className="max-w-3xl">
           <div className="inline-flex items-center gap-2 bg-primary/20 text-primary px-4 py-1.5 rounded-full text-sm font-medium mb-6">
             <Shield className="w-4 h-4" />
-            <span>UKAS Accredited Services</span>
+            <span>UKAS-Traceable Services</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
             Calibration Services
@@ -620,7 +620,7 @@ const Footer = () => {
             </div>
             <div>
               <span className="font-bold text-white block">Oakrange Engineering</span>
-              <span className="text-xs text-slate-500">UKAS Accredited Calibration</span>
+              <span className="text-xs text-slate-500">UKAS-Traceable Calibration</span>
             </div>
           </div>
           <div className="flex items-center gap-6 text-sm">
@@ -671,10 +671,10 @@ const servicesData = [
       'Schedule a visit at a time that suits your operations',
       'Our engineer arrives with all reference standards and equipment',
       'Calibration performed onsite — typically same-day completion',
-      'UKAS certificates uploaded to your portal within 48 hours',
+      'UKAS-traceable certificates uploaded to your portal within 48 hours',
     ],
     whatYouReceive: [
-      'UKAS-accredited calibration certificates',
+      'UKAS-traceable calibration certificates',
       'Calibration stickers/labels applied to each instrument',
       'Full traceability to national standards',
       '24/7 access to certificates via the Customer Portal',
@@ -748,7 +748,7 @@ const servicesData = [
       'Full documentation pack provided for authority audits',
     ],
     whatYouReceive: [
-      'UKAS-accredited certificates recognised by CAA and EASA',
+      'UKAS-traceable certificates recognised by CAA and EASA',
       'Documentation suitable for Part 145 audit requirements',
       'Traceability statements for each calibrated instrument',
       'Secure portal access for instant certificate retrieval',
@@ -786,7 +786,7 @@ const servicesData = [
     ],
     whatYouReceive: [
       'Detailed repair report with work completed',
-      'UKAS-accredited calibration certificate',
+      'UKAS-traceable calibration certificate',
       'Warranty on all repair work (typically 12 months)',
       'Before and after measurement data',
       'Collection/delivery with full insurance cover',
@@ -801,7 +801,7 @@ const servicesData = [
     whoItsFor: [
       'Quality managers needing instant certificate access',
       'Multi-site businesses managing equipment across locations',
-      'Companies preparing for ISO, UKAS, or industry audits',
+      'Companies preparing for ISO, UKAS-traceable, or industry audits',
       'Workshop managers tracking calibration schedules',
       'Anyone tired of searching filing cabinets for certificates',
     ],

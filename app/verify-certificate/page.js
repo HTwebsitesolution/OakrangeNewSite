@@ -392,7 +392,7 @@ const SupportSection = () => {
                 </AccordionTrigger>
                 <AccordionContent className="text-slate-600">
                   We maintain calibration records for a minimum of 10 years in accordance with our 
-                  UKAS accreditation requirements. Historical certificates can be retrieved on request.
+                  UKAS-traceable requirements. Historical certificates can be retrieved on request.
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
@@ -471,7 +471,7 @@ export default function VerifyCertificatePage() {
         <div className="container-main text-center">
           <div className="inline-flex items-center gap-2 bg-oakblue-100 text-oakblue-800 px-4 py-1.5 rounded-full text-sm font-medium mb-4">
             <Shield className="w-4 h-4" />
-            <span>UKAS Accredited Certificates</span>
+            <span>UKAS-Traceable Certificates</span>
           </div>
           <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Verify Certificate</h1>
           <p className="text-lg text-slate-600 max-w-xl mx-auto">

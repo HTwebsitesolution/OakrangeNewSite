@@ -634,7 +634,7 @@ const Footer = () => {
             </div>
             <div>
               <span className="font-bold text-white block">Oakrange Engineering</span>
-              <span className="text-xs text-slate-500">UKAS Accredited Calibration</span>
+              <span className="text-xs text-slate-500">UKAS-Traceable Calibration</span>
             </div>
           </div>
           <div className="flex items-center gap-6 text-sm">
@@ -808,7 +808,7 @@ const industriesData = [
     risks: [
       { 
         title: 'CAA/EASA Compliance', 
-        description: 'Aviation authorities require UKAS-accredited calibration for all maintenance equipment.' 
+        description: 'Aviation authorities require UKAS-traceable calibration for all maintenance equipment.' 
       },
       { 
         title: 'Part 145 Audit Findings', 
@@ -827,7 +827,7 @@ const industriesData = [
       primary: 'onsite',
       description: 'We provide specialised onsite calibration for airfields, understanding the unique requirements of aviation. Our engineers hold appropriate airside access and work around your flying schedule.',
       reasons: [
-        'UKAS certificates recognised by CAA and EASA',
+        'UKAS-traceable certificates recognised by CAA and EASA',
         'Engineers with airside security clearance',
         'Calibration scheduled around flying operations',
         'Full Part 145 audit documentation provided',

@@ -312,8 +312,8 @@ const HeroSection = ({ onQuoteClick }) => {
 
   const heroSlides = [
     {
-      title: "UKAS-Accredited Precision",
-      description: "Every calibration performed to UKAS-accredited standards with full traceability to national standards.",
+      title: "UKAS-Traceable Precision",
+      description: "Every calibration performed to UKAS-traceable standards with full traceability to national standards.",
       icon: Shield,
       gradient: "from-blue-600 to-blue-800",
       image: "/images/hero-tech-calibration.png",
@@ -385,7 +385,7 @@ const HeroSection = ({ onQuoteClick }) => {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-50 border border-slate-200 rounded-full text-sm font-medium text-slate-700">
               <Shield className="w-4 h-4 text-slate-600" />
-              <span>UKAS Accredited Calibration Laboratory</span>
+              <span>UKAS-Traceable Calibration Laboratory</span>
             </div>
 
             {/* Headline - Reduced red usage */}
@@ -410,7 +410,7 @@ const HeroSection = ({ onQuoteClick }) => {
             <div className="space-y-3 pt-4">
               <div className="flex items-start gap-3">
                 <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
-                <span className="text-slate-700">UKAS-accredited certificates with full traceability</span>
+                <span className="text-slate-700">UKAS-traceable certificates with full traceability</span>
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
@@ -529,7 +529,7 @@ const HeroSection = ({ onQuoteClick }) => {
                 <Shield className="w-6 h-6 text-slate-600" />
               </div>
               <div>
-                <div className="font-semibold text-slate-900 text-sm">UKAS Accredited</div>
+                <div className="font-semibold text-slate-900 text-sm">UKAS-Traceable</div>
                 <div className="text-xs text-slate-500">ISO/IEC 17025</div>
               </div>
             </div>
@@ -626,9 +626,9 @@ const PremiumSliderSection = () => {
 
   const slides = [
     {
-      title: "UKAS-Accredited Precision",
+      title: "UKAS-Traceable Precision",
       subtitle: "Industry-Leading Standards",
-      description: "Every calibration is performed to UKAS-accredited standards with full traceability to national standards. Your equipment is calibrated by certified engineers using precision instruments.",
+      description: "Every calibration is performed to UKAS-traceable standards with full traceability to national standards. Your equipment is calibrated by certified engineers using precision instruments.",
       icon: Shield,
       gradient: "from-blue-600 to-blue-800",
       bgColor: "bg-gradient-to-br from-blue-50 to-blue-100",
@@ -1100,13 +1100,13 @@ const AccreditationSection = () => {
             <div className="w-16 h-1 bg-white/20 mb-6" />
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">Accreditation & Standards</h2>
             <p className="text-xl text-slate-300 leading-relaxed mb-8">
-              Our UKAS accreditation demonstrates our commitment to precision, traceability, and quality assurance.
+              Our UKAS-traceable services demonstrate our commitment to precision, traceability, and quality assurance.
             </p>
             <div className="space-y-4">
               <div className="flex items-start gap-4">
                 <CheckCircle2 className="w-6 h-6 text-emerald-400 flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="font-semibold text-lg text-white mb-1">UKAS Accredited</h3>
+                  <h3 className="font-semibold text-lg text-white mb-1">UKAS-Traceable</h3>
                   <p className="text-slate-300">United Kingdom Accreditation Service recognition for calibration competence</p>
                 </div>
               </div>
@@ -1132,7 +1132,7 @@ const AccreditationSection = () => {
             <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-[0_24px_80px_rgba(15,23,42,0.65)] bg-slate-800 aspect-[4/3]">
               <img
                 src="/images/lab-calibration.png"
-                alt="Laboratory calibration environment with UKAS-aligned procedures"
+                alt="Laboratory calibration environment with UKAS-traceable procedures"
                 className="h-full w-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-slate-950/50 via-transparent to-slate-200/10" />
@@ -1230,7 +1230,7 @@ const ProcessSection = () => {
     {
       step: '03',
       title: 'Certificate + Portal Access',
-      description: 'UKAS certificates uploaded directly to your secure portal within 48 hours. Download anytime, audit-ready.',
+      description: 'UKAS-traceable certificates uploaded directly to your secure portal within 48 hours. Download anytime, audit-ready.',
       icon: Upload,
     },
   ]
@@ -1286,7 +1286,7 @@ const ProcessSection = () => {
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
                 <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
-                <span className="text-slate-700">UKAS-accredited calibration certificates</span>
+                <span className="text-slate-700">UKAS-traceable calibration certificates</span>
               </li>
               <li className="flex items-start gap-3">
                 <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
@@ -1510,8 +1510,8 @@ const TestimonialsSection = () => {
 const FAQSection = () => {
   const faqs = [
     {
-      question: 'What is UKAS accreditation and why does it matter?',
-      answer: 'UKAS (United Kingdom Accreditation Service) is the national accreditation body recognised by the UK government. UKAS accreditation ensures that our calibration services meet ISO/IEC 17025 requirements, providing internationally recognised traceability and measurement competence. This is often a regulatory requirement for quality management systems.',
+      question: 'What is UKAS-traceable calibration and why does it matter?',
+      answer: 'UKAS (United Kingdom Accreditation Service) is the national accreditation body recognised by the UK government. UKAS-traceable calibration ensures that our calibration services meet ISO/IEC 17025 requirements, providing internationally recognised traceability and measurement competence. This is often a regulatory requirement for quality management systems.',
     },
     {
       question: 'How long does onsite calibration typically take?',
@@ -1848,7 +1848,7 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-slate-400 mb-6 max-w-sm">
-              UKAS accredited calibration laboratory providing precision measurement services across the UK since 1998.
+              UKAS-traceable calibration laboratory providing precision measurement services across the UK since 1998.
             </p>
             <div className="space-y-3">
               <a href="tel:01709542334" className="flex items-center gap-3 hover:text-white transition-colors">
