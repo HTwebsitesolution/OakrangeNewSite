@@ -1302,11 +1302,13 @@ const ProcessSection = () => {
               </li>
             </ul>
           </div>
-          <div className="bg-slate-100 rounded-2xl p-8 lg:p-10 border border-slate-200 flex items-center justify-center">
-            <div className="text-center">
-              <FileCheck className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-              <p className="text-slate-500 font-medium">Certificate Sample</p>
-              <p className="text-sm text-slate-400 mt-2">Placeholder for certificate preview</p>
+          <div className="bg-slate-100 rounded-2xl p-8 lg:p-10 border border-slate-200 flex items-center justify-center overflow-hidden">
+            <div className="relative w-full h-full min-h-[500px] flex items-center justify-center">
+              <img
+                src="/Calibration Certificate -example_OakrangeEngineering.png"
+                alt="Calibration Certificate Sample - Oakrange Engineering"
+                className="object-contain w-full h-full max-w-full max-h-full rounded-lg shadow-lg"
+              />
             </div>
           </div>
         </div>
