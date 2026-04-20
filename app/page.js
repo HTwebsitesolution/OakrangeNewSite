@@ -334,7 +334,7 @@ const HeroSection = ({ onQuoteClick }) => {
     },
     {
       title: "Expert Engineering Team",
-      description: "40+ years of experience across all measurement disciplines, ensuring your equipment meets the highest standards.",
+      description: "40+ years of experience across all measurement disciplines, ensuring your equipment meets the required standards.",
       icon: Award,
       gradient: "from-primary to-primary/90",
       image: "/images/hero-tech-calibration.png",
@@ -394,14 +394,14 @@ const HeroSection = ({ onQuoteClick }) => {
                 Onsite <span className="text-primary">Calibration</span> Across the UK —
               </span>{' '}
               <span className="block lg:inline text-slate-900">
-                audit-ready results, minimal downtime.
+                results, minimal downtime.
               </span>
             </h1>
 
             {/* Subheadline */}
             <p className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-3xl">
               From <strong className="text-slate-900">automotive workshops</strong> and <strong className="text-slate-900">tractor dealerships</strong> to{' '}
-              <strong className="text-slate-900">construction yards</strong> and <strong className="text-slate-900">airfields</strong> — we calibrate your 
+              <strong className="text-slate-900">construction workshops</strong> and <strong className="text-slate-900">airfields</strong> — we calibrate your 
               torque wrenches, pressure gauges, and test equipment on your premises. 
               Certificates uploaded directly to your <strong className="text-slate-900">online portal</strong>.
             </p>
@@ -652,7 +652,7 @@ const PremiumSliderSection = () => {
     {
       title: "Expert Engineering Team",
       subtitle: "40+ Years of Experience",
-      description: "Our certified calibration engineers bring decades of expertise across all measurement disciplines. From torque wrenches to pressure gauges, we ensure your equipment meets the highest standards.",
+      description: "40+ years of experience across all measurement disciplines, ensuring your equipment meets the required standards.",
       icon: Award,
       gradient: "from-primary to-primary/90",
       bgColor: "bg-gradient-to-br from-red-50 to-red-100",
@@ -779,14 +779,14 @@ const ServicesSection = () => {
       title: 'Torque Calibration',
       description: 'Torque wrenches, transducers, and screwdrivers calibrated to international standards.',
       outcome: 'Reduce downtime',
-      features: ['0.1 Nm to 20,000 Nm range', 'BS EN ISO 6789 compliant', 'Both clockwise and counter-clockwise'],
+      features: ['0.1 Nm to 1500 Nm range', 'BS EN ISO 6789 compliant', 'Both clockwise and counter-clockwise'],
     },
     {
       icon: Gauge,
       title: 'Pressure Calibration',
       description: 'Pressure gauges, transmitters, and test equipment calibrated across the full pressure range.',
       outcome: 'Pass audits',
-      features: ['Vacuum to 10,000 bar', 'Dead-weight testers', 'Digital pressure standards'],
+      features: ['Vacuum to 10,000 psi', 'Dead-weight testers', 'Digital pressure standards'],
     },
   ]
 
@@ -830,7 +830,7 @@ const ServicesSection = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">Calibration Services</h2>
           <p className="text-xl text-slate-600 leading-relaxed">
             Comprehensive calibration capabilities covering all major measurement disciplines, 
-            delivered by expert engineers at your location.
+            delivered by our engineers at your location.
           </p>
         </div>
 
