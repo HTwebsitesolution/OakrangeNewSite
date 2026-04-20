@@ -123,7 +123,7 @@ const Navigation = ({ onQuoteClick }) => {
     { label: 'Temperature Calibration', href: '/services#temperature', icon: Thermometer, desc: 'Thermometers, probes, ovens' },
     { label: 'Dimensional Calibration', href: '/services#dimensional', icon: Ruler, desc: 'Calipers, micrometers, gauges' },
     { label: 'Mass Calibration', href: '/services#mass', icon: Scale, desc: 'Scales, weights, balances' },
-    { label: 'Electrical Calibration', href: '/services#electrical', icon: Zap, desc: 'Multimeters, clamp meters' },
+    { label: 'Electrical Calibration', href: '/services#electrical', icon: Zap, desc: 'Multimeters, PAT testers' },
   ]
 
   const industriesMenu = [
@@ -786,7 +786,7 @@ const ServicesSection = () => {
       title: 'Pressure Calibration',
       description: 'Pressure gauges, transmitters, and test equipment calibrated across the full pressure range.',
       outcome: 'Pass audits',
-      features: ['Vacuum to 10,000 psi', 'Dead-weight testers', 'Digital pressure standards'],
+      features: ['Vacuum to 10,000 psi', 'Digital and manual gauges', 'Digital pressure standards'],
     },
   ]
 
@@ -794,28 +794,28 @@ const ServicesSection = () => {
     {
       icon: Thermometer,
       title: 'Temperature Calibration',
-      description: 'Thermometers, thermocouples, RTDs, data loggers, and temperature chambers.',
+      description: 'Thermometers, thermocouples.',
       outcome: 'Traceable results',
-      features: ['Traceable to NPL', '-200°C to +1600°C range', 'Onsite or laboratory'],
+      features: ['Traceable to UKAS certificate', '0 to 200°C range', 'Onsite'],
     },
     {
       icon: Ruler,
       title: 'Dimensional Calibration',
-      description: 'Micrometers, calipers, gauge blocks, CMMs, and other dimensional instruments.',
-      outcome: 'Sub-micron accuracy',
-      features: ['Sub-micron accuracy', 'CMM verification', 'Gauge block calibration'],
+      description: 'Micrometers, calipers, and other dimensional instruments.',
+      outcome: 'Micron accuracy',
+      features: ['Micron accuracy', 'CMM verification', 'Gauge block calibration'],
     },
     {
       icon: Scale,
       title: 'Mass Calibration',
-      description: 'Balances, scales, and mass standards from milligrams to tonnes.',
+      description: 'Balances, scales, and mass standards from milligrams to 50kg.',
       outcome: 'OIML compliant',
-      features: ['OIML weights', 'Analytical balances', 'Industrial scales'],
+      features: ['UKAS traceable', 'Analytical balances', 'Industrial scales'],
     },
     {
       icon: Zap,
       title: 'Electrical Calibration',
-      description: 'Multimeters, clamp meters, insulation testers, PAT testers, and electrical standards.',
+      description: 'Multimeters, insulation testers, PAT testers, and electrical standards.',
       outcome: 'Full traceability',
       features: ['DC to 100 kHz', 'High voltage', 'Resistance standards'],
     },
@@ -1029,7 +1029,7 @@ const IndustriesSection = () => {
       icon: HardHat,
       title: 'Construction Workshops',
       description: 'Plant hire, construction depots, and heavy equipment service centres across the UK.',
-      items: ['Lifting equipment', 'Pressure systems', 'Torque tools'],
+      items: ['Multimeters', 'Pressure systems', 'Torque tools'],
     },
     {
       icon: PlaneTakeoff,
