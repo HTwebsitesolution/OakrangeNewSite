@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { 
@@ -108,6 +108,7 @@ const Navigation = ({ onQuoteClick }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState(null)
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState(null)
+  const closeDropdownTimeoutRef = useRef(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -116,6 +117,31 @@ const Navigation = ({ onQuoteClick }) => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  useEffect(() => {
+    return () => {
+      if (closeDropdownTimeoutRef.current) {
+        clearTimeout(closeDropdownTimeoutRef.current)
+      }
+    }
+  }, [])
+
+  const openDesktopDropdown = (label) => {
+    if (closeDropdownTimeoutRef.current) {
+      clearTimeout(closeDropdownTimeoutRef.current)
+      closeDropdownTimeoutRef.current = null
+    }
+    setOpenDropdown(label)
+  }
+
+  const closeDesktopDropdown = () => {
+    if (closeDropdownTimeoutRef.current) {
+      clearTimeout(closeDropdownTimeoutRef.current)
+    }
+    closeDropdownTimeoutRef.current = setTimeout(() => {
+      setOpenDropdown(null)
+    }, 180)
+  }
 
   const servicesMenu = [
     { label: 'Torque Calibration', href: '/services#torque', icon: Gauge, desc: 'Wrenches, multipliers, testers' },
@@ -158,8 +184,8 @@ const Navigation = ({ onQuoteClick }) => {
               <div
                 key={link.label}
                 className="relative"
-                onMouseEnter={() => link.hasDropdown && setOpenDropdown(link.label)}
-                onMouseLeave={() => setOpenDropdown(null)}
+                onMouseEnter={() => link.hasDropdown && openDesktopDropdown(link.label)}
+                onMouseLeave={() => link.hasDropdown && closeDesktopDropdown()}
               >
                 <a
                   href={link.href}
@@ -174,7 +200,11 @@ const Navigation = ({ onQuoteClick }) => {
                 
                 {/* Premium Bubble Dropdown */}
                 {link.hasDropdown && openDropdown === link.label && (
-                  <div className="absolute top-full left-0 mt-3 w-[520px] bg-white rounded-2xl shadow-2xl border border-slate-200/50 backdrop-blur-xl overflow-hidden animate-fade-in-up z-50">
+                  <div
+                    className="absolute top-full left-0 mt-3 w-[520px] bg-white rounded-2xl shadow-2xl border border-slate-200/50 backdrop-blur-xl overflow-hidden animate-fade-in-up z-50"
+                    onMouseEnter={() => openDesktopDropdown(link.label)}
+                    onMouseLeave={closeDesktopDropdown}
+                  >
                     {/* Arrow pointer */}
                     <div className="absolute -top-2 left-8 w-4 h-4 bg-white border-l border-t border-slate-200/50 rotate-45"></div>
                     <div className="p-6">
