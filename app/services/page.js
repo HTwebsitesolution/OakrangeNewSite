@@ -29,111 +29,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-
-// ==================== BRAND LOGO ====================
-const BrandLogo = () => {
-  return (
-    <Link href="/" className="flex items-center gap-3">
-      <Image
-        src="/oakrange-3d-logo.png"
-        alt="Oakrange Engineering Ltd"
-        width={220}
-        height={60}
-        priority
-        className="h-[112.78125px] w-auto logo-animated logo-hover-effect logo-color-adjust"
-      />
-    </Link>
-  )
-}
-
-// ==================== NAVIGATION ====================
-const Navigation = ({ onQuoteClick }) => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
-  const navLinks = [
-    { label: 'Home', href: '/' },
-    { label: 'Services', href: '/services' },
-    { label: 'Industries', href: '/#industries' },
-    { label: 'Process', href: '/#process' },
-    { label: 'FAQ', href: '/#faq' },
-    { label: 'Contact', href: '/#contact' },
-  ]
-
-  return (
-    <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200">
-      <div className="container-main">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
-          <BrandLogo />
-
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="text-slate-600 hover:text-primary font-medium transition-colors relative group"
-              >
-                {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
-              </Link>
-            ))}
-          </div>
-
-          {/* CTA Button */}
-          <div className="hidden md:flex items-center gap-4">
-            <Button 
-              onClick={onQuoteClick}
-              className="bg-primary hover:bg-primary/90 text-white font-medium px-6 py-2.5 rounded-lg transition-all"
-            >
-              <Calculator className="w-4 h-4 mr-2" />
-              Request a Quote
-            </Button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-slate-100 py-4 animate-fade-in">
-            <div className="flex flex-col gap-2">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className="px-4 py-3 text-slate-600 hover:text-primary hover:bg-slate-50 rounded-lg font-medium transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <div className="px-4 pt-4 border-t border-slate-100 mt-2">
-                <Button 
-                  onClick={() => {
-                    setMobileMenuOpen(false)
-                    onQuoteClick()
-                  }}
-                  className="bg-primary hover:bg-primary/90 text-white w-full"
-                >
-                  <Calculator className="w-4 h-4 mr-2" />
-                  Request a Quote
-                </Button>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    </nav>
-  )
-}
+import { SiteChrome } from '@/components/site/SiteChrome'
+import { useSiteQuote } from '@/components/site/quote-context'
+import { PATHS } from '@/lib/site-config'
 
 // ==================== PAGE HEADER ====================
 const PageHeader = () => {
@@ -432,217 +330,6 @@ const ServiceDetailSection = ({
 }
 
 // ==================== QUOTE BUILDER ====================
-const QuoteBuilder = ({ isOpen, onClose }) => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    company: '',
-    phone: '',
-    serviceType: '',
-    instrumentCount: '',
-    location: '',
-    message: '',
-  })
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log('Quote request:', formData)
-    alert('Thank you! We will contact you shortly with your quote.')
-    onClose()
-  }
-
-  const handleChange = (field, value) => {
-    setFormData(prev => ({ ...prev, [field]: value }))
-  }
-
-  return (
-    <Sheet open={isOpen} onOpenChange={onClose}>
-      <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
-        <SheetHeader className="mb-6">
-          <SheetTitle className="text-2xl flex items-center gap-2">
-            <Calculator className="w-6 h-6 text-primary" />
-            Request a Quote
-          </SheetTitle>
-          <SheetDescription>
-            Fill in your details and we'll provide a tailored quote within 24 hours.
-          </SheetDescription>
-        </SheetHeader>
-
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Contact Information */}
-          <div className="space-y-4">
-            <h4 className="font-semibold text-slate-900 flex items-center gap-2">
-              <Users className="w-4 h-4 text-primary" />
-              Contact Information
-            </h4>
-            
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">Full Name *</Label>
-                <Input
-                  id="name"
-                  placeholder="John Smith"
-                  value={formData.name}
-                  onChange={(e) => handleChange('name', e.target.value)}
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="phone">Phone</Label>
-                <Input
-                  id="phone"
-                  type="tel"
-                  placeholder="+44 ..."
-                  value={formData.phone}
-                  onChange={(e) => handleChange('phone', e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="email">Email Address *</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="john@company.co.uk"
-                value={formData.email}
-                onChange={(e) => handleChange('email', e.target.value)}
-                required
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="company">Company Name</Label>
-              <Input
-                id="company"
-                placeholder="Your Company Ltd"
-                value={formData.company}
-                onChange={(e) => handleChange('company', e.target.value)}
-              />
-            </div>
-          </div>
-
-          {/* Service Requirements */}
-          <div className="space-y-4 pt-4 border-t border-slate-200">
-            <h4 className="font-semibold text-slate-900 flex items-center gap-2">
-              <Gauge className="w-4 h-4 text-primary" />
-              Service Requirements
-            </h4>
-
-            <div className="space-y-2">
-              <Label htmlFor="serviceType">Service Type *</Label>
-              <Select 
-                value={formData.serviceType} 
-                onValueChange={(value) => handleChange('serviceType', value)}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select a service" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="onsite-workshop">Onsite Workshop Calibration</SelectItem>
-                  <SelectItem value="automotive-diagnostic">Specialist Automotive Diagnostic</SelectItem>
-                  <SelectItem value="airfield-equipment">Airfield Equipment Calibration</SelectItem>
-                  <SelectItem value="repairs-support">In-house Repairs & Support</SelectItem>
-                  <SelectItem value="certificate-portal">Certificate Management & Portal</SelectItem>
-                  <SelectItem value="multiple">Multiple Services</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="instrumentCount">No. of Instruments</Label>
-                <Select 
-                  value={formData.instrumentCount} 
-                  onValueChange={(value) => handleChange('instrumentCount', value)}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="1-10">1-10</SelectItem>
-                    <SelectItem value="11-25">11-25</SelectItem>
-                    <SelectItem value="26-50">26-50</SelectItem>
-                    <SelectItem value="51-100">51-100</SelectItem>
-                    <SelectItem value="100+">100+</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="location">Your Postcode</Label>
-                <Input
-                  id="location"
-                  placeholder="e.g. B1 1AA"
-                  value={formData.location}
-                  onChange={(e) => handleChange('location', e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="message">Equipment Details</Label>
-              <Textarea
-                id="message"
-                placeholder="Tell us about your instruments — makes, models, quantities, or any specific requirements..."
-                rows={4}
-                value={formData.message}
-                onChange={(e) => handleChange('message', e.target.value)}
-              />
-            </div>
-          </div>
-
-          {/* Submit */}
-          <div className="pt-4 border-t border-slate-200">
-            <Button type="submit" className="bg-primary hover:bg-primary/90 w-full text-lg py-6">
-              <Calculator className="w-5 h-5 mr-2" />
-              Submit Quote Request
-            </Button>
-            <p className="text-xs text-slate-500 text-center mt-4">
-              We typically respond within 24 hours. For urgent enquiries, call us.
-            </p>
-          </div>
-        </form>
-      </SheetContent>
-    </Sheet>
-  )
-}
-
-// ==================== FOOTER ====================
-const Footer = () => {
-  return (
-    <footer className="bg-slate-900 text-slate-300 py-12">
-      <div className="container-main">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-              <Gauge className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <span className="font-bold text-white block">Oakrange Engineering</span>
-              <span className="text-xs text-slate-500">UKAS-Traceable Calibration</span>
-            </div>
-          </div>
-          <div className="flex items-center gap-6 text-sm">
-            <a href="tel:+441234567890" className="flex items-center gap-2 hover:text-white transition-colors">
-              <Phone className="w-4 h-4" />
-              +44 (0) 1234 567890
-            </a>
-            <a href="mailto:info@oakrange.co.uk" className="flex items-center gap-2 hover:text-white transition-colors">
-              <Mail className="w-4 h-4" />
-              info@oakrange.co.uk
-            </a>
-          </div>
-        </div>
-        <div className="mt-8 pt-8 border-t border-slate-800 text-center text-sm text-slate-500">
-          © {new Date().getFullYear()} Oakrange Engineering Ltd. All rights reserved.
-        </div>
-      </div>
-    </footer>
-  )
-}
-
-// ==================== SERVICES DATA ====================
 const servicesData = [
   {
     id: 'onsite-workshop',
@@ -871,67 +558,57 @@ const servicesData = [
   },
 ]
 
-// ==================== MAIN PAGE ====================
-export default function ServicesPage() {
-  const [quoteBuilderOpen, setQuoteBuilderOpen] = useState(false)
+function ServicesPageContent() {
+  const { openQuote } = useSiteQuote()
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Navigation */}
-      <Navigation onQuoteClick={() => setQuoteBuilderOpen(true)} />
+    <main>
+      <PageHeader />
+      <ServiceHubCards />
+      <NotSureBlock onQuoteClick={openQuote} />
 
-      {/* Main Content */}
-      <main>
-        <PageHeader />
-        <ServiceHubCards />
-        <NotSureBlock onQuoteClick={() => setQuoteBuilderOpen(true)} />
-        
-        {/* Service Detail Sections */}
-        {servicesData.map((service) => (
-          <ServiceDetailSection
-            key={service.id}
-            {...service}
-            onQuoteClick={() => setQuoteBuilderOpen(true)}
-          />
-        ))}
+      {servicesData.map((service) => (
+        <ServiceDetailSection
+          key={service.id}
+          {...service}
+          onQuoteClick={openQuote}
+        />
+      ))}
 
-        {/* Final CTA */}
-        <section className="py-20 bg-gradient-to-r from-primary to-primary/90">
-          <div className="container-main text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Ready to Get Your Equipment Calibrated?
-            </h2>
-            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              Request a quote today or access your existing certificates through the Customer Portal.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <button
-                onClick={() => setQuoteBuilderOpen(true)}
-                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-lg font-semibold transition-colors bg-white text-primary hover:bg-primary/10 hover:text-primary px-8 py-4 h-auto shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-              >
-                <Calculator className="w-5 h-5" />
-                Request a Quote
-              </button>
-              <a
-                href="#portal"
-                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-lg font-semibold transition-colors border border-white/30 text-white bg-transparent hover:bg-white/10 hover:text-white px-8 py-4 h-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 disabled:pointer-events-none disabled:opacity-50"
-              >
-                <ExternalLink className="w-5 h-5" />
-                Customer Portal
-              </a>
-            </div>
+      <section className="py-20 bg-gradient-to-r from-primary to-primary/90">
+        <div className="container-main text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            Ready to Get Your Equipment Calibrated?
+          </h2>
+          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+            Request a quote today or access your existing certificates through the Customer Portal.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button
+              onClick={openQuote}
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-lg font-semibold transition-colors bg-white text-primary hover:bg-primary/10 hover:text-primary px-8 py-4 h-auto shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+            >
+              <Calculator className="w-5 h-5" />
+              Request a Quote
+            </button>
+            <Link
+              href={PATHS.customerPortal}
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-lg font-semibold transition-colors border border-white/30 text-white bg-transparent hover:bg-white/10 hover:text-white px-8 py-4 h-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 disabled:pointer-events-none disabled:opacity-50"
+            >
+              <ExternalLink className="w-5 h-5" />
+              Customer Portal
+            </Link>
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
+    </main>
+  )
+}
 
-      {/* Footer */}
-      <Footer />
-
-      {/* Quote Builder */}
-      <QuoteBuilder 
-        isOpen={quoteBuilderOpen} 
-        onClose={() => setQuoteBuilderOpen(false)} 
-      />
-    </div>
+export default function ServicesPage() {
+  return (
+    <SiteChrome quoteSource="services" showLogoInNav>
+      <ServicesPageContent />
+    </SiteChrome>
   )
 }

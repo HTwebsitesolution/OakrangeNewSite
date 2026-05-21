@@ -1,7 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
-import Image from 'next/image'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { 
   Menu, X, ChevronDown, ChevronRight, Phone, Mail, MapPin, 
@@ -48,291 +47,11 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel'
-
-// ==================== BRAND LOGO ====================
-const BrandLogo = ({ variant = 'default' }) => {
-  const isDark = variant === 'dark'
-  return (
-    <Link href="/" className={`flex items-center gap-3 ${isDark ? '' : 'pt-1'}`}>
-      <Image
-        src="/oakrange-3d-logo.png"
-        alt="Oakrange Engineering Ltd"
-        width={220}
-        height={60}
-        priority
-        className={`${isDark ? "h-[90.225px] w-auto" : "h-[112.78125px] w-auto"} logo-animated logo-hover-effect logo-color-adjust`}
-      />
-    </Link>
-  )
-}
-
-// ==================== UTILITY BAR ====================
-const UtilityBar = () => {
-  return (
-    <div className="bg-slate-900 text-slate-300 text-sm relative">
-      <div className="container-main flex items-center justify-between py-2 relative">
-        <div className="flex items-center gap-6 z-10">
-          <a href="tel:01709542334" className="flex items-center gap-2 hover:text-white transition-colors">
-            <Phone className="w-4 h-4" />
-            <span className="hidden sm:inline">01709 542334</span>
-          </a>
-          <a href="mailto:info@oakrange.co.uk" className="flex items-center gap-2 hover:text-white transition-colors">
-            <Mail className="w-4 h-4" />
-            <span className="hidden md:inline">info@oakrange.co.uk</span>
-          </a>
-        </div>
-        
-        {/* Logo in center with full-height white background */}
-        <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 bg-white flex items-center justify-center px-4 min-w-[180px] max-w-[220px] z-20">
-          <BrandLogo variant="dark" />
-        </div>
-        
-        <div className="flex items-center gap-4 z-10 ml-auto">
-          <button className="flex items-center gap-2 hover:text-white transition-colors px-3 py-1 rounded hover:bg-slate-800">
-            <FileCheck className="w-4 h-4" />
-            <span>Verify Certificate</span>
-          </button>
-          <button className="flex items-center gap-2 hover:text-white transition-colors px-3 py-1 rounded hover:bg-slate-800">
-            <ExternalLink className="w-4 h-4" />
-            <span className="hidden sm:inline">Customer Portal</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-// ==================== NAVIGATION ====================
-const Navigation = ({ onQuoteClick }) => {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [openDropdown, setOpenDropdown] = useState(null)
-  const [mobileDropdownOpen, setMobileDropdownOpen] = useState(null)
-  const closeDropdownTimeoutRef = useRef(null)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  useEffect(() => {
-    return () => {
-      if (closeDropdownTimeoutRef.current) {
-        clearTimeout(closeDropdownTimeoutRef.current)
-      }
-    }
-  }, [])
-
-  const openDesktopDropdown = (label) => {
-    if (closeDropdownTimeoutRef.current) {
-      clearTimeout(closeDropdownTimeoutRef.current)
-      closeDropdownTimeoutRef.current = null
-    }
-    setOpenDropdown(label)
-  }
-
-  const closeDesktopDropdown = () => {
-    if (closeDropdownTimeoutRef.current) {
-      clearTimeout(closeDropdownTimeoutRef.current)
-    }
-    closeDropdownTimeoutRef.current = setTimeout(() => {
-      setOpenDropdown(null)
-    }, 180)
-  }
-
-  const servicesMenu = [
-    { label: 'Torque Calibration', href: '/services#torque', icon: Gauge, desc: 'Wrenches, multipliers, testers' },
-    { label: 'Pressure Calibration', href: '/services#pressure', icon: Gauge, desc: 'Gauges, transducers, sensors' },
-    { label: 'Temperature Calibration', href: '/services#temperature', icon: Thermometer, desc: 'Thermometers, probes, ovens' },
-    { label: 'Dimensional Calibration', href: '/services#dimensional', icon: Ruler, desc: 'Calipers, micrometers, gauges' },
-    { label: 'Mass Calibration', href: '/services#mass', icon: Scale, desc: 'Scales, weights, balances' },
-    { label: 'Electrical Calibration', href: '/services#electrical', icon: Zap, desc: 'Multimeters, PAT testers' },
-  ]
-
-  const industriesMenu = [
-    { label: 'Automotive', href: '/industries#automotive', icon: Wrench, desc: 'Workshops & dealerships' },
-    { label: 'Agriculture', href: '/industries#agriculture', icon: Tractor, desc: 'Farm equipment & machinery' },
-    { label: 'Construction', href: '/industries#construction', icon: HardHat, desc: 'Site equipment & tools' },
-    { label: 'Aviation', href: '/industries#aviation', icon: PlaneTakeoff, desc: 'Aircraft maintenance' },
-    { label: 'Manufacturing', href: '/industries#manufacturing', icon: Factory, desc: 'Production facilities' },
-    { label: 'Pharmaceutical', href: '/industries#pharmaceutical', icon: Pill, desc: 'Lab equipment & compliance' },
-  ]
-
-  const navLinks = [
-    { label: 'Services', href: '/services', hasDropdown: true, menu: servicesMenu },
-    { label: 'Industries', href: '/industries', hasDropdown: true, menu: industriesMenu },
-    { label: 'Process', href: '#process' },
-    { label: 'About', href: '#about' },
-    { label: 'FAQ', href: '#faq' },
-    { label: 'Contact', href: '#contact' },
-  ]
-
-  return (
-    <nav className={`sticky top-0 z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-white/95 backdrop-blur-md shadow-lg' 
-        : 'bg-white'
-    }`}>
-      <div className="container-main">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-6">
-            {navLinks.map((link) => (
-              <div
-                key={link.label}
-                className="relative"
-                onMouseEnter={() => link.hasDropdown && openDesktopDropdown(link.label)}
-                onMouseLeave={() => link.hasDropdown && closeDesktopDropdown()}
-              >
-                <a
-                  href={link.href}
-                  className="text-slate-700 hover:text-primary font-semibold text-[15px] tracking-wide transition-all duration-300 relative group flex items-center gap-1.5 px-3 py-2"
-                >
-                  {link.label}
-                  {link.hasDropdown && (
-                    <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${openDropdown === link.label ? 'rotate-180' : ''}`} />
-                  )}
-                  <span className="absolute -bottom-1 left-3 right-3 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </a>
-                
-                {/* Premium Bubble Dropdown */}
-                {link.hasDropdown && openDropdown === link.label && (
-                  <div
-                    className="absolute top-full left-0 mt-3 w-[520px] bg-white rounded-2xl shadow-2xl border border-slate-200/50 backdrop-blur-xl overflow-hidden animate-fade-in-up z-50"
-                    onMouseEnter={() => openDesktopDropdown(link.label)}
-                    onMouseLeave={closeDesktopDropdown}
-                  >
-                    {/* Arrow pointer */}
-                    <div className="absolute -top-2 left-8 w-4 h-4 bg-white border-l border-t border-slate-200/50 rotate-45"></div>
-                    <div className="p-6">
-                      <div className="grid grid-cols-2 gap-4">
-                        {link.menu.map((item, idx) => {
-                          const Icon = item.icon
-                          return (
-                            <a
-                              key={idx}
-                              href={item.href}
-                              className="group flex items-start gap-3 p-4 rounded-xl hover:bg-gradient-to-br hover:from-slate-50 hover:to-white transition-all duration-300 hover:shadow-md border border-transparent hover:border-slate-200"
-                            >
-                              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-slate-100 to-slate-50 group-hover:from-primary/10 group-hover:to-primary/5 flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-110">
-                                <Icon className="w-5 h-5 text-slate-700 group-hover:text-primary transition-colors" />
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <div className="font-semibold text-slate-900 group-hover:text-primary transition-colors text-sm mb-1">
-                                  {item.label}
-                                </div>
-                                <div className="text-xs text-slate-500 line-clamp-1">
-                                  {item.desc}
-                                </div>
-                              </div>
-                              <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-primary group-hover:translate-x-1 transition-all flex-shrink-0" />
-                            </a>
-                          )
-                        })}
-                      </div>
-                    </div>
-                    <div className="px-6 py-4 bg-gradient-to-r from-slate-50 to-white border-t border-slate-100">
-                      <a
-                        href={link.href}
-                        className="flex items-center justify-between group"
-                      >
-                        <span className="text-sm font-semibold text-slate-900 group-hover:text-primary transition-colors">
-                          View all {link.label.toLowerCase()}
-                        </span>
-                        <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-primary group-hover:translate-x-1 transition-all" />
-                      </a>
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))}
-            {/* CTA Button */}
-            <Button 
-              onClick={onQuoteClick}
-              className="ml-2 bg-primary hover:bg-primary/90 text-white font-semibold px-6 py-2.5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center gap-2 border-0"
-            >
-              <Calculator className="w-4 h-4" />
-              Request a Quote
-            </Button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-slate-100 py-4 animate-fade-in">
-            <div className="flex flex-col gap-2">
-              {navLinks.map((link) => (
-                <div key={link.label}>
-                  {link.hasDropdown ? (
-                    <>
-                      <button
-                        onClick={() => setMobileDropdownOpen(mobileDropdownOpen === link.label ? null : link.label)}
-                        className="w-full px-4 py-3 text-slate-600 hover:text-primary hover:bg-slate-50 rounded-xl font-semibold transition-colors flex items-center justify-between"
-                      >
-                        <span>{link.label}</span>
-                        <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${mobileDropdownOpen === link.label ? 'rotate-180' : ''}`} />
-                      </button>
-                      {mobileDropdownOpen === link.label && (
-                        <div className="ml-4 mt-2 mb-2 space-y-1 border-l-2 border-slate-200 pl-4">
-                          {link.menu.map((item, idx) => {
-                            const Icon = item.icon
-                            return (
-                              <a
-                                key={idx}
-                                href={item.href}
-                                className="flex items-center gap-3 px-4 py-2.5 text-slate-600 hover:text-primary hover:bg-slate-50 rounded-lg font-medium transition-colors"
-                                onClick={() => setMobileMenuOpen(false)}
-                              >
-                                <Icon className="w-4 h-4" />
-                                <span className="text-sm">{item.label}</span>
-                              </a>
-                            )
-                          })}
-                        </div>
-                      )}
-                    </>
-                  ) : (
-                    <a
-                      href={link.href}
-                      className="px-4 py-3 text-slate-600 hover:text-primary hover:bg-slate-50 rounded-xl font-semibold transition-colors"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {link.label}
-                    </a>
-                  )}
-                </div>
-              ))}
-              <div className="px-4 pt-4 border-t border-slate-100 mt-2">
-                <Button 
-                  onClick={() => {
-                    setMobileMenuOpen(false)
-                    onQuoteClick()
-                  }}
-                  className="btn-primary w-full flex items-center justify-center gap-2"
-                >
-                  <Calculator className="w-4 h-4" />
-                  Request a Quote
-                </Button>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    </nav>
-  )
-}
+import { UtilityBar } from '@/components/site/UtilityBar'
+import { SiteNavigation } from '@/components/site/SiteNavigation'
+import { SiteFooter } from '@/components/site/SiteFooter'
+import { QuoteProvider, useSiteQuote } from '@/components/site/quote-context'
+import { PATHS } from '@/lib/site-config'
 
 // ==================== HERO SECTION ====================
 const HeroSection = ({ onQuoteClick }) => {
@@ -468,10 +187,10 @@ const HeroSection = ({ onQuoteClick }) => {
                 className="border-2 border-slate-300 text-slate-700 hover:bg-slate-50 hover:text-slate-900 hover:border-slate-400 font-semibold text-lg px-8 py-4 h-auto transition-all duration-200"
                 asChild
               >
-                <a href="#verify">
+                <Link href={PATHS.verifyCertificate}>
                   <FileCheck className="w-5 h-5 mr-2" />
                   Verify Certificate
-                </a>
+                </Link>
               </Button>
             </div>
           </div>
@@ -806,6 +525,7 @@ const ServicesSection = () => {
   const flagshipServices = [
     {
       icon: Cog,
+      scopeHref: '/services#torque',
       title: 'Torque Calibration',
       description: 'Torque wrenches, transducers, and screwdrivers calibrated to international standards.',
       outcome: 'Reduce downtime',
@@ -813,6 +533,7 @@ const ServicesSection = () => {
     },
     {
       icon: Gauge,
+      scopeHref: '/services#pressure',
       title: 'Pressure Calibration',
       description: 'Pressure gauges, transmitters, and test equipment calibrated across the full pressure range.',
       outcome: 'Pass audits',
@@ -823,6 +544,7 @@ const ServicesSection = () => {
   const supportingServices = [
     {
       icon: Thermometer,
+      scopeHref: '/services#temperature',
       title: 'Temperature Calibration',
       description: 'Thermometers, thermocouples.',
       outcome: 'Traceable results',
@@ -830,6 +552,7 @@ const ServicesSection = () => {
     },
     {
       icon: Ruler,
+      scopeHref: '/services#dimensional',
       title: 'Dimensional Calibration',
       description: 'Micrometers, calipers, and other dimensional instruments.',
       outcome: 'Micron accuracy',
@@ -837,6 +560,7 @@ const ServicesSection = () => {
     },
     {
       icon: Scale,
+      scopeHref: '/services#mass',
       title: 'Mass Calibration',
       description: 'Balances, scales, and mass standards from milligrams to 50kg.',
       outcome: 'OIML compliant',
@@ -844,6 +568,7 @@ const ServicesSection = () => {
     },
     {
       icon: Zap,
+      scopeHref: '/services#electrical',
       title: 'Electrical Calibration',
       description: 'Multimeters, insulation testers, PAT testers, and electrical standards.',
       outcome: 'Full traceability',
@@ -897,13 +622,13 @@ const ServicesSection = () => {
                   ))}
                 </ul>
                 <div className="pt-6 border-t border-slate-100">
-                  <a 
-                    href="#" 
+                  <Link 
+                    href={service.scopeHref}
                     className="inline-flex items-center text-slate-900 font-semibold text-sm hover:gap-3 transition-all group/link"
                   >
                     View scope
                     <ArrowRight className="w-4 h-4 ml-2 group-hover/link:translate-x-1 transition-transform" />
-                  </a>
+                  </Link>
                 </div>
               </CardContent>
             </Card>
@@ -956,15 +681,15 @@ const ServicesSection = () => {
                       </li>
                     ))}
                   </ul>
-                  <a 
-                    href="#" 
+                  <Link 
+                    href={service.scopeHref}
                     className={`inline-flex items-center font-medium text-xs hover:gap-2 transition-all group/link ${
                       isBlueCard ? 'text-white hover:text-slate-200' : 'text-slate-900'
                     }`}
                   >
                     View scope
                     <ArrowRight className={`w-3 h-3 ml-1 group-hover/link:translate-x-1 transition-transform ${isBlueCard ? 'text-white' : 'text-slate-900'}`} />
-                  </a>
+                  </Link>
                 </CardContent>
               </Card>
             )
@@ -1351,9 +1076,11 @@ const ProcessSection = () => {
               <p className="font-semibold text-slate-900">Already a customer?</p>
               <p className="text-sm text-slate-600">Access your certificates in the Customer Portal</p>
             </div>
-            <Button variant="outline" size="sm" className="ml-4 border-2 border-slate-300 text-slate-700 hover:bg-slate-50 hover:text-slate-900 hover:border-slate-400 transition-all duration-200">
-              <ExternalLink className="w-4 h-4 mr-2" />
-              Open Portal
+            <Button variant="outline" size="sm" className="ml-4 border-2 border-slate-300 text-slate-700 hover:bg-slate-50 hover:text-slate-900 hover:border-slate-400 transition-all duration-200" asChild>
+              <Link href={PATHS.customerPortal}>
+                <ExternalLink className="w-4 h-4 mr-2" />
+                Open Portal
+              </Link>
             </Button>
           </div>
         </div>
@@ -1634,334 +1361,17 @@ const CTABand = ({ onQuoteClick }) => {
               <Calculator className="w-5 h-5" />
               Request a Quote
             </button>
-            <a
-              href="#portal"
+            <Link
+              href={PATHS.customerPortal}
               className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-lg font-semibold transition-colors border-2 border-white/30 text-white bg-transparent hover:bg-white/10 hover:text-white px-8 py-4 h-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 disabled:pointer-events-none disabled:opacity-50"
             >
               <ExternalLink className="w-5 h-5" />
               Customer Portal
-            </a>
+            </Link>
           </div>
         </div>
       </div>
     </section>
-  )
-}
-
-// ==================== QUOTE BUILDER SLIDE-OVER ====================
-const QuoteBuilder = ({ isOpen, onClose }) => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    company: '',
-    phone: '',
-    serviceType: '',
-    instrumentCount: '',
-    location: '',
-    message: '',
-  })
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // Handle form submission
-    console.log('Quote request:', formData)
-    alert('Thank you! We will contact you shortly with your quote.')
-    onClose()
-  }
-
-  const handleChange = (field, value) => {
-    setFormData(prev => ({ ...prev, [field]: value }))
-  }
-
-  return (
-    <Sheet open={isOpen} onOpenChange={onClose}>
-      <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
-        <SheetHeader className="mb-6">
-          <SheetTitle className="text-2xl flex items-center gap-2">
-            <Calculator className="w-6 h-6 text-primary" />
-            Request a Quote
-          </SheetTitle>
-          <SheetDescription>
-            Fill in your details and we'll provide a tailored quote within 24 hours.
-          </SheetDescription>
-        </SheetHeader>
-
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Contact Information */}
-          <div className="space-y-4">
-            <h4 className="font-semibold text-slate-900 flex items-center gap-2">
-              <Users className="w-4 h-4 text-primary" />
-              Contact Information
-            </h4>
-            
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">Full Name *</Label>
-                <Input
-                  id="name"
-                  placeholder="John Smith"
-                  value={formData.name}
-                  onChange={(e) => handleChange('name', e.target.value)}
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="phone">Phone</Label>
-                <Input
-                  id="phone"
-                  type="tel"
-                  placeholder="+44 ..."
-                  value={formData.phone}
-                  onChange={(e) => handleChange('phone', e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="email">Email Address *</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="john@company.co.uk"
-                value={formData.email}
-                onChange={(e) => handleChange('email', e.target.value)}
-                required
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="company">Company Name</Label>
-              <Input
-                id="company"
-                placeholder="Your Company Ltd"
-                value={formData.company}
-                onChange={(e) => handleChange('company', e.target.value)}
-              />
-            </div>
-          </div>
-
-          {/* Service Requirements */}
-          <div className="space-y-4 pt-4 border-t border-slate-200">
-            <h4 className="font-semibold text-slate-900 flex items-center gap-2">
-              <Gauge className="w-4 h-4 text-primary" />
-              Service Requirements
-            </h4>
-
-            <div className="space-y-2">
-              <Label htmlFor="serviceType">Service Type *</Label>
-              <Select 
-                value={formData.serviceType} 
-                onValueChange={(value) => handleChange('serviceType', value)}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select a service" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="temperature">Temperature Calibration</SelectItem>
-                  <SelectItem value="pressure">Pressure Calibration</SelectItem>
-                  <SelectItem value="dimensional">Dimensional Calibration</SelectItem>
-                  <SelectItem value="mass">Mass Calibration</SelectItem>
-                  <SelectItem value="electrical">Electrical Calibration</SelectItem>
-                  <SelectItem value="torque">Torque Calibration</SelectItem>
-                  <SelectItem value="multiple">Multiple Services</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="instrumentCount">No. of Instruments</Label>
-                <Select 
-                  value={formData.instrumentCount} 
-                  onValueChange={(value) => handleChange('instrumentCount', value)}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="1-10">1-10</SelectItem>
-                    <SelectItem value="11-25">11-25</SelectItem>
-                    <SelectItem value="26-50">26-50</SelectItem>
-                    <SelectItem value="51-100">51-100</SelectItem>
-                    <SelectItem value="100+">100+</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="location">Location</Label>
-                <Select 
-                  value={formData.location} 
-                  onValueChange={(value) => handleChange('location', value)}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="onsite">Onsite Service</SelectItem>
-                    <SelectItem value="laboratory">Laboratory</SelectItem>
-                    <SelectItem value="either">Either</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="message">Additional Details</Label>
-              <Textarea
-                id="message"
-                placeholder="Tell us about your instruments, any specific requirements, or questions..."
-                rows={4}
-                value={formData.message}
-                onChange={(e) => handleChange('message', e.target.value)}
-              />
-            </div>
-          </div>
-
-          {/* Submit */}
-          <div className="pt-4 border-t border-slate-200">
-            <Button type="submit" className="btn-primary w-full text-lg py-6">
-              <Send className="w-5 h-5 mr-2" />
-              Submit Quote Request
-            </Button>
-            <p className="text-xs text-slate-500 text-center mt-4">
-              We typically respond within 24 hours. For urgent enquiries, please call us.
-            </p>
-          </div>
-        </form>
-      </SheetContent>
-    </Sheet>
-  )
-}
-
-// ==================== FOOTER ====================
-const Footer = () => {
-  const currentYear = new Date().getFullYear()
-
-  const footerLinks = {
-    services: [
-      { label: 'Temperature Calibration', href: '#' },
-      { label: 'Pressure Calibration', href: '#' },
-      { label: 'Dimensional Calibration', href: '#' },
-      { label: 'Mass Calibration', href: '#' },
-      { label: 'Electrical Calibration', href: '#' },
-      { label: 'Torque Calibration', href: '#' },
-    ],
-    company: [
-      { label: 'About Us', href: '#about' },
-      { label: 'Our Process', href: '#process' },
-      { label: 'Industries', href: '#industries' },
-      { label: 'Careers', href: '#' },
-      { label: 'News & Updates', href: '#' },
-    ],
-    support: [
-      { label: 'Contact Us', href: '#contact' },
-      { label: 'FAQ', href: '#faq' },
-      { label: 'Verify Certificate', href: '#' },
-      { label: 'Customer Portal', href: '#' },
-      { label: 'Request Callback', href: '#' },
-    ],
-  }
-
-  return (
-    <footer id="contact" className="bg-slate-900 text-slate-300">
-      {/* Main Footer */}
-      <div className="container-main section-padding">
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12">
-          {/* Company Info */}
-          <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                <Gauge className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <span className="font-bold text-lg text-white block leading-tight">Oakrange</span>
-                <span className="text-xs text-slate-500 leading-tight">Engineering</span>
-              </div>
-            </div>
-            <p className="text-slate-400 mb-6 max-w-sm">
-              UKAS-traceable calibration laboratory providing precision measurement services across the UK since 1998.
-            </p>
-            <div className="space-y-3">
-              <a href="tel:01709542334" className="flex items-center gap-3 hover:text-white transition-colors">
-                <Phone className="w-5 h-5 text-primary/80" />
-                <span>01709 542334</span>
-              </a>
-              <a href="mailto:info@oakrange.co.uk" className="flex items-center gap-3 hover:text-white transition-colors">
-                <Mail className="w-5 h-5 text-primary/80" />
-                <span>info@oakrange.co.uk</span>
-              </a>
-              <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-primary/80 flex-shrink-0 mt-0.5" />
-                <span>
-                  Oakrange Engineering Ltd<br />
-                  Manor Farm. Styrrup Rd<br />
-                  Oldcotes, Worksop S81 8JB
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Services Links */}
-          <div>
-            <h4 className="font-semibold text-white mb-4">Services</h4>
-            <ul className="space-y-3">
-              {footerLinks.services.map((link, index) => (
-                <li key={index}>
-                  <a href={link.href} className="hover:text-white transition-colors text-sm">
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company Links */}
-          <div>
-            <h4 className="font-semibold text-white mb-4">Company</h4>
-            <ul className="space-y-3">
-              {footerLinks.company.map((link, index) => (
-                <li key={index}>
-                  <a href={link.href} className="hover:text-white transition-colors text-sm">
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Support Links */}
-          <div>
-            <h4 className="font-semibold text-white mb-4">Support</h4>
-            <ul className="space-y-3">
-              {footerLinks.support.map((link, index) => (
-                <li key={index}>
-                  <a href={link.href} className="hover:text-white transition-colors text-sm">
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom Bar */}
-      <div className="border-t border-slate-800">
-        <div className="container-main py-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-slate-500">
-              © {currentYear} Oakrange Engineering Ltd. All rights reserved.
-            </p>
-            <div className="flex items-center gap-6 text-sm">
-              <a href="#" className="text-slate-500 hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" className="text-slate-500 hover:text-white transition-colors">Terms of Service</a>
-              <a href="#" className="text-slate-500 hover:text-white transition-colors">Cookie Policy</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
   )
 }
 
@@ -2002,21 +1412,13 @@ const BackToTop = () => {
   )
 }
 
-// ==================== MAIN APP ====================
-export default function App() {
-  const [quoteBuilderOpen, setQuoteBuilderOpen] = useState(false)
+function HomePageContent() {
+  const { openQuote } = useSiteQuote()
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Utility Bar */}
-      <UtilityBar />
-
-      {/* Navigation */}
-      <Navigation onQuoteClick={() => setQuoteBuilderOpen(true)} />
-
-      {/* Main Content */}
+    <>
       <main>
-        <HeroSection onQuoteClick={() => setQuoteBuilderOpen(true)} />
+        <HeroSection onQuoteClick={openQuote} />
         <CredibilityStrip />
         <OnsiteCoverageSection />
         <ServicesSection />
@@ -2024,23 +1426,25 @@ export default function App() {
         <AccreditationSection />
         <CaseStudiesSection />
         <ProcessSection />
-        <AIQuoteBuilderPreview onQuoteClick={() => setQuoteBuilderOpen(true)} />
+        <AIQuoteBuilderPreview onQuoteClick={openQuote} />
         <TestimonialsSection />
         <FAQSection />
-        <CTABand onQuoteClick={() => setQuoteBuilderOpen(true)} />
+        <CTABand onQuoteClick={openQuote} />
       </main>
-
-      {/* Footer */}
-      <Footer />
-
-      {/* Back to Top Button */}
+      <SiteFooter />
       <BackToTop />
+    </>
+  )
+}
 
-      {/* Quote Builder Slide-Over */}
-      <QuoteBuilder 
-        isOpen={quoteBuilderOpen} 
-        onClose={() => setQuoteBuilderOpen(false)} 
-      />
-    </div>
+export default function App() {
+  return (
+    <QuoteProvider quoteSource="homepage">
+      <div className="min-h-screen bg-background">
+        <UtilityBar />
+        <SiteNavigation showLogo={false} />
+        <HomePageContent />
+      </div>
+    </QuoteProvider>
   )
 }

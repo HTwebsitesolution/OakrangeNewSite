@@ -120,6 +120,78 @@ async function verifyCertificate(certificateId) {
   }
 }
 
+function buildQuoteSummaryText({ quoteId, equipment = [], formData = {} }) {
+  const totalItems = equipment.reduce((sum, item) => sum + parseInt(item.quantity || 1, 10), 0)
+  const equipmentLines = equipment.length
+    ? equipment
+        .map(
+          (item, i) =>
+            `${i + 1}. ${item.type} - ${item.makeModel || 'N/A'} (Qty: ${item.quantity})${
+              item.serialNumber ? ` S/N: ${item.serialNumber}` : ''
+            }${item.location ? ` Location: ${item.location}` : ''}`
+        )
+        .join('\n')
+    : 'See online quote request for details.'
+
+  return `OAKRANGE ENGINEERING - QUOTE REQUEST SUMMARY
+========================================
+Reference: ${quoteId}
+Date: ${new Date().toLocaleDateString('en-GB')}
+
+CONTACT DETAILS
+---------------
+Name: ${formData.name || ''}
+Email: ${formData.email || ''}
+Phone: ${formData.phone || 'Not provided'}
+Company: ${formData.company || ''}
+
+SITE ADDRESS
+------------
+${formData.address || 'Not provided'}
+
+SCHEDULING
+----------
+Preferred Date: ${formData.preferredDate || 'Flexible'}
+Audit Deadline: ${formData.auditDeadline || 'None specified'}
+
+EQUIPMENT LIST (${totalItems} items)
+--------------------
+${equipmentLines}
+
+ADDITIONAL NOTES
+----------------
+${formData.notes || 'None'}
+
+========================================
+Thank you for your request.
+We will respond within 24 hours.
+
+Oakrange Engineering Ltd
+01709 542334
+info@oakrange.co.uk
+`
+}
+
+async function handleGeneratePdf(request) {
+  try {
+    const body = await request.json()
+    const { quoteId, equipment = [], formData = {} } = body
+    const text = buildQuoteSummaryText({ quoteId, equipment, formData })
+    const filename = `quote-request-${quoteId || 'summary'}.txt`
+
+    return new NextResponse(text, {
+      status: 200,
+      headers: {
+        'Content-Type': 'text/plain; charset=utf-8',
+        'Content-Disposition': `attachment; filename="${filename}"`,
+      },
+    })
+  } catch (error) {
+    console.error('PDF/summary generation error:', error)
+    return NextResponse.json({ success: false, error: 'Failed to generate summary' }, { status: 500 })
+  }
+}
+
 // Route handler
 export async function GET(request, { params }) {
   const path = params?.path || []
@@ -156,6 +228,10 @@ export async function POST(request, { params }) {
   
   if (pathString === 'quotes') {
     return handleQuoteRequest(request)
+  }
+
+  if (pathString === 'quotes/generate-pdf') {
+    return handleGeneratePdf(request)
   }
   
   return NextResponse.json({ 

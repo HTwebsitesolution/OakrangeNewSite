@@ -9,45 +9,8 @@ import {
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-
-// ==================== NAVIGATION ====================
-const Navigation = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
-  return (
-    <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200">
-      <div className="container-main">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 bg-oakblue-600 rounded-lg flex items-center justify-center group-hover:bg-oakblue-700 transition-colors">
-              <Gauge className="w-6 h-6 text-white" />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-bold text-lg text-slate-900 leading-tight">Oakrange</span>
-              <span className="text-xs text-slate-500 leading-tight">Engineering</span>
-            </div>
-          </Link>
-
-          <div className="hidden md:flex items-center gap-4">
-            <Button variant="outline" asChild>
-              <Link href="/verify-certificate">
-                <FileCheck className="w-4 h-4 mr-2" />
-                Verify Certificate
-              </Link>
-            </Button>
-          </div>
-
-          <button
-            className="md:hidden p-2 rounded-lg hover:bg-slate-100"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-      </div>
-    </nav>
-  )
-}
+import { SiteChrome } from '@/components/site/SiteChrome'
+import { PORTAL_ONLINE_URL, PORTAL_EXTERNAL_URL } from '@/lib/site-config'
 
 // ==================== HERO SECTION ====================
 const HeroSection = () => {
@@ -81,7 +44,7 @@ const HeroSection = () => {
               className="bg-white text-oakblue-700 hover:bg-oakblue-50 font-semibold px-8 py-4 h-auto shadow-lg"
               asChild
             >
-              <a href="https://oakrangeonline.co.uk" target="_blank" rel="noopener noreferrer">
+              <a href={PORTAL_ONLINE_URL} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="w-5 h-5 mr-2" />
                 Open Oakrange Online
               </a>
@@ -92,7 +55,7 @@ const HeroSection = () => {
               className="border-white/30 text-white hover:bg-white/10 px-8 py-4 h-auto"
               asChild
             >
-              <a href="https://oakrangeportal.co.uk" target="_blank" rel="noopener noreferrer">
+              <a href={PORTAL_EXTERNAL_URL} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="w-5 h-5 mr-2" />
                 Portal Redirect
               </a>
@@ -305,7 +268,7 @@ const CTASection = () => {
               className="bg-oakblue-600 hover:bg-oakblue-700 text-white px-8 py-4 h-auto"
               asChild
             >
-              <a href="https://oakrangeonline.co.uk" target="_blank" rel="noopener noreferrer">
+              <a href={PORTAL_ONLINE_URL} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="w-5 h-5 mr-2" />
                 Open Oakrange Online
               </a>
@@ -316,7 +279,7 @@ const CTASection = () => {
               className="border-slate-600 text-slate-300 hover:bg-slate-800 px-8 py-4 h-auto"
               asChild
             >
-              <a href="https://oakrangeportal.co.uk" target="_blank" rel="noopener noreferrer">
+              <a href={PORTAL_EXTERNAL_URL} target="_blank" rel="noopener noreferrer">
                 Portal Redirect
               </a>
             </Button>
@@ -330,32 +293,12 @@ const CTASection = () => {
 // ==================== MAIN PAGE ====================
 export default function CustomerPortalPage() {
   return (
-    <div className="min-h-screen bg-white">
-      <Navigation />
+    <SiteChrome quoteSource="customer-portal" showLogoInNav>
       <HeroSection />
       <FeaturesSection />
       <AccessSection />
       <SecurityNotice />
       <CTASection />
-
-      {/* Footer */}
-      <footer className="bg-slate-900 text-slate-300 py-8">
-        <div className="container-main">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-sm">&copy; {new Date().getFullYear()} Oakrange Engineering Ltd. All rights reserved.</p>
-            <div className="flex items-center gap-6 text-sm">
-              <a href="tel:+441234567890" className="flex items-center gap-2 hover:text-white transition-colors">
-                <Phone className="w-4 h-4" />
-                +44 (0) 1234 567890
-              </a>
-              <a href="mailto:info@oakrange.co.uk" className="flex items-center gap-2 hover:text-white transition-colors">
-                <Mail className="w-4 h-4" />
-                info@oakrange.co.uk
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
+    </SiteChrome>
   )
 }

@@ -19,50 +19,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
-
-// ==================== NAVIGATION ====================
-const Navigation = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
-  return (
-    <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200">
-      <div className="container-main">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 bg-oakblue-600 rounded-lg flex items-center justify-center group-hover:bg-oakblue-700 transition-colors">
-              <Gauge className="w-6 h-6 text-white" />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-bold text-lg text-slate-900 leading-tight">Oakrange</span>
-              <span className="text-xs text-slate-500 leading-tight">Engineering</span>
-            </div>
-          </Link>
-
-          <div className="hidden md:flex items-center gap-4">
-            <Button variant="outline" asChild>
-              <Link href="/request-quote">
-                Request Quote
-              </Link>
-            </Button>
-            <Button className="bg-oakblue-600 hover:bg-oakblue-700" asChild>
-              <a href="https://oakrangeonline.co.uk" target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="w-4 h-4 mr-2" />
-                Customer Portal
-              </a>
-            </Button>
-          </div>
-
-          <button
-            className="md:hidden p-2 rounded-lg hover:bg-slate-100"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-      </div>
-    </nav>
-  )
-}
+import { SiteChrome } from '@/components/site/SiteChrome'
 
 // ==================== VERIFICATION FORM ====================
 const VerificationForm = ({ onVerify, isLoading }) => {
@@ -262,7 +219,7 @@ const ErrorResult = ({ onReset }) => {
             Try Again
           </Button>
           <Button className="bg-oakblue-600 hover:bg-oakblue-700 flex-1" asChild>
-            <a href="tel:+441234567890">
+            <a href="tel:01709542334">
               <Phone className="w-4 h-4 mr-2" />
               Call Support
             </a>
@@ -400,7 +357,7 @@ const SupportSection = () => {
             <div className="mt-8 p-4 bg-oakblue-50 rounded-xl border border-oakblue-100">
               <p className="text-sm text-oakblue-800">
                 <strong>Need urgent help?</strong> Call us on{' '}
-                <a href="tel:+441234567890" className="underline">+44 (0) 1234 567890</a>
+                <a href="tel:01709542334" className="underline">01709 542334</a>
               </p>
             </div>
           </div>
@@ -463,9 +420,7 @@ export default function VerifyCertificatePage() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      <Navigation />
-
+    <SiteChrome quoteSource="verify-certificate" showLogoInNav>
       {/* Header */}
       <section className="bg-gradient-to-br from-slate-50 to-oakblue-50 py-12 md:py-16">
         <div className="container-main text-center">
@@ -503,13 +458,6 @@ export default function VerifyCertificatePage() {
 
       {/* Support & FAQ */}
       <SupportSection />
-
-      {/* Footer */}
-      <footer className="bg-slate-900 text-slate-300 py-8">
-        <div className="container-main text-center text-sm">
-          <p>&copy; {new Date().getFullYear()} Oakrange Engineering Ltd. All rights reserved.</p>
-        </div>
-      </footer>
-    </div>
+    </SiteChrome>
   )
 }

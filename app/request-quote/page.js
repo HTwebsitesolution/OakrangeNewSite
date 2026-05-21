@@ -29,56 +29,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-
-// ==================== NAVIGATION ====================
-const Navigation = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
-  const navLinks = [
-    { label: 'Home', href: '/' },
-    { label: 'Services', href: '/services' },
-    { label: 'Industries', href: '/industries' },
-    { label: 'Request Quote', href: '/request-quote' },
-  ]
-
-  return (
-    <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200">
-      <div className="container-main">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 bg-oakblue-600 rounded-lg flex items-center justify-center group-hover:bg-oakblue-700 transition-colors">
-              <Gauge className="w-6 h-6 text-white" />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-bold text-lg text-slate-900 leading-tight">Oakrange</span>
-              <span className="text-xs text-slate-500 leading-tight">Engineering</span>
-            </div>
-          </Link>
-
-          <div className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="text-slate-600 hover:text-oakblue-600 font-medium transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-
-          <button
-            className="lg:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-      </div>
-    </nav>
-  )
-}
+import { SiteChrome } from '@/components/site/SiteChrome'
 
 // ==================== STEP INDICATOR ====================
 const StepIndicator = ({ currentStep }) => {
@@ -571,7 +522,7 @@ Thank you for your request.
 We will respond within 24 hours.
 
 Oakrange Engineering Ltd
-+44 (0) 1234 567890
+01709 542334
 info@oakrange.co.uk
 `
     
@@ -747,9 +698,7 @@ export default function RequestQuotePage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <Navigation />
-
+    <SiteChrome quoteSource="request-quote" showLogoInNav showFooter={false}>
       {/* Header */}
       <section className="bg-white border-b border-slate-200 py-8">
         <div className="container-main">
@@ -794,13 +743,6 @@ export default function RequestQuotePage() {
           )}
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-slate-900 text-slate-300 py-8">
-        <div className="container-main text-center text-sm">
-          <p>&copy; {new Date().getFullYear()} Oakrange Engineering Ltd. All rights reserved.</p>
-        </div>
-      </footer>
-    </div>
+    </SiteChrome>
   )
 }
