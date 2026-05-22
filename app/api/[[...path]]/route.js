@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { MongoClient } from 'mongodb'
 import { v4 as uuidv4 } from 'uuid'
+import { notifyOakrangeOfQuote } from '@/lib/notify-quote-email'
 
 const mongoUrl = process.env.MONGO_URL
 let client = null
@@ -52,6 +53,8 @@ async function handleQuoteRequest(request) {
     }
     
     await database.collection('quote_requests').insertOne(quoteRequest)
+
+    await notifyOakrangeOfQuote(quoteRequest)
     
     return NextResponse.json({ 
       success: true, 

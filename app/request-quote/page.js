@@ -13,7 +13,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
-import { Checkbox } from '@/components/ui/checkbox'
 import {
   Select,
   SelectContent,
@@ -412,16 +411,6 @@ const ContactDetailsStep = ({ formData, setFormData, onBack, onSubmit, isSubmitt
                 onChange={(e) => handleChange('notes', e.target.value)}
               />
             </div>
-            <div className="flex items-center space-x-2 pt-2">
-              <Checkbox 
-                id="emailCopy" 
-                checked={formData.emailCopy}
-                onCheckedChange={(checked) => handleChange('emailCopy', checked)}
-              />
-              <Label htmlFor="emailCopy" className="text-sm cursor-pointer">
-                Email me a copy of this request
-              </Label>
-            </div>
           </CardContent>
         </Card>
       </div>
@@ -577,12 +566,10 @@ info@oakrange.co.uk
             </div>
           </div>
 
-          {formData.emailCopy && (
-            <div className="flex items-center gap-2 text-sm text-emerald-600 bg-emerald-50 px-4 py-2 rounded-lg">
-              <Mail className="w-4 h-4" />
-              <span>A copy has been sent to {formData.email}</span>
-            </div>
-          )}
+          <div className="flex items-center gap-2 text-sm text-emerald-600 bg-emerald-50 px-4 py-2 rounded-lg">
+            <CheckCircle2 className="w-4 h-4" />
+            <span>Keep your reference number <strong>{quoteId}</strong> for any follow-up.</span>
+          </div>
         </CardContent>
       </Card>
 
@@ -662,7 +649,6 @@ export default function RequestQuotePage() {
     auditDeadline: '',
     uploadedFile: '',
     notes: '',
-    emailCopy: true,
   })
 
   const handleSubmit = async () => {
